@@ -1,0 +1,73 @@
+@import 'lacleTheme.scss';
+
+.color-green {
+  color: $color-green;
+}
+
+.color-red {
+  color: $color-red;
+}
+
+.color-blue {
+  color: $color-blue;
+}
+
+.color-yellow {
+  color: $color-yellow;
+}
+
+.vertical-align-middle {
+  vertical-align: middle;
+}
+
+.text-centered {
+  text-align: center;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.padding-small {
+  padding: $spacing-small;
+}
+
+.margin-auto {
+  margin: auto;
+}
+
+.topleft {
+  top: 0;
+  left: 0;
+}
+
+.topright {
+  top: 0;
+  right: 0;
+}
+
+.bottomleft {
+  bottom: 0;
+  left: 0;
+}
+
+.bottomright {
+  bottom: 0;
+  right: 0;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.display-block {
+  display: block;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.overflow-y-hidden {
+  overflow-y: hidden;
+}

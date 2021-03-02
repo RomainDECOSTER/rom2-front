@@ -1,0 +1,45 @@
+@import 'lacleTheme.scss';
+
+.nav-item-icon {
+  color: $secondary-color;
+  min-width: $spacing-xLarge;
+}
+
+.nav-item-module {
+  font-weight: bold;
+}
+
+.nav-item-text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.navbar-item {
+  padding-left: $spacing-navbar-icon;
+}
+
+.navbar-item-disabled,
+.navbar-item-disabled:hover {
+  background-color: $color-shade-disabled;
+}
+
+.navbar-item.active {
+  background: $color-shade-slight;
+}
+
+.navbar-item.active .nav-item-icon {
+  color: $primary-color;
+}
+
+.navbar-item.active .navbar-item-add-icon {
+  color: $color-icon-selected;
+}
+
+.navbar-item-add-icon {
+  font-size: $fontSize-title2;
+  margin-right: $spacing-tiny;
+}
+
+.navbar-item-text-left-offset {
+  padding-left: $spacing-large;
+}

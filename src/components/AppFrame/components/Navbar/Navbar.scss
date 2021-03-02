@@ -1,0 +1,27 @@
+@import 'lacleTheme.scss';
+
+.navbar {
+  width: $navbar-width;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.navbar-open,
+.navbar-close {
+  padding-top: $header-height;
+}
+
+.navbar-open {
+  width: $navbar-width;
+  transition: width $duration-enteringScreen $easing-sharp;
+}
+
+.navbar-close {
+  overflow-x: hidden;
+  width: $navbar-width-closed;
+  transition: width $duration-leavingScreen $easing-sharp;
+}
+
+.nav-list {
+  width: 100%;
+}

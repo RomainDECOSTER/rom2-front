@@ -1,0 +1,13 @@
+@import 'lacleTheme.scss';
+
+.header-icon-button {
+  margin: 0 $spacing-tiny;
+}
+
+.header-icon-button:hover {
+  background-color: $color-shade-xslight;
+}
+
+.header-icon {
+  font-size: $fontSize-headerIcon;
+}

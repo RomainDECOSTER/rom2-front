@@ -1,0 +1,66 @@
+// border
+$border-xteeny: 0.2px;
+$border-teeny: 1px;
+$border-tiny: 2px;
+$border-small: 3px;
+
+// border radius
+$border-radius-teeny: 2px;
+$border-radius-tiny: 3px;
+$border-radius-small: 4px;
+
+// slider
+$slider-mark-height: 8px;
+$slider-mark-width: 1px;
+$slider-mark-margin-top: -3px;
+
+// appframe
+$navbar-width: 240px;
+$header-height: 64px;
+$header-logo-max-height: 32px;
+$navbar-width-closed: 68px;
+$menu-icon-min-width: 35px;
+
+// auth scenes
+$login-logo-size: 100px;
+$set-password-logo-width: 300px;
+
+// maps
+$map-dialog-height: 70vh;
+$recenter-button-width: 40px;
+$recenter-button-img-width: 27px;
+$floor-input-paper-width: 50px;
+$map-dialog-tiles-bar-floor-input-width: 50px;
+
+// table
+$table-max-height: 70vh;
+$table-text-input-max-width: 250px;
+$table-color-text-input-min-width: 150px;
+$table-number-text-input-min-width: 100px;
+$table-text-input-min-width: 130px;
+$table-time-text-input-min-width: 70px;
+$table-selector-min-with: 300px;
+$color-overview-size: 14px;
+
+// json viewer and editor
+$code-viewer-height: 70vh;
+$code-viewer-height-small: 90vh;
+$default-json-editor-height: 200px;
+
+// scenes
+$gradient-editor-height: 200px;
+$contract-groups-editor-height: 250px;
+$client-app-internal-settings-editor-height: 150px;
+$analysis-area-polygon-viewer-height: 200px;
+$parkoview-zone-direction-table: 35vh;
+$contract-area-polygon-viewer-height: 250px;
+$zcevalues-form-height: 89vh;
+$parquery-area-generate-spots-input-width: 200px;
+$parkoview-area-generate-spots-input-width: 200px;
+$parkoview-area-generate-linear-input-width: 200px;
+$sensor-monitoring-contract-selector-max-width: 300px;
+$sensor-monitoring-map-height: 70vh;
+$floors-manager-selector-width: 160px;
+
+//Bosch List
+$batch-actions-selector: 300px;

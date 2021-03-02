@@ -1,0 +1,22 @@
+const paths = {
+  front: { default: '/home' },
+  api: {
+    auth: {
+      login: '/auth/login',
+      refresh: '/auth/request_access_token',
+    },
+    user: {
+      infos: '/users/me',
+      setPassword: '/users/password',
+      forgotPassword: '/users/forgot_password',
+      factoriot: {
+        list: '/users',
+        create: '/users',
+        edit: '/users/',
+        get: '/users/',
+      },
+    },
+  },
+};
+
+export { paths };

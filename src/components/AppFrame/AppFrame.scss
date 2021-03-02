@@ -1,0 +1,43 @@
+@import 'lacleTheme.scss';
+
+body {
+  background-color: $color-main-background;
+}
+
+.appframe-root {
+  margin-top: $header-height;
+}
+
+.app-content {
+  padding: 3 * $spacing-tiny;
+  transition-property: margin-left;
+  transition-timing-function: $easing-sharp;
+}
+
+.app-content-small-device {
+  padding: $spacing-teeny;
+}
+
+.app-content-open {
+  margin-left: $navbar-width;
+  transition-duration: $duration-enteringScreen;
+}
+
+.app-content-open-small-device {
+  margin-left: $navbar-width-closed;
+}
+
+.app-content-close {
+  margin-left: $navbar-width-closed;
+  transition-duration: $duration-leavingScreen;
+}
+
+.content-shadow {
+  background-color: $color-shade-dark;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1000;
+}

@@ -1,0 +1,11 @@
+@import 'parkkiTheme.scss';
+
+.selector-container {
+  width: 100%;
+}
+
+.selector-item-icon,
+.selector-item-label {
+  margin: 0 $spacing-teeny;
+  vertical-align: middle;
+}

@@ -1,0 +1,12 @@
+@import 'parkkiTheme.scss';
+
+.text-input-label {
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.input-with-end-adornment {
+  padding-right: $spacing-teeny;
+}

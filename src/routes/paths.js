@@ -1,5 +1,5 @@
 const paths = {
-  front: { default: '/home' },
+  front: { default: '/home', login: '/login', forgotPassword: '/forgot_password', setPassword: '/set_password' },
   api: {
     auth: {
       login: '/auth/login',

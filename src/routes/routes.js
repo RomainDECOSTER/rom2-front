@@ -1,6 +1,18 @@
+import { Home } from 'scenes';
+import { AuthenticatedRoute } from './components';
+import { paths } from './paths';
 import { authenticationRoutes } from './routeGroups';
 
-const otherRoutes = [];
+const otherRoutes = [
+  {
+    render: AuthenticatedRoute,
+    props: {
+      path: paths.front.default,
+      exact: true,
+      component: Home,
+    },
+  },
+];
 
 const routes = otherRoutes.concat(authenticationRoutes);
 

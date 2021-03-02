@@ -15,7 +15,7 @@ const composeEnhancers =
 const persistConfig = {
   key: 'lacle-backoffice',
   storage,
-  whitelist: [],
+  whitelist: ['Authentication'],
 };
 
 const persistedReducer = persistReducer(persistConfig, appReducers);

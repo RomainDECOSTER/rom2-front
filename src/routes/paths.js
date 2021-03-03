@@ -16,6 +16,13 @@ const paths = {
         get: '/users/',
       },
     },
+    campaign: {
+      list: '/campaigns',
+      get: '/campaign/',
+      create: '/campaign',
+      edit: '/campaign/',
+      delete: '/campaign/',
+    },
   },
 };
 

@@ -1,5 +1,5 @@
-import { lacleStore } from 'store';
 import { toast } from 'components';
+import { lacleStore } from 'store';
 import { CampaignApi } from './api';
 
 const CampaignActioner = {
@@ -39,7 +39,7 @@ const CampaignActioner = {
     return CampaignApi.update(id, fields)
       .then(() => {
         const messages = lacleStore.getState().I18n.messages.toast.success;
-        toast.success(messages.successFullyUpdated);
+        toast.success(messages.successFullyEdited);
       })
       .catch(err => {
         const messages = lacleStore.getState().I18n.messages.toast.error;

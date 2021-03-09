@@ -19,6 +19,30 @@ const scenes = {
     sendLinkButtonLabel: 'Envoyer le lien de réinitialisation',
     successMessage: 'Le lien de réinitialisation du mot de passe a été envoyé avec succès.',
   },
+  Table: {
+    actions: 'Actions',
+  },
+  campaignList: {
+    title: 'Campagne',
+    columnTitles: {
+      name: 'Nom',
+      description: 'Description',
+    },
+  },
+  campaignCreate: {
+    title: 'Créer une campagne',
+  },
+  campaignEdit: {
+    title: 'Modifier une campagne',
+    labels: {
+      name: 'Nom',
+      description: 'Description',
+    },
+  },
+  submitButtons: {
+    save: 'Sauvegarder',
+    delete: 'Supprimer',
+  },
 };
 
 export { scenes };

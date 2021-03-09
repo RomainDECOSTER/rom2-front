@@ -22,7 +22,9 @@ const toast = {
     successFullyEdited: 'Modifié avec succès.',
     successFullyDeleted: 'Supprimer avec succès.',
   },
-  info: {},
+  info: {
+    noFieldChanged: "Aucun champ n'a été modifié.",
+  },
   warning: {},
 };
 

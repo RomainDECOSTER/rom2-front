@@ -1,5 +1,5 @@
-const { paths } = require('routes');
-const { XHTTP } = require('services/api');
+import { paths } from 'routes';
+import { XHTTP } from 'services';
 
 const END_POINTS = {
   ...paths.api.campaign,

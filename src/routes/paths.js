@@ -1,5 +1,13 @@
 const paths = {
-  front: { default: '/home', login: '/login', forgotPassword: '/forgot_password', setPassword: '/set_password' },
+  front: {
+    default: '/home',
+    login: '/login',
+    forgotPassword: '/forgot_password',
+    setPassword: '/set_password',
+    campaign: '/campaign',
+    campaignCreate: '/campaign/create',
+    campaignEdit: '/campaign/edit/:id',
+  },
   api: {
     auth: {
       login: '/auth/login',
@@ -15,6 +23,13 @@ const paths = {
         edit: '/users/',
         get: '/users/',
       },
+    },
+    campaign: {
+      list: '/campaigns',
+      get: '/campaign/',
+      create: '/campaign',
+      edit: '/campaign/',
+      delete: '/campaign/',
     },
   },
 };

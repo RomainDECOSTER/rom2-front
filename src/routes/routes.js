@@ -1,7 +1,7 @@
 import { Home } from 'scenes';
 import { AuthenticatedRoute } from './components';
 import { paths } from './paths';
-import { authenticationRoutes } from './routeGroups';
+import { authenticationRoutes, campaignRoutes } from './routeGroups';
 
 const otherRoutes = [
   {
@@ -14,6 +14,6 @@ const otherRoutes = [
   },
 ];
 
-const routes = otherRoutes.concat(authenticationRoutes);
+const routes = otherRoutes.concat(authenticationRoutes, campaignRoutes);
 
 export { routes };

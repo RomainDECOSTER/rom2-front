@@ -11,6 +11,9 @@ const components = {
       list: 'Liste',
       create: 'Créer',
       users: 'Utilisateurs',
+      home: 'Acceuil',
+      settings: 'Administration',
+      campaign: 'Campaigne',
     },
   },
   table: {

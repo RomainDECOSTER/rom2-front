@@ -11,7 +11,7 @@ function getInitialValues(values = {}) {
   return {
     name: vod(values.name, ''),
     description: vod(values.description, ''),
-    id: values.id,
+    id: vod(values._id, undefined),
   };
 }
 

@@ -1,8 +1,7 @@
-import { createStore, compose, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import { applyMiddleware, compose, createStore } from 'redux';
+import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
-import { persistStore, persistReducer } from 'redux-persist';
-
+import thunk from 'redux-thunk';
 import { appReducers } from './services';
 
 const composeEnhancers =
@@ -15,7 +14,7 @@ const composeEnhancers =
 const persistConfig = {
   key: 'lacle-backoffice',
   storage,
-  whitelist: ['Authentication'],
+  whitelist: ['Authentication', 'Campaign'],
 };
 
 const persistedReducer = persistReducer(persistConfig, appReducers);

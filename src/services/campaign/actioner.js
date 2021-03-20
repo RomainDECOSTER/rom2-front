@@ -2,7 +2,12 @@ import { toast } from 'components';
 import { lacleStore } from 'store';
 import { CampaignApi } from './api';
 
+const CampaignActionType = {
+  SET_CURRENT_CAMPAIGN: 'SET_CURRENT_CAMPAIGN',
+};
+
 const CampaignActioner = {
+  setCurrentCampaign: campaignId => ({ type: CampaignActionType.SET_CURRENT_CAMPAIGN, campaign: campaignId }),
   list: () => {
     return CampaignApi.getList()
       .then(res => res)
@@ -65,4 +70,4 @@ const CampaignActioner = {
   },
 };
 
-export { CampaignActioner };
+export { CampaignActioner, CampaignActionType };

@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import { CssBaseline, useMediaQuery, useTheme } from '@material-ui/core';
 import clsx from 'clsx';
-import { CssBaseline, useTheme, useMediaQuery } from '@material-ui/core';
+import React, { useState } from 'react';
 import { injectIntl } from 'react-intl';
-
+import './AppFrame.scss';
 import { Header, Navbar } from './components';
 import { getNavLinks } from './navLinks';
-import './AppFrame.scss';
 
 function removeUnauthorizedNavLinks(navLinks) {
   const authorizedLinks = [];
@@ -36,7 +35,12 @@ function AppFrameComponent(props) {
   return (
     <div className="appframe-root">
       <CssBaseline />
-      <Header navbarOpen={open} handleDrawerOpen={openNavbar} handleDrawerClose={closeNavbar} />
+      <Header
+        navbarOpen={open}
+        handleDrawerOpen={openNavbar}
+        handleDrawerClose={closeNavbar}
+        campaigns={props.campaigns}
+      />
       <Navbar navbarOpen={open} navLinks={linksToSend} openNavbar={openNavbar} />
       {smallDevice && open && <div className="content-shadow" onClick={closeNavbar} />}
       <main

@@ -6,6 +6,7 @@ const components = {
         fr: 'FR',
         us: 'US',
       },
+      campaign: 'Campaign courante',
     },
     navbar: {
       list: 'Liste',

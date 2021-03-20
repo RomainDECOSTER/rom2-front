@@ -1,12 +1,12 @@
+import { AppFrame, Loader, toast } from 'components';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Route, Redirect, Switch, BrowserRouter } from 'react-router-dom';
-import { QueryParamProvider } from 'use-query-params';
-
-import { paths } from './paths';
-import { AppFrame, toast, Loader } from 'components';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { UserApi } from 'services';
+import { CampaignActioner } from 'services/campaign';
 import { lacleStore } from 'store';
+import { QueryParamProvider } from 'use-query-params';
+import { paths } from './paths';
 
 const RouteSwitch = ({ routes }) => (
   <Switch>
@@ -20,10 +20,10 @@ const RouteSwitch = ({ routes }) => (
   </Switch>
 );
 
-function AuthSwitch({ routes }) {
+function AuthSwitch({ routes, campaigns }) {
   return (
     <QueryParamProvider ReactRouterRoute={Route}>
-      <AppFrame>
+      <AppFrame campaigns={campaigns}>
         <RouteSwitch routes={routes} />
       </AppFrame>
     </QueryParamProvider>
@@ -35,7 +35,9 @@ const AuthLoading = ({ routes }) => {
     const authSwitch = <AuthSwitch routes={routes} />;
     UserApi.getUserInfos()
       .then(res => {
-        render(authSwitch);
+        CampaignActioner.list().then(campaigns => {
+          render(<AuthSwitch routes={routes} campaigns={campaigns} />);
+        });
       })
       .catch(() => {
         const reduxState = lacleStore.getState();

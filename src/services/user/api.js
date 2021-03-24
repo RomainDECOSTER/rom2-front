@@ -1,5 +1,5 @@
-import { XHTTP } from 'services';
 import { paths } from 'routes';
+import { XHTTP } from 'services';
 
 const END_POINTS = {
   getUserInfos: paths.api.user.infos,
@@ -9,6 +9,7 @@ const END_POINTS = {
   createNewUser: paths.api.user.factoriot.create,
   editUser: paths.api.user.factoriot.edit,
   getSpecificUserInfos: paths.api.user.factoriot.get,
+  delete: paths.api.user.factoriot.delete,
 };
 
 const UserApi = {
@@ -54,6 +55,7 @@ const UserApi = {
     }),
 
   getSpecificUserInfos: userId => XHTTP(`${END_POINTS.getSpecificUserInfos}${userId}`),
+  delete: id => XHTTP(`${END_POINTS.delete}${id}`, { method: 'delete' }),
 };
 
 export { UserApi };

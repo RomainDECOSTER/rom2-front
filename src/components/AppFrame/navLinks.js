@@ -16,12 +16,32 @@ const getNavLinks = () => {
       Icon: Settings,
       items: [
         {
-          label: customNames.campaign,
-          link: paths.front.campaign,
+          label: customNames.users,
+          Icon: Settings,
+          items: [
+            {
+              label: customNames.list,
+              link: paths.front.user.home,
+            },
+            {
+              label: customNames.create,
+              link: paths.front.user.create,
+            },
+          ],
         },
         {
-          label: customNames.create,
-          link: paths.front.campaignCreate,
+          label: customNames.campaign,
+          Icon: Settings,
+          items: [
+            {
+              label: customNames.list,
+              link: paths.front.campaign.home,
+            },
+            {
+              label: customNames.create,
+              link: paths.front.campaign.create,
+            },
+          ],
         },
       ],
     },

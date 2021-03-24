@@ -6,45 +6,59 @@ import { injectIntl } from 'react-intl';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { paths } from 'routes';
-import { CampaignActioner } from 'services/campaign';
+import { UserActioner } from 'services/user';
 
-function CampaignTable({ campaignFound, intlData }) {
-  const [data] = useState(useMemo(() => campaignFound, [campaignFound]));
+function UserTable({ userFound, intlData }) {
+  const [data] = useState(useMemo(() => userFound, [userFound]));
   const [skipPageReset] = useState(false);
   const history = useHistory();
 
-  const intl = intlData.messages.scenes.campaignList;
+  const intl = intlData.messages.scenes.userList;
   const commonDefaultTitles = intlData.messages.scenes.Table;
   const columnTitles = intl.columnTitles;
 
   const columns = useMemo(
     () => [
       {
-        Header: columnTitles.name,
-        accessor: 'name',
+        Header: columnTitles.firstname,
+        accessor: 'firstname',
       },
       {
-        Header: columnTitles.description,
-        accessor: 'description',
+        Header: columnTitles.lastname,
+        accessor: 'lastname',
+      },
+      {
+        Header: columnTitles.email,
+        accessor: 'email',
+      },
+      {
+        Header: columnTitles.roles,
+        accessor: 'roles',
       },
       {
         Header: commonDefaultTitles.actions,
         accessor: '_id',
         disableSortBy: true,
         Cell: ({ value }) => (
-          <IconButton size="small" component={Link} to={paths.front.campaign.edit.replace(':id', value)}>
+          <IconButton size="small" component={Link} to={paths.front.user.edit.replace(':id', value)}>
             <Edit />
           </IconButton>
         ),
       },
     ],
-    [columnTitles.description, columnTitles.name, commonDefaultTitles.actions],
+    [
+      columnTitles.firstname,
+      columnTitles.lastname,
+      columnTitles.email,
+      columnTitles.roles,
+      commonDefaultTitles.actions,
+    ],
   );
 
   const actions = [
     {
       render: () => (
-        <IconButton size="small" onClick={() => history.push(paths.front.campaign.create)}>
+        <IconButton size="small" onClick={() => history.push(paths.front.user.create)}>
           <AddCircle color="primary" />
         </IconButton>
       ),
@@ -57,14 +71,15 @@ function CampaignTable({ campaignFound, intlData }) {
   );
 }
 
-function CampaignListComponent(props) {
-  const [campaigns, setCampaigns] = useState([]);
+function UserListComponent(props) {
+  const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (loading) {
-      CampaignActioner.list().then(docs => {
-        setCampaigns(docs);
+      UserActioner.getUserList().then(docs => {
+        console.log(docs);
+        setUsers(docs);
         setLoading(false);
       });
     }
@@ -72,7 +87,7 @@ function CampaignListComponent(props) {
   }, [loading]);
 
   return (
-    <Paper>
+    <Paper className="padding-small">
       {loading ? (
         <Grid
           container
@@ -85,12 +100,12 @@ function CampaignListComponent(props) {
           <CircularProgress color="primary" />
         </Grid>
       ) : (
-        <CampaignTable campaignFound={campaigns} intlData={props.intl} reload={() => setLoading(true)} />
+        <UserTable userFound={users} intlData={props.intl} reload={() => setLoading(true)} />
       )}
     </Paper>
   );
 }
 
-const CampaignList = injectIntl(CampaignListComponent);
+const UserList = injectIntl(UserListComponent);
 
-export { CampaignList };
+export { UserList };

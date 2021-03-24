@@ -4,3 +4,4 @@ export * from './Home';
 export * from './Login';
 export * from './SetPassword';
 export * from './User';
+export * from './Workshop';

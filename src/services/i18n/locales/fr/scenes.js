@@ -71,6 +71,23 @@ const scenes = {
   userEdit: {
     title: 'Modifier un utilisateur',
   },
+  workshopForm: {
+    labels: {
+      name: "Nom de l'atelier",
+    },
+  },
+  workshopList: {
+    title: 'Ateliers',
+    columnTitles: {
+      name: "Nom de l'atelier",
+    },
+  },
+  workshopCreate: {
+    title: 'Créer un atelier',
+  },
+  workshopEdit: {
+    title: 'Modifier un atelier',
+  },
 };
 
 export { scenes };

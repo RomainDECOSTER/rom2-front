@@ -30,6 +30,20 @@ const getNavLinks = () => {
           ],
         },
         {
+          label: customNames.workshop,
+          Icon: Settings,
+          items: [
+            {
+              label: customNames.list,
+              link: paths.front.workshop.home,
+            },
+            {
+              label: customNames.create,
+              link: paths.front.workshop.create,
+            },
+          ],
+        },
+        {
           label: customNames.campaign,
           Icon: Settings,
           items: [

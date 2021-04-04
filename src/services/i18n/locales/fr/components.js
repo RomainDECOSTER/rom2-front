@@ -14,7 +14,8 @@ const components = {
       users: 'Utilisateurs',
       home: 'Acceuil',
       settings: 'Administration',
-      campaign: 'Campaigne',
+      campaign: 'Campagne',
+      workshop: 'Atelier',
     },
   },
   table: {

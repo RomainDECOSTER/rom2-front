@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import { Collapse, Divider, List, ListItemIcon, ListItemText } from '@material-ui/core';
+import { AddBox, ExpandLess, ExpandMore } from '@material-ui/icons';
 import clsx from 'clsx';
-import { ExpandLess, ExpandMore, AddBox } from '@material-ui/icons';
-import { Divider, Collapse, List, ListItemIcon, ListItemText } from '@material-ui/core';
-
+import React, { useState } from 'react';
 import { NavItemComponent } from '../';
 import './NavItem.scss';
 

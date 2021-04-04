@@ -6,7 +6,7 @@ import { UserForm } from './UserForm';
 function UserCreateComponent({ intl }) {
   return (
     <Paper className="padding-small">
-      <h2>{intl.messages.scenes.userCreate.title}</h2>
+      <h2 className="text-centered">{intl.messages.scenes.user.create.title}</h2>
       <UserForm mode={'create'} />
     </Paper>
   );

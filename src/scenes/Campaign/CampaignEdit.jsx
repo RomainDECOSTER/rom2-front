@@ -3,15 +3,15 @@ import { Loader } from 'components';
 import React, { useState } from 'react';
 import { injectIntl } from 'react-intl';
 import { CampaignActioner } from 'services/campaign';
-import { CampaignEditForm } from '../CampaignEditForm/CampaignEditForm';
+import { CampaignForm } from './CampaignForm';
 
 function CampaignEditComponent(props) {
   const [, reload] = useState();
   const id = props.match.params.id;
-  const intl = props.intl.messages.scenes.campaignEdit;
+  const intl = props.intl.messages.scenes.campaign.edit;
 
   function editForm(values) {
-    return <CampaignEditForm values={values} reload={() => reload({})} mode={'edit'} />;
+    return <CampaignForm values={values} reload={() => reload({})} mode={'edit'} />;
   }
 
   function loadInfos() {
@@ -33,7 +33,7 @@ function CampaignEditComponent(props) {
 
   return (
     <Paper className="padding-small">
-      <h2>{intl.title}</h2>
+      <h2 className="text-centered">{intl.title}</h2>
       <Loader render={renderEditForm} />
     </Paper>
   );

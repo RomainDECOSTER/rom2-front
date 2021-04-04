@@ -13,7 +13,7 @@ function UserTable({ userFound, intlData }) {
   const [skipPageReset] = useState(false);
   const history = useHistory();
 
-  const intl = intlData.messages.scenes.userList;
+  const intl = intlData.messages.scenes.user.list;
   const commonDefaultTitles = intlData.messages.scenes.Table;
   const columnTitles = intl.columnTitles;
 
@@ -78,7 +78,6 @@ function UserListComponent(props) {
   useEffect(() => {
     if (loading) {
       UserActioner.getUserList().then(docs => {
-        console.log(docs);
         setUsers(docs);
         setLoading(false);
       });
@@ -89,14 +88,7 @@ function UserListComponent(props) {
   return (
     <Paper className="padding-small">
       {loading ? (
-        <Grid
-          container
-          spacing={0}
-          direction="column"
-          alignItems="center"
-          justify="center"
-          style={{ minHeight: '40vh' }}
-        >
+        <Grid container spacing={0} direction="column" alignItems="center" justify="center" className="height-circular">
           <CircularProgress color="primary" />
         </Grid>
       ) : (

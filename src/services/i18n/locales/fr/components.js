@@ -14,8 +14,10 @@ const components = {
       users: 'Utilisateurs',
       home: 'Acceuil',
       settings: 'Administration',
-      campaign: 'Campagne',
-      workshop: 'Atelier',
+      campaign: 'Campagnes',
+      workshop: 'Ateliers',
+      gestion: 'Gestion',
+      student: 'Apprenants',
     },
   },
   table: {

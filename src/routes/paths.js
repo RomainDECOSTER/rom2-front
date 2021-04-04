@@ -19,6 +19,12 @@ const paths = {
       create: '/workshop/create',
       edit: '/workshop/edit/:id',
     },
+    student: {
+      home: '/student',
+      create: '/student/create',
+      edit: '/student/edit/:id',
+      profil: '/student/profil/:id',
+    },
   },
   api: {
     auth: {
@@ -50,6 +56,13 @@ const paths = {
       create: '/workshop',
       edit: '/workshop/',
       delete: '/workshop/',
+    },
+    student: {
+      list: '/students',
+      get: '/student/',
+      create: '/student',
+      edit: '/student/',
+      delete: '/student/',
     },
   },
 };

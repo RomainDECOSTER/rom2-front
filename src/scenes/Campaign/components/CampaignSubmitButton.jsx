@@ -5,9 +5,9 @@ import { ConfirmDialog } from 'components/ConfirmDialog';
 import { injectIntl } from 'react-intl';
 import { useHistory } from 'react-router';
 import { paths } from 'routes';
-import { WorkshopActioner } from 'services/workshop';
+import { CampaignActioner } from 'services/campaign';
 
-function WorkshopSubmitButtonComponent({ fields, setFields, mode, initialValues, reload, ...props }) {
+function CampaignSubmitButtonComponent({ fields, setFields, mode, initialValues, reload, ...props }) {
   const intl = props.intl.messages.scenes.submitButtons;
   const toastMessages = props.intl.messages.toast;
   const id = initialValues.id;
@@ -31,12 +31,16 @@ function WorkshopSubmitButtonComponent({ fields, setFields, mode, initialValues,
       fieldsToSend.name = fields.name;
     }
 
+    if (fields.description !== initialValues.description) {
+      fieldsToSend.description = fields.description;
+    }
+
     if (Object.entries(fieldsToSend).length === 0) {
       return toast.info(toastMessages.info.noFieldChanged);
     }
     setLoading(true);
 
-    WorkshopActioner.update(id, fieldsToSend)
+    CampaignActioner.update(id, fieldsToSend)
       .then(() => {
         setLoading(false);
         reload();
@@ -52,10 +56,10 @@ function WorkshopSubmitButtonComponent({ fields, setFields, mode, initialValues,
     }
 
     setLoading(true);
-    WorkshopActioner.create(fields)
+    CampaignActioner.create(fields)
       .then(() => {
         setLoading(false);
-        history.push(paths.front.workshop.home);
+        history.push(paths.front.campaign.home);
       })
       .catch(() => {
         setLoading(false);
@@ -64,10 +68,10 @@ function WorkshopSubmitButtonComponent({ fields, setFields, mode, initialValues,
 
   function onDelete() {
     setLoading(true);
-    WorkshopActioner.delete(id)
+    CampaignActioner.delete(id)
       .then(() => {
         setLoading(false);
-        history.push(paths.front.workshop.home);
+        history.push(paths.front.campaign.home);
       })
       .catch(() => {
         setLoading(false);
@@ -106,6 +110,6 @@ function WorkshopSubmitButtonComponent({ fields, setFields, mode, initialValues,
   );
 }
 
-const WorkshopSubmitButton = injectIntl(WorkshopSubmitButtonComponent);
+const CampaignSubmitButton = injectIntl(CampaignSubmitButtonComponent);
 
-export { WorkshopSubmitButton };
+export { CampaignSubmitButton };

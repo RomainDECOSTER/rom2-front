@@ -12,6 +12,7 @@
 .header-toolbar {
   min-height: $header-height;
   padding: 0;
+  background: linear-gradient(135deg, $secondary-color, #5989cc);
 }
 
 .header-divider {
@@ -40,6 +41,9 @@
 }
 
 .campaign-selector {
-  width: 20% !important;
-  padding-right: 1%;
+  width: 15% !important;
+  height: 80%;
+  padding: 0rem 0.5rem;
+  border-radius: 1vh;
+  margin-right: 1%;
 }

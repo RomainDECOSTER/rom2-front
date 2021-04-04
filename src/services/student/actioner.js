@@ -1,28 +1,28 @@
 import { toast } from 'components';
 import { lacleStore } from 'store';
-import { WorkshopApi } from './api';
+import { StudentApi } from './api';
 
-const WorkshopActioner = {
-  list: () => {
-    return WorkshopApi.getList()
+const StudentActioner = {
+  list: id => {
+    return StudentApi.getList(id)
       .then(res => res)
       .catch(err => {
         const messages = lacleStore.getState().I18n.messages.toast.error;
-        toast.error(messages.unableToRetrieveWorkshopList);
+        toast.error(messages.unableToRetrieveStudentList);
         throw err;
       });
   },
   get: id => {
-    return WorkshopApi.getSpecific(id)
+    return StudentApi.getSpecific(id)
       .then(res => res)
       .catch(err => {
         const messages = lacleStore.getState().I18n.messages.toast.error;
-        toast.error(messages.unableToRetrieveWorkshopList);
+        toast.error(messages.unableToRetrieveStudentList);
         throw err;
       });
   },
   create: (id, fields) => {
-    return WorkshopApi.create(id, fields)
+    return StudentApi.create(id, fields)
       .then(() => {
         const messages = lacleStore.getState().I18n.messages.toast.success;
         toast.success(messages.successFullyCreated);
@@ -36,7 +36,7 @@ const WorkshopActioner = {
       });
   },
   update: (id, fields) => {
-    return WorkshopApi.update(id, fields)
+    return StudentApi.update(id, fields)
       .then(() => {
         const messages = lacleStore.getState().I18n.messages.toast.success;
         toast.success(messages.successFullyEdited);
@@ -50,7 +50,7 @@ const WorkshopActioner = {
       });
   },
   delete: id => {
-    return WorkshopApi.delete(id)
+    return StudentApi.delete(id)
       .then(() => {
         const messages = lacleStore.getState().I18n.messages.toast.success;
         toast.success(messages.successFullyDeleted);
@@ -65,4 +65,4 @@ const WorkshopActioner = {
   },
 };
 
-export { WorkshopActioner };
+export { StudentActioner };

@@ -8,7 +8,7 @@ import { WorkshopActioner } from 'services/workshop';
 function WorkshopEditComponent(props) {
   const [, reload] = useState();
   const id = props.match.params.id;
-  const intl = props.intl.messages.scenes.campaignEdit;
+  const intl = props.intl.messages.scenes.workshop.edit;
 
   function editForm(values) {
     return <WorkshopForm values={values} reload={() => reload({})} mode={'edit'} />;
@@ -33,7 +33,7 @@ function WorkshopEditComponent(props) {
 
   return (
     <Paper className="padding-small">
-      <h2>{intl.title}</h2>
+      <h2 className="text-centered">{intl.title}</h2>
       <Loader render={renderEditForm} />
     </Paper>
   );

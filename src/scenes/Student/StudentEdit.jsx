@@ -1,21 +1,21 @@
-import { Paper } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import { Loader } from 'components';
 import React, { useState } from 'react';
 import { injectIntl } from 'react-intl';
-import { UserActioner } from 'services/user';
-import { UserForm } from './UserForm';
+import { StudentForm } from 'scenes';
+import { StudentActioner } from 'services/student';
 
-function UserEditComponent(props) {
+function StudentEditComponent(props) {
   const [, reload] = useState();
   const id = props.match.params.id;
-  const intl = props.intl.messages.scenes.user.edit;
+  const intl = props.intl.messages.scenes.studentEdit;
 
   function editForm(values) {
-    return <UserForm values={values} reload={() => reload({})} mode={'edit'} />;
+    return <StudentForm values={values} reload={() => reload({})} mode={'edit'} />;
   }
 
   function loadInfos() {
-    return UserActioner.getSpecificUserInfos(id)
+    return StudentActioner.get(id)
       .then(infos => {
         const values = { ...infos, id };
         return values;
@@ -32,13 +32,13 @@ function UserEditComponent(props) {
   }
 
   return (
-    <Paper className="padding-small">
-      <h2 className="text-centered">{intl.title}</h2>
+    <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" className="full-width">
+      <h2>{intl.title}</h2>
       <Loader render={renderEditForm} />
-    </Paper>
+    </Box>
   );
 }
 
-const UserEdit = injectIntl(UserEditComponent);
+const StudentEdit = injectIntl(StudentEditComponent);
 
-export { UserEdit };
+export { StudentEdit };

@@ -1,5 +1,4 @@
 import { Button, Container, Fade, Grid, Menu, MenuItem, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import AddIcon from '@material-ui/icons/Add';
 import { TextInput } from 'components/TextInput';
@@ -7,40 +6,9 @@ import { useState } from 'react';
 import { injectIntl } from 'react-intl';
 import { ValueUtils } from 'tools';
 import { UserSubmitButton } from './components';
+import './User.scss';
 
 const vod = ValueUtils.valueOrDefault;
-
-const useStyles = makeStyles(theme => ({
-  margin: {
-    margin: theme.spacing(1),
-  },
-  marginBottom: {
-    marginBottom: '40px',
-  },
-  central: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    backgroundColor: 'white',
-    padding: '10px',
-    margin: theme.spacing(1),
-  },
-  centralbutton: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    border: 'none',
-    backgroundColor: 'Transparent',
-    cursor: 'pointer',
-  },
-  split: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-}));
 
 function getInitialValues(values = {}) {
   return {
@@ -53,7 +21,6 @@ function getInitialValues(values = {}) {
 }
 
 const ListRoles = props => {
-  const classes = useStyles();
   const { user, setUser } = props;
 
   const handleClick = (event, index) => {
@@ -65,8 +32,8 @@ const ListRoles = props => {
   return user.roles.map((role, index) => {
     return (
       <div key={index}>
-        <button onClick={event => handleClick(event, index)} className={classes.centralbutton}>
-          <Grid item xs={3} sm={3} className={classes.central}>
+        <button onClick={event => handleClick(event, index)} className="user-central-button">
+          <Grid item xs={3} sm={3} className="user-central">
             <AccountCircleIcon color="secondary" fontSize="large" />
             <Typography variant="subtitle1" gutterBottom>
               {role}
@@ -79,7 +46,6 @@ const ListRoles = props => {
 };
 
 function UserFormComponent(props) {
-  const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const { reload, mode, values } = props;
@@ -94,14 +60,8 @@ function UserFormComponent(props) {
     loading: false,
   });
 
-  const intl = props.intl.messages.scenes.userForm;
+  const intl = props.intl.messages.scenes.user.form;
   const initRoles = [intl.labels.roles.admin, intl.labels.roles.team, intl.labels.roles.user];
-
-  function setFieldFunction(name) {
-    return value => {
-      setFields(f => ({ ...f, [name]: value }));
-    };
-  }
 
   function setFieldWithErrorFunction(name) {
     return value => {
@@ -181,14 +141,14 @@ function UserFormComponent(props) {
           >
             {initRoles.map((initrole, index) => {
               return (
-                <MenuItem key={index} onClick={event => handleMenuItemClick(event, index)} className={classes.margin}>
+                <MenuItem key={index} onClick={event => handleMenuItemClick(event, index)} className="user-margin">
                   {initrole}
                 </MenuItem>
               );
             })}
           </Menu>
         </Grid>
-        <Grid container item xs={12} sm={6} className={classes.marginBottom}>
+        <Grid container item xs={12} sm={6} className="user-marginBottom">
           <ListRoles user={fields} setUser={setFields} />
         </Grid>
       </Grid>

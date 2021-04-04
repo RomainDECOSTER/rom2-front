@@ -25,7 +25,7 @@ function WorkshopFormComponent(props) {
     loading: false,
   });
 
-  const intl = props.intl.messages.scenes.workshopForm;
+  const intl = props.intl.messages.scenes.workshop.form;
 
   function setFieldWithErrorFunction(name) {
     return value => {

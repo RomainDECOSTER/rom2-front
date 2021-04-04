@@ -3,10 +3,10 @@ import { createMuiTheme } from '@material-ui/core/styles';
 const LacleMuiTheme = createMuiTheme({
   palette: {
     primary: {
-      main: '#03a9f4',
+      main: '#2D6FA1',
     },
     secondary: {
-      main: '#008a98',
+      main: '#D17348',
     },
   },
 });

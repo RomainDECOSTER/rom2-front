@@ -1,0 +1,37 @@
+@import 'lacleTheme.scss';
+
+.user-margin {
+  margin: 10px;
+}
+
+.user-marginBottom {
+  margin-bottom: '40px';
+}
+
+.user-central {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: white;
+  padding: 10px;
+  margin: 10px;
+}
+.user-central-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.user-central-button:hover {
+  border: solid 2px red;
+  border-radius: 5px;
+}
+.user-split {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

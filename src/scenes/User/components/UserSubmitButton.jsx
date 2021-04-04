@@ -61,12 +61,15 @@ function UserSubmitButtonComponent({ fields, setFields, mode, initialValues, rel
   }
 
   function onCreate() {
-    if (fields.name === '') {
-      return setError('name');
+    if (fields.firstname === '') {
+      return setError('firstname');
     }
-
-    console.log(fields);
-
+    if (fields.lastname === '') {
+      return setError('lastname');
+    }
+    if (fields.email === '') {
+      return setError('email');
+    }
     setLoading(true);
     UserActioner.createNewUser(fields)
       .then(() => {

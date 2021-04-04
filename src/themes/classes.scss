@@ -71,3 +71,11 @@
 .overflow-y-hidden {
   overflow-y: hidden;
 }
+
+.marginB20 {
+  margin-bottom: $spacing-normal;
+}
+
+.height-circular {
+  min-height: $monitor-half-size;
+}

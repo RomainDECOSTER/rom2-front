@@ -1,12 +1,11 @@
+import { Button, Container, CssBaseline, TextField, Typography } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
+import { toast } from 'components';
 import React, { useEffect, useState } from 'react';
+import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { injectIntl } from 'react-intl';
-import { Container, CssBaseline, Typography, TextField, Button, Avatar } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
-
 import { paths } from 'routes';
-import { toast } from 'components';
 import { UserActioner } from 'services';
 // import parkkiLogo from './logo-parkki.png';
 import './ForgotPassword.scss';

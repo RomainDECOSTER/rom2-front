@@ -1,7 +1,6 @@
 import { paths } from 'routes';
 import { AuthenticatedRoute } from 'routes/components';
-import { CampaignCreate, CampaignList } from 'scenes';
-import { CampaignEdit } from 'scenes/Campaign/CampaignEdit/CampaignEdit';
+import { CampaignCreate, CampaignEdit, CampaignList } from 'scenes';
 
 const campaignRoutes = [
   {

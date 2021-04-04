@@ -6,7 +6,7 @@ import { WorkshopForm } from './WorkshopForm';
 function WorkshopCreateComponent({ intl }) {
   return (
     <Paper className="padding-small">
-      <h2>{intl.messages.scenes.workshopCreate.title}</h2>
+      <h2 className="text-centered">{intl.messages.scenes.workshop.create.title}</h2>
       <WorkshopForm mode={'create'} />
     </Paper>
   );

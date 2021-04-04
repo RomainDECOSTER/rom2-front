@@ -8,7 +8,7 @@ import { UserForm } from './UserForm';
 function UserEditComponent(props) {
   const [, reload] = useState();
   const id = props.match.params.id;
-  const intl = props.intl.messages.scenes.userEdit;
+  const intl = props.intl.messages.scenes.user.edit;
 
   function editForm(values) {
     return <UserForm values={values} reload={() => reload({})} mode={'edit'} />;
@@ -33,7 +33,7 @@ function UserEditComponent(props) {
 
   return (
     <Paper className="padding-small">
-      <h2>{intl.title}</h2>
+      <h2 className="text-centered">{intl.title}</h2>
       <Loader render={renderEditForm} />
     </Paper>
   );

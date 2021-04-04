@@ -51,8 +51,6 @@ function WorkshopSubmitButtonComponent({ fields, setFields, mode, initialValues,
       return setError('name');
     }
 
-    console.log(fields);
-
     setLoading(true);
     WorkshopActioner.create(fields)
       .then(() => {

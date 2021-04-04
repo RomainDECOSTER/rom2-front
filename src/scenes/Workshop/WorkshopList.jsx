@@ -13,7 +13,7 @@ function WorkshopTable({ workshopFound, intlData }) {
   const [skipPageReset] = useState(false);
   const history = useHistory();
 
-  const intl = intlData.messages.scenes.workshopList;
+  const intl = intlData.messages.scenes.workshop.list;
   const commonDefaultTitles = intlData.messages.scenes.Table;
   const columnTitles = intl.columnTitles;
 
@@ -70,14 +70,7 @@ function WorkshopListComponent(props) {
   return (
     <Paper>
       {loading ? (
-        <Grid
-          container
-          spacing={0}
-          direction="column"
-          alignItems="center"
-          justify="center"
-          style={{ minHeight: '40vh' }}
-        >
+        <Grid container spacing={0} direction="column" alignItems="center" justify="center" className="height-circular">
           <CircularProgress color="primary" />
         </Grid>
       ) : (

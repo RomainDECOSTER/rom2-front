@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { InputAdornment, TextField } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import { TextField, InputAdornment } from '@material-ui/core';
-
+import React, { useEffect, useState } from 'react';
 import './TextInput.scss';
 
 function TextInput(props) {
@@ -86,7 +85,7 @@ TextInput.defaultProps = {
   setField: () => {},
   disabled: false,
   variant: 'outlined',
-  margin: 'dense',
+  margin: 'normal',
   required: true,
   type: 'text',
   inputClassName: '',

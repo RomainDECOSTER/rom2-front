@@ -1,8 +1,12 @@
 @import 'lacleTheme.scss';
 
 .nav-item-icon {
-  color: $secondary-color;
+  color: $primary-color;
   min-width: $spacing-xLarge;
+}
+
+.navbar-item-add-icon {
+  color: $primary-color;
 }
 
 .nav-item-module {
@@ -28,11 +32,11 @@
 }
 
 .navbar-item.active .nav-item-icon {
-  color: $primary-color;
+  color: $secondary-color;
 }
 
 .navbar-item.active .navbar-item-add-icon {
-  color: $color-icon-selected;
+  color: $secondary-color;
 }
 
 .navbar-item-add-icon {

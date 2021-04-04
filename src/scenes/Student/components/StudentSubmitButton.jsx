@@ -5,9 +5,10 @@ import { ConfirmDialog } from 'components/ConfirmDialog';
 import { injectIntl } from 'react-intl';
 import { useHistory } from 'react-router';
 import { paths } from 'routes';
-import { CampaignActioner } from 'services/campaign';
+import { StudentActioner } from 'services/student';
+import { ObjectUtils } from 'tools';
 
-function CampaignSubmitButtonComponent({ fields, setFields, mode, initialValues, reload, ...props }) {
+function StudentSubmitButtonComponent({ fields, setFields, mode, initialValues, reload, ...props }) {
   const intl = props.intl.messages.scenes.submitButtons;
   const toastMessages = props.intl.messages.toast;
   const id = initialValues.id;
@@ -22,25 +23,12 @@ function CampaignSubmitButtonComponent({ fields, setFields, mode, initialValues,
   }
 
   function onEdit() {
-    const fieldsToSend = {};
-
-    if (fields.name !== initialValues.name) {
-      if (fields.name === '') {
-        return setError('name');
-      }
-      fieldsToSend.name = fields.name;
-    }
-
-    if (fields.description !== initialValues.description) {
-      fieldsToSend.description = fields.description;
-    }
-
-    if (Object.entries(fieldsToSend).length === 0) {
+    if (ObjectUtils.compareSimpleObjects(fields, initialValues)) {
       return toast.info(toastMessages.info.noFieldChanged);
     }
     setLoading(true);
 
-    CampaignActioner.update(id, fieldsToSend)
+    StudentActioner.update(id, fields)
       .then(() => {
         setLoading(false);
         reload();
@@ -55,13 +43,15 @@ function CampaignSubmitButtonComponent({ fields, setFields, mode, initialValues,
       return setError('name');
     }
 
-    console.log(fields);
+    if (fields.campaign === '') {
+      return setError('campaign');
+    }
 
     setLoading(true);
-    CampaignActioner.create(fields)
+    StudentActioner.create(fields)
       .then(() => {
         setLoading(false);
-        history.push(paths.front.campaign.home);
+        history.push(paths.front.student.home);
       })
       .catch(() => {
         setLoading(false);
@@ -70,10 +60,10 @@ function CampaignSubmitButtonComponent({ fields, setFields, mode, initialValues,
 
   function onDelete() {
     setLoading(true);
-    CampaignActioner.delete(id)
+    StudentActioner.delete(id)
       .then(() => {
         setLoading(false);
-        history.push(paths.front.campaign.home);
+        history.push(paths.front.student.home);
       })
       .catch(() => {
         setLoading(false);
@@ -112,6 +102,6 @@ function CampaignSubmitButtonComponent({ fields, setFields, mode, initialValues,
   );
 }
 
-const CampaignSubmitButton = injectIntl(CampaignSubmitButtonComponent);
+const StudentSubmitButton = injectIntl(StudentSubmitButtonComponent);
 
-export { CampaignSubmitButton };
+export { StudentSubmitButton };

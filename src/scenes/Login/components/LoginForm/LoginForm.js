@@ -1,25 +1,23 @@
-import React, { useState } from 'react';
 import {
-  Avatar,
-  Button,
-  CssBaseline,
-  TextField,
-  FormControlLabel,
-  Checkbox,
-  Grid,
   Box,
-  Typography,
+  Button,
+  Checkbox,
   Container,
+  CssBaseline,
+  FormControlLabel,
+  Grid,
+  TextField,
+  Typography,
 } from '@material-ui/core';
-import { connect } from 'react-redux';
+import { toast } from 'components';
+import React, { useState } from 'react';
 import { injectIntl } from 'react-intl';
-import { useHistory, Link as RouterLink } from 'react-router-dom';
-
-import './LoginForm.scss';
+import { connect } from 'react-redux';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
+import { paths } from 'routes';
 // import parkkiLogo from './logo-parkki.png';
 import { AuthenticationActioner, AuthenticationUtils } from 'services';
-import { toast } from 'components';
-import { paths } from 'routes';
+import './LoginForm.scss';
 
 const LoginFormComponent = props => {
   const [fields, setFields] = useState({

@@ -1,8 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 import clsx from 'clsx';
-import { FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
-
+import PropTypes from 'prop-types';
+import React from 'react';
 import './Selector.scss';
 
 function Selector(props) {

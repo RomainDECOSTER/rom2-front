@@ -13,7 +13,7 @@ function CampaignTable({ campaignFound, intlData }) {
   const [skipPageReset] = useState(false);
   const history = useHistory();
 
-  const intl = intlData.messages.scenes.campaignList;
+  const intl = intlData.messages.scenes.campaign.list;
   const commonDefaultTitles = intlData.messages.scenes.Table;
   const columnTitles = intl.columnTitles;
 
@@ -74,14 +74,7 @@ function CampaignListComponent(props) {
   return (
     <Paper>
       {loading ? (
-        <Grid
-          container
-          spacing={0}
-          direction="column"
-          alignItems="center"
-          justify="center"
-          style={{ minHeight: '40vh' }}
-        >
+        <Grid container spacing={0} direction="column" alignItems="center" justify="center" className="height-circular">
           <CircularProgress color="primary" />
         </Grid>
       ) : (

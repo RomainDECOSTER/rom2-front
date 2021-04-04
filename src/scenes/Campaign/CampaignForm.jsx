@@ -3,7 +3,7 @@ import { TextInput } from 'components/TextInput';
 import { useState } from 'react';
 import { injectIntl } from 'react-intl';
 import { ValueUtils } from 'tools';
-import { CampaignSubmitButton } from './components/CampaignSubmitButton/CampaignSubmitButton';
+import { CampaignSubmitButton } from './components/CampaignSubmitButton';
 
 const vod = ValueUtils.valueOrDefault;
 
@@ -26,7 +26,7 @@ function CampaignEditFormComponent(props) {
     loading: false,
   });
 
-  const intl = props.intl.messages.scenes.campaignEdit;
+  const intl = props.intl.messages.scenes.campaign.edit;
 
   function setFieldFunction(name) {
     return value => {
@@ -78,6 +78,6 @@ function CampaignEditFormComponent(props) {
   );
 }
 
-const CampaignEditForm = injectIntl(CampaignEditFormComponent);
+const CampaignForm = injectIntl(CampaignEditFormComponent);
 
-export { CampaignEditForm };
+export { CampaignForm };

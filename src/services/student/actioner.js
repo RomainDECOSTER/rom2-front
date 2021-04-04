@@ -2,12 +2,7 @@ import { toast } from 'components';
 import { lacleStore } from 'store';
 import { StudentApi } from './api';
 
-const StudentActionType = {
-  SET_CURRENT_STUDENT: 'SET_CURRENT_STUDENT',
-};
-
 const StudentActioner = {
-  setCurrentStudent: studentId => ({ type: StudentActionType.SET_CURRENT_STUDENT, student: studentId }),
   list: id => {
     return StudentApi.getList(id)
       .then(res => res)
@@ -70,4 +65,4 @@ const StudentActioner = {
   },
 };
 
-export { StudentActioner, StudentActionType };
+export { StudentActioner };

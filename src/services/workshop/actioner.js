@@ -2,12 +2,7 @@ import { toast } from 'components';
 import { lacleStore } from 'store';
 import { WorkshopApi } from './api';
 
-const WorkshopActionType = {
-  SET_CURRENT_WORKSHOP: 'SET_CURRENT_WORKSHOP',
-};
-
 const WorkshopActioner = {
-  setCurrentWorkshop: workshopId => ({ type: WorkshopActionType.SET_CURRENT_WORKSHOP, workshop: workshopId }),
   list: () => {
     return WorkshopApi.getList()
       .then(res => res)
@@ -70,4 +65,4 @@ const WorkshopActioner = {
   },
 };
 
-export { WorkshopActioner, WorkshopActionType };
+export { WorkshopActioner };

@@ -7,7 +7,7 @@ const campaignRoutes = [
   {
     render: AuthenticatedRoute,
     props: {
-      path: paths.front.campaign,
+      path: paths.front.campaign.home,
       exact: true,
       component: CampaignList,
     },
@@ -15,7 +15,7 @@ const campaignRoutes = [
   {
     render: AuthenticatedRoute,
     props: {
-      path: paths.front.campaignCreate,
+      path: paths.front.campaign.create,
       exact: true,
       component: CampaignCreate,
     },
@@ -23,7 +23,7 @@ const campaignRoutes = [
   {
     render: AuthenticatedRoute,
     props: {
-      path: paths.front.campaignEdit,
+      path: paths.front.campaign.edit,
       exact: true,
       component: CampaignEdit,
     },

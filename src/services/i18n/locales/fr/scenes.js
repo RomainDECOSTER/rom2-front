@@ -43,6 +43,34 @@ const scenes = {
     save: 'Sauvegarder',
     delete: 'Supprimer',
   },
+  userForm: {
+    labels: {
+      firstname: 'Prénom',
+      lastname: 'Nom',
+      email: 'Email',
+      roles: {
+        title: 'Roles',
+        admin: 'Admin',
+        team: 'Team',
+        user: 'User',
+      },
+    },
+  },
+  userList: {
+    title: 'Utilisateurs',
+    columnTitles: {
+      firstname: 'Prénom',
+      lastname: 'Nom',
+      email: 'Email',
+      roles: 'Roles',
+    },
+  },
+  userCreate: {
+    title: 'Créer un utilisateur',
+  },
+  userEdit: {
+    title: 'Modifier un utilisateur',
+  },
 };
 
 export { scenes };

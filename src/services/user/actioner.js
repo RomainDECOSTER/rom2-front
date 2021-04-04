@@ -1,6 +1,6 @@
-import { UserApi } from './api';
-import { lacleStore } from 'store';
 import { toast } from 'components';
+import { lacleStore } from 'store';
+import { UserApi } from './api';
 
 const UserActionTypes = {
   SET_USER: 'USER_SET_USER',
@@ -98,6 +98,21 @@ const UserActioner = {
           reject(err);
         });
     });
+  },
+
+  delete: id => {
+    return UserApi.delete(id)
+      .then(() => {
+        const messages = lacleStore.getState().I18n.messages.toast.success;
+        toast.success(messages.successFullyDeleted);
+      })
+      .catch(err => {
+        const messages = lacleStore.getState().I18n.messages.toast.error;
+        const msg = err.description ? err.description : messages.errorOccured;
+        toast.error(msg);
+
+        throw err;
+      });
   },
 };
 

@@ -4,9 +4,16 @@ const paths = {
     login: '/login',
     forgotPassword: '/forgot_password',
     setPassword: '/set_password',
-    campaign: '/campaign',
-    campaignCreate: '/campaign/create',
-    campaignEdit: '/campaign/edit/:id',
+    campaign: {
+      home: '/campaign',
+      create: '/campaign/create',
+      edit: '/campaign/edit/:id',
+    },
+    user: {
+      home: '/user',
+      create: '/user/create',
+      edit: '/user/edit/:id',
+    },
   },
   api: {
     auth: {
@@ -22,6 +29,7 @@ const paths = {
         create: '/users',
         edit: '/users/',
         get: '/users/',
+        delete: '/users/',
       },
     },
     campaign: {

@@ -1,4 +1,6 @@
+/* eslint-disable prettier/prettier */
 import { Box, CircularProgress, Container, Grid } from '@material-ui/core';
+import { Availabilities } from 'components/ComonForm/Availabilities/Availabilities';
 import { Selector } from 'components/Selector';
 import { useEffect, useState } from 'react';
 import { injectIntl } from 'react-intl';
@@ -14,7 +16,7 @@ import {
   SchoolForm,
   SocialMediationForm,
   StudentSubmitButton,
-  WorkshopFormStudent,
+  WorkshopFormStudent
 } from './components';
 
 const vod = ValueUtils.valueOrDefault;
@@ -31,6 +33,7 @@ function getInitialValues(values = {}) {
       know_lacle: '',
       other_known: '',
     }),
+    availabilities_information: vod(values.availabilities_information, []),
     family_situation: vod(values.family_situation, {
       alone: false,
       couple: false,
@@ -161,6 +164,7 @@ function StudentFormComponent(props) {
             </Grid>
             <Grid item xs={6} sm={6} className="padding-small">
               <RegisterForm student={fields} setStudent={setFields} />
+              <Availabilities setData={setFieldFunction('availabilities_information')} data={fields.availabilities_information} disabled={fields.loading} />
               <FamilyRessourcesForm student={fields} setStudent={setFields} type={fields.type} />
               {fields.type !== 'AS' ? (
                 <LevelForm student={fields} setStudent={setFields} />

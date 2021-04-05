@@ -34,6 +34,14 @@ const components = {
     close: 'Annuler',
     confirm: 'Confirmer',
   },
+  availabilities: {
+    title: 'Disponibilitées',
+    labels: {
+      day: 'Jour',
+      startHour: 'Heure de début',
+      endHour: 'Heure de fin',
+    },
+  },
 };
 
 export { components };

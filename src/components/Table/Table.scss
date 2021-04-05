@@ -1,0 +1,18 @@
+@import 'lacleTheme.scss';
+
+.table-container {
+  max-height: $table-max-height;
+}
+
+.table-header-cell {
+  background-color: $color-table-header-background;
+}
+
+.table-actions-button {
+  margin: 0 $spacing-teeny;
+  color: $color-table-button;
+}
+
+.table-cell-small-device {
+  padding: $spacing-tiny;
+}

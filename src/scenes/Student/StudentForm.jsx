@@ -157,7 +157,7 @@ function StudentFormComponent(props) {
           </Grid>
           <Grid container item xs={12} sm={12}>
             <Grid item xs={6} sm={6} className="padding-small">
-              <GeneralForm student={fields} setStudent={setFields} />
+              <GeneralForm student={fields} setStudent={setFields} type="student" />
               <FamilySituationForm student={fields} setStudent={setFields} />
               <LifeStateForm student={fields} setStudent={setFields} />
               <SocialMediationForm student={fields} setStudent={setFields} />

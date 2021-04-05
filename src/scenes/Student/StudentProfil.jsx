@@ -28,11 +28,11 @@ function ProfilSection(props) {
 function DynamicProfilComponent(props) {
   const { label, text, ptype } = props;
   let type = ptype;
-  if (label && label.includes('Date')) {
-    type = 'date';
-  }
 
-  function setGoodValue(text, type) {
+  function setGoodValue(text, label, type) {
+    if (label && label.includes('Date')) {
+      type = 'date';
+    }
     switch (type) {
       case 'string':
         return text;

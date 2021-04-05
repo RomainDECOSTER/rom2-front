@@ -111,6 +111,7 @@ const scenes = {
         entry_date: "Date d'entrée",
         mobile: 'Numéro de téléphone',
         email: 'Email',
+        social_number: 'Numéro de sécurité sociale',
         health_problems: 'Problèmes de santé',
         address: 'Adresse',
         city: 'Ville',

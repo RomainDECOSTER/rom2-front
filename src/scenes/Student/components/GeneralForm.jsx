@@ -7,7 +7,7 @@ import { TextInput } from 'components/TextInput';
 import { injectIntl } from 'react-intl';
 
 function GeneralFormComponent(props) {
-  const { student, setStudent } = props;
+  const { student, setStudent, type } = props;
   const fields = student.general_information;
   const intl = props.intl.messages.scenes.common.general_information;
 
@@ -54,16 +54,18 @@ function GeneralFormComponent(props) {
             required={false}
           />
         </Grid>
-        <Grid item xs={12} sm={12}>
-          <TextInput
-            name="maiden_name"
-            label={intl.labels.maiden_name}
-            value={fields.maiden_name}
-            setField={setFieldFunction('maiden_name')}
-            disabled={fields.loading}
-            required={false}
-          />
-        </Grid>
+        {type === 'student' ? (
+          <Grid item xs={12} sm={12}>
+            <TextInput
+              name="maiden_name"
+              label={intl.labels.maiden_name}
+              value={fields.maiden_name}
+              setField={setFieldFunction('maiden_name')}
+              disabled={fields.loading}
+              required={false}
+            />
+          </Grid>
+        ) : null}
         <Grid item xs={12} sm={12}>
           <Selector
             labelId="gender"
@@ -91,63 +93,73 @@ function GeneralFormComponent(props) {
             />
           </MuiPickersUtilsProvider>
         </Grid>
-        <Grid item xs={12} sm={12}>
-          <TextInput
-            name="birthtown"
-            label={intl.labels.birthtown}
-            value={fields.birthtown}
-            setField={setFieldFunction('birthtown')}
-            disabled={fields.loading}
-            required={false}
-          />
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          <TextInput
-            name="origin"
-            label={intl.labels.origin}
-            value={fields.origin}
-            setField={setFieldFunction('origin')}
-            disabled={fields.loading}
-            required={false}
-          />
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          <TextInput
-            name="nationality"
-            label={intl.labels.nationality}
-            value={fields.nationality}
-            setField={setFieldFunction('nationality')}
-            disabled={fields.loading}
-            required={false}
-          />
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          <TextInput
-            name="langage"
-            label={intl.labels.langage}
-            value={fields.langage}
-            setField={setFieldFunction('langage')}
-            disabled={fields.loading}
-            required={false}
-          />
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker
-              margin="normal"
-              id="entry_date"
-              label={intl.labels.entry_date}
-              format="MM/dd/yyyy"
-              name="entry_date"
-              value={fields.entry_date}
-              onChange={setFieldFunction('entry_date')}
-              KeyboardButtonProps={{
-                'aria-label': 'change date',
-              }}
-              fullWidth
+        {type === 'student' ? (
+          <Grid item xs={12} sm={12}>
+            <TextInput
+              name="birthtown"
+              label={intl.labels.birthtown}
+              value={fields.birthtown}
+              setField={setFieldFunction('birthtown')}
+              disabled={fields.loading}
+              required={false}
             />
-          </MuiPickersUtilsProvider>
-        </Grid>
+          </Grid>
+        ) : null}
+        {type === 'student' ? (
+          <Grid item xs={12} sm={12}>
+            <TextInput
+              name="origin"
+              label={intl.labels.origin}
+              value={fields.origin}
+              setField={setFieldFunction('origin')}
+              disabled={fields.loading}
+              required={false}
+            />
+          </Grid>
+        ) : null}
+        {type === 'student' ? (
+          <Grid item xs={12} sm={12}>
+            <TextInput
+              name="nationality"
+              label={intl.labels.nationality}
+              value={fields.nationality}
+              setField={setFieldFunction('nationality')}
+              disabled={fields.loading}
+              required={false}
+            />
+          </Grid>
+        ) : null}
+        {type === 'student' ? (
+          <Grid item xs={12} sm={12}>
+            <TextInput
+              name="langage"
+              label={intl.labels.langage}
+              value={fields.langage}
+              setField={setFieldFunction('langage')}
+              disabled={fields.loading}
+              required={false}
+            />
+          </Grid>
+        ) : null}
+        {type === 'student' ? (
+          <Grid item xs={12} sm={12}>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <KeyboardDatePicker
+                margin="normal"
+                id="entry_date"
+                label={intl.labels.entry_date}
+                format="MM/dd/yyyy"
+                name="entry_date"
+                value={fields.entry_date}
+                onChange={setFieldFunction('entry_date')}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
+                fullWidth
+              />
+            </MuiPickersUtilsProvider>
+          </Grid>
+        ) : null}
         <Grid item xs={12} sm={12}>
           <TextInput
             name="mobile"
@@ -168,6 +180,18 @@ function GeneralFormComponent(props) {
             required={false}
           />
         </Grid>
+        {type === 'volunteer' ? (
+          <Grid item xs={12} sm={12}>
+            <TextInput
+              name="social_number"
+              label={intl.labels.social_number}
+              value={fields.social_number}
+              setField={setFieldFunction('social_number')}
+              disabled={fields.loading}
+              required={false}
+            />
+          </Grid>
+        ) : null}
         <Grid item xs={12} sm={12}>
           <TextInput
             name="health_problems"

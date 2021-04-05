@@ -5,7 +5,19 @@ import React from 'react';
 import './Selector.scss';
 
 function Selector(props) {
-  const { label, labelId, selected, setSelected, items, error, disabled, variant, className } = props;
+  const {
+    label,
+    labelId,
+    selected,
+    setSelected,
+    items,
+    error,
+    disabled,
+    variant,
+    className,
+    labelClassName,
+    inputClassName,
+  } = props;
 
   function onStatusChange(event) {
     const value = event.target.value;
@@ -17,11 +29,18 @@ function Selector(props) {
   return (
     <FormControl className={`selector-container ${className}`}>
       {labelId && label && (
-        <InputLabel error={error} id={labelId}>
+        <InputLabel error={error} id={labelId} className={labelClassName}>
           {label}
         </InputLabel>
       )}
-      <Select variant={variant} labelId={labelId} value={selected} onChange={onStatusChange} disabled={disabled}>
+      <Select
+        variant={variant}
+        labelId={labelId}
+        value={selected}
+        onChange={onStatusChange}
+        disabled={disabled}
+        className={inputClassName}
+      >
         {items.map((item, index) => (
           <MenuItem value={item.value} key={index}>
             {item.icon && (
@@ -52,6 +71,8 @@ Selector.propTypes = {
   disabled: PropTypes.bool,
   variant: PropTypes.string,
   className: PropTypes.string,
+  labelClassName: PropTypes.string,
+  inputClassName: PropTypes.string,
 };
 
 Selector.defaultProps = {
@@ -64,6 +85,8 @@ Selector.defaultProps = {
   disabled: false,
   variant: 'standard',
   className: '',
+  labelClassName: '',
+  inputClassName: '',
 };
 
 export { Selector };

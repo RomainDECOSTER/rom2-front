@@ -48,6 +48,8 @@ function HeaderComponent(props) {
           items={campaigns.map(t => ({ label: t.name, value: t._id }))}
           selected={campaign}
           setSelected={v => setCampaign(v)}
+          labelClassName={'campaign-selector-color'}
+          inputClassName={'campaign-selector-color'}
         />
         <Divider orientation="vertical" flexItem className="header-divider" />
         <HeaderIconButton aria-label="log out" icon={PowerSettingsNew} onClick={handleMenuOpen} />

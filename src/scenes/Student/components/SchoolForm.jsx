@@ -2,12 +2,34 @@ import { Box, Grid, Paper, Typography } from '@material-ui/core';
 import { MultipleSelector } from 'components/MultipleSelector';
 import { Selector } from 'components/Selector';
 import { TextInput } from 'components/TextInput';
-import { useEffect } from 'react';
 import { injectIntl } from 'react-intl';
+import { ArrayUtils, ValueUtils } from 'tools';
+
+const vod = ValueUtils.valueOrDefault;
 
 function SchoolFormComponent(props) {
-  const { student, setStudent } = props;
-  const fields = student.school;
+  const { data, setData, disabled } = props;
+  const fields = {
+    school_path: vod(data.school_path, ''),
+    name: vod(data.name, ''),
+    subjet: vod(data.subjet, ['']),
+    comment: vod(data.comment, ''),
+    school_name: vod(data.school_name, ''),
+    school_comment: vod(data.school_comment, ''),
+    level: vod(data.level, ''),
+    class_room: vod(data.class_room, ['']),
+    option1: vod(data.option1, ''),
+    option2: vod(data.option2, ''),
+    option3: vod(data.option3, ''),
+  };
+
+  function setFieldFunction(field) {
+    return value => {
+      const newFamilyRessources = ArrayUtils.copyJsonObjectArray(fields);
+      newFamilyRessources[field] = value;
+      setData(newFamilyRessources);
+    };
+  }
 
   //Level
   const classeRooms = [
@@ -39,23 +61,6 @@ function SchoolFormComponent(props) {
 
   const intl = props.intl.messages.scenes.student.school;
 
-  function ArrayToSelectorArray(tab) {
-    const newtab = [];
-    tab.map(tabs => {
-      newtab.push({ value: tabs, label: tabs });
-      return newtab;
-    });
-  }
-  useEffect(() => {
-    ArrayToSelectorArray(type_school);
-  }, [type_school]);
-
-  function setFieldFunction(name) {
-    return value => {
-      setStudent(f => ({ ...f, school: { ...f.school, [name]: value } }));
-    };
-  }
-
   return (
     <Paper className="padding-small full-width marginB20">
       <Typography variant="h5" gutterBottom>
@@ -75,7 +80,7 @@ function SchoolFormComponent(props) {
             selected={fields.level}
             setSelected={setFieldFunction('level')}
             items={type_school}
-            disabled={student.loading}
+            disabled={disabled}
           />
         </Grid>
         <Grid container item xs={12} sm={12}>
@@ -94,7 +99,7 @@ function SchoolFormComponent(props) {
             label={intl.labels.school_name}
             value={fields.school_name}
             setField={setFieldFunction('school_name')}
-            disabled={student.loading}
+            disabled={disabled}
           />
         </Grid>
         <Grid container item xs={12} sm={12}>
@@ -103,7 +108,7 @@ function SchoolFormComponent(props) {
             label={intl.labels.school_comment}
             value={fields.school_comment}
             setField={setFieldFunction('school_comment')}
-            disabled={student.loading}
+            disabled={disabled}
           />
         </Grid>
         <Grid container item xs={12} sm={12}>
@@ -112,7 +117,7 @@ function SchoolFormComponent(props) {
             label={intl.labels.school_path}
             value={fields.school_path}
             setField={setFieldFunction('school_path')}
-            disabled={student.loading}
+            disabled={disabled}
           />
         </Grid>
         <Grid container item xs={12} sm={12}>
@@ -131,7 +136,7 @@ function SchoolFormComponent(props) {
             label={intl.labels.comment}
             value={fields.comment}
             setField={setFieldFunction('comment')}
-            disabled={student.loading}
+            disabled={disabled}
           />
         </Grid>
       </Box>

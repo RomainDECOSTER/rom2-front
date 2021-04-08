@@ -1,22 +1,19 @@
 /* eslint-disable prettier/prettier */
 import { Box, CircularProgress, Container, Grid } from '@material-ui/core';
-import { Availabilities } from 'components/ComonForm/Availabilities/Availabilities';
+import { Availabilities, FamilyRessourcesForm, GeneralForm, RegisterForm } from 'components/ComonForm';
 import { Selector } from 'components/Selector';
 import { useEffect, useState } from 'react';
 import { injectIntl } from 'react-intl';
 import { CampaignActioner } from 'services/campaign';
 import { ValueUtils } from 'tools';
 import {
-  FamilyRessourcesForm,
   FamilySituationForm,
-  GeneralForm,
   LevelForm,
   LifeStateForm,
-  RegisterForm,
   SchoolForm,
   SocialMediationForm,
   StudentSubmitButton,
-  WorkshopFormStudent
+  WorkshopFormStudent,
 } from './components';
 
 const vod = ValueUtils.valueOrDefault;
@@ -24,74 +21,22 @@ const vod = ValueUtils.valueOrDefault;
 function getInitialValues(values = {}) {
   return {
     type: vod(values.type, ''),
-    general_information: vod(values.general_information, ''),
-    registration_information: vod(values.registration_information, {
-      date: new Date(),
-      number: 0,
-      fresh: false,
-      first_date: new Date(),
-      know_lacle: '',
-      other_known: '',
-    }),
+    general_information: vod(values.general_information, {}),
+    registration_information: vod(values.registration_information, {}),
     availabilities_information: vod(values.availabilities_information, []),
-    family_situation: vod(values.family_situation, {
-      alone: false,
-      couple: false,
-      children: false,
-    }),
-    family_ressources: vod(values.family_ressources, {
-      CAFNumber: '',
-      instructing_body: '',
-      obtention_data: new Date(),
-      other_details: '',
-      referent: '',
-      school: '',
-      health_number: '',
-      school_path: '',
-      certification: '',
-      certification_futur: '',
-      work_name: '',
-      parentWork: '',
-      retirement_number: '',
-    }),
-    life_state: vod(values.life_state, {
-      ESAT_details: '',
-      employment_asker_date: new Date(),
-      other_details: '',
-      comment: '',
-      RSA: false,
-    }),
-    social_mediation: vod(values.social_mediation, {
-      active: false,
-      details: '',
-    }),
-    level: vod(values.level, {
-      initial_level: '',
-      final_level: '',
-      certification: '',
-      certification_final: '',
-      MIFE: '',
-      level_comment: '',
-    }),
-    school: vod(values.school, {
-      school_path: '',
-      name: '',
-      subjet: [''],
-      comment: '',
-      school_name: '',
-      school_comment: '',
-      level: '',
-      class_room: [''],
-      option1: '',
-      option2: '',
-      option3: '',
-    }),
+    family_situation: vod(values.family_situation, {}),
+    family_ressources: vod(values.family_ressources, {}),
+    life_state: vod(values.life_state, {}),
+    social_mediation: vod(values.social_mediation, {}),
+    level: vod(values.level, {}),
+    school: vod(values.school, {}),
     campaign: vod(values.campaign, ''),
     workshopsComment: vod(values.workshopsComment, ''),
     id: vod(values._id, undefined),
     errors: {
       last_name: false,
       campaign: false,
+      type: false,
     },
     loading: false,
   };
@@ -134,6 +79,16 @@ function StudentFormComponent(props) {
   function setFieldFunction(name) {
     return value => {
       setFields(f => ({ ...f, [name]: value }));
+      console.log(fields);
+    };
+  }
+  function setFieldWithErrorFunction(name) {
+    return value => {
+      setFields(f => ({
+        ...f,
+        [name]: value,
+        errors: { ...f.errors, [name]: f.errors[name] && value !== '' ? false : f.errors[name] },
+      }));
     };
   }
 
@@ -150,26 +105,64 @@ function StudentFormComponent(props) {
               labelId="type"
               label={intl.type}
               selected={fields.type}
-              setSelected={setFieldFunction('type')}
+              setSelected={setFieldWithErrorFunction('type')}
               items={types}
               disabled={fields.loading}
             />
           </Grid>
           <Grid container item xs={12} sm={12}>
             <Grid item xs={6} sm={6} className="padding-small">
-              <GeneralForm student={fields} setStudent={setFields} type="student" />
-              <FamilySituationForm student={fields} setStudent={setFields} />
-              <LifeStateForm student={fields} setStudent={setFields} />
-              <SocialMediationForm student={fields} setStudent={setFields} />
+              <GeneralForm
+                data={fields.general_information}
+                setData={setFieldFunction('general_information')}
+                disabled={fields.loading}
+                type="student"
+              />
+              <FamilySituationForm
+                data={fields.family_situation}
+                setData={setFieldFunction('family_situation')}
+                disabled={fields.loading}
+              />
+              <LifeStateForm
+                data={fields.life_state}
+                setData={setFieldFunction('life_state')}
+                disabled={fields.loading}
+              />
+              <SocialMediationForm
+                data={fields.social_mediation}
+                setData={setFieldFunction('social_mediation')}
+                disabled={fields.loading}
+              />
             </Grid>
             <Grid item xs={6} sm={6} className="padding-small">
-              <RegisterForm student={fields} setStudent={setFields} />
-              <Availabilities setData={setFieldFunction('availabilities_information')} data={fields.availabilities_information} disabled={fields.loading} />
-              <FamilyRessourcesForm student={fields} setStudent={setFields} type={fields.type} />
+              <RegisterForm
+                data={fields.registration_information}
+                setData={setFieldFunction('registration_information')}
+                campaign={fields.campaign}
+                setCampaign={setFieldWithErrorFunction('campaign')}
+                disabled={fields.loading}
+              />
+              <Availabilities
+                setData={setFieldFunction('availabilities_information')}
+                data={fields.availabilities_information}
+                disabled={fields.loading}
+              />
+              <FamilyRessourcesForm
+                data={fields.family_ressources}
+                setData={setFieldFunction('family_ressources')}
+                type={fields.type}
+                disabled={fields.loading}
+              />
               {fields.type !== 'AS' ? (
-                <LevelForm student={fields} setStudent={setFields} />
+                <LevelForm
+                  dataLevel={fields.level}
+                  setDataLevel={setFieldFunction('level')}
+                  dataSchool={fields.school}
+                  setDataSchool={setFieldFunction('school')}
+                  disabled={fields.loading}
+                />
               ) : (
-                <SchoolForm student={fields} setStudent={setFields} />
+                <SchoolForm data={fields.school} setData={setFieldFunction('school')} disabled={fields.loading} />
               )}
               <WorkshopFormStudent student={fields} setStudent={setFields} />
             </Grid>

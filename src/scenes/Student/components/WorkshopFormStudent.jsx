@@ -11,6 +11,7 @@ function WorkshopFormComponent(props) {
   const [loading, setLoading] = useState(true);
 
   const intl = props.intl.messages.scenes.student.workshop;
+
   useEffect(() => {
     const newworkshops = [...workshops];
     if (loading) {
@@ -24,7 +25,7 @@ function WorkshopFormComponent(props) {
       });
     }
     return () => {};
-  }, [loading, workshops]);
+  }, [loading]);
 
   function setFieldFunction(name) {
     return value => {

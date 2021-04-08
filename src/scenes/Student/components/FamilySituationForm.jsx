@@ -1,16 +1,25 @@
 import { Box, Paper, Typography } from '@material-ui/core';
 import { CheckboxField } from 'components/CheckboxField';
 import { injectIntl } from 'react-intl';
+import { ArrayUtils, ValueUtils } from 'tools';
+
+const vod = ValueUtils.valueOrDefault;
 
 function FamilySituationFormComponent(props) {
-  const { student, setStudent } = props;
-  const fields = student.family_situation;
+  const { data, setData, disabled } = props;
+  const fields = {
+    alone: vod(data.alone, false),
+    couple: vod(data.couple, false),
+    children: vod(data.children, false),
+  };
 
   const intl = props.intl.messages.scenes.student.family_situation;
 
-  function setFieldFunction(name) {
+  function setFieldFunction(field) {
     return value => {
-      setStudent(f => ({ ...f, family_situation: { ...f.family_situation, [name]: value } }));
+      const newFamilySituation = ArrayUtils.copyJsonObjectArray(fields);
+      newFamilySituation[field] = value;
+      setData(newFamilySituation);
     };
   }
 
@@ -24,19 +33,19 @@ function FamilySituationFormComponent(props) {
           label={intl.labels.alone}
           checked={fields.alone ? fields.alone : false}
           setField={setFieldFunction('alone')}
-          disabled={fields.loading}
+          disabled={disabled}
         />
         <CheckboxField
           label={intl.labels.couple}
           checked={fields.couple ? fields.couple : false}
           setField={setFieldFunction('couple')}
-          disabled={fields.loading}
+          disabled={disabled}
         />
         <CheckboxField
           label={intl.labels.children}
           checked={fields.children ? fields.children : false}
           setField={setFieldFunction('children')}
-          disabled={fields.loading}
+          disabled={disabled}
         />
       </Box>
     </Paper>

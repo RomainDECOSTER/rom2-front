@@ -1,5 +1,6 @@
 import { Box, Button, CircularProgress, Grid, Typography } from '@material-ui/core';
 import { CheckBox, Delete, Edit } from '@material-ui/icons';
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { injectIntl } from 'react-intl';
 import { useHistory } from 'react-router';
@@ -55,7 +56,7 @@ function DynamicProfilComponent(props) {
       case 'boolean':
         return <CheckBox color="secondary" />;
       case 'date':
-        return text.split('T')[0].split('-').reverse().join('-');
+        return moment(text).format('DD-MM-YYYY');
       default:
         return null;
     }
@@ -92,7 +93,6 @@ function StudentProfilComponent(props) {
   useEffect(() => {
     if (loading) {
       StudentActioner.get(id).then(docs => {
-        console.log(docs);
         setFields(docs);
         setLoading(false);
       });

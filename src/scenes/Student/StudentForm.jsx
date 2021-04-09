@@ -79,7 +79,6 @@ function StudentFormComponent(props) {
   function setFieldFunction(name) {
     return value => {
       setFields(f => ({ ...f, [name]: value }));
-      console.log(fields);
     };
   }
   function setFieldWithErrorFunction(name) {

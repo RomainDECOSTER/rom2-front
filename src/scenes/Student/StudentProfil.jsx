@@ -1,5 +1,6 @@
 import { Box, Button, CircularProgress, Grid, Typography } from '@material-ui/core';
 import { CheckBox, Delete, Edit } from '@material-ui/icons';
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { injectIntl } from 'react-intl';
 import { useHistory } from 'react-router';
@@ -15,49 +16,70 @@ function ProfilSection(props) {
       <Typography className="info-title" variant="h4" color="primary">
         {intl.title}
       </Typography>
-      {Object.keys(items).map(item => {
-        const type = typeof items[item];
-        return (
-          <DynamicProfilComponent key={item} label={intl.labels[item]} text={items[item]} ptype={type} variant="h6" />
-        );
-      })}
+      <SectionDataPrint items={items} intl={intl} />
     </Typography>
   );
+}
+
+function SectionDataPrint(props) {
+  const { items, intl } = props;
+
+  function testing(type, text, item) {
+    if (type === 'object') {
+      return <SectionDataPrint items={text} intl={intl} />;
+    }
+    return (
+      <DynamicProfilComponent key={item} label={intl.labels[item]} intl={intl} text={text} ptype={type} variant="h6" />
+    );
+  }
+
+  return Object.keys(items).map(item => {
+    const type = typeof items[item];
+    return testing(type, items[item], item);
+  });
 }
 
 function DynamicProfilComponent(props) {
   const { label, text, ptype } = props;
   let type = ptype;
-  if (label && label.includes('Date')) {
-    type = 'date';
-  }
 
-  function setGoodValue(text, type) {
+  function setGoodValue(text, label, type) {
+    if (!text || text === '') {
+      return null;
+    }
+    if (label && label.includes('Date')) {
+      type = 'date';
+    }
     switch (type) {
       case 'string':
         return text;
       case 'boolean':
         return <CheckBox color="secondary" />;
       case 'date':
-        return text.split('T')[0].split('-').reverse().join('-');
+        return moment(text).format('DD-MM-YYYY');
       default:
-        return text;
+        return null;
     }
   }
 
   return (
     <Grid container item xs={12} sm={12}>
-      {text && text !== '' ? (
-        <Grid className="info" container item spacing={1} xs={12} sm={12}>
-          <Grid item xs={6} sm={6}>
-            <span className="info-label">{label}</span>
-          </Grid>
-          <Grid item xs={6} sm={6}>
-            <span className="info-text">{setGoodValue(text, label, type)}</span>
-          </Grid>
-          <div className="info-divider"></div>
-        </Grid>
-      ) : null}
+      {text && text !== '' ? <LabelValue label={label} value={setGoodValue(text, label, type)} /> : null}
+    </Grid>
+  );
+}
+
+function LabelValue(props) {
+  const { label, value } = props;
+  return (
+    <Grid className="info" container item spacing={1} xs={12} sm={12}>
+      <Grid item xs={6} sm={6}>
+        <span className="info-label">{label}</span>
+      </Grid>
+      <Grid item xs={6} sm={6}>
+        <span className="info-text">{value}</span>
+      </Grid>
+      <div className="info-divider"></div>
     </Grid>
   );
 }
@@ -112,6 +134,9 @@ function StudentProfilComponent(props) {
                 alignItems="center"
                 justifyContent="center"
               >
+                <Typography className="title" variant="h6">
+                  {fields.type}
+                </Typography>
                 <div className="info-img"></div>
                 <div className="info-resume">
                   <Typography className="title" variant="h4">
@@ -121,11 +146,11 @@ function StudentProfilComponent(props) {
                     {fields.general_information.email}
                     <br />
                     <br />
-                    {fields.general_information.address}
+                    {fields.general_information.address.address_description}
                     <br />
-                    {fields.general_information.city}
+                    {fields.general_information.address.city}
                     {'  '}
-                    {fields.general_information.postal_code}
+                    {fields.general_information.address.zip_code}
                   </Typography>
                   <div className="info-buttons">
                     <Button variant="contained" color="primary" startIcon={<Edit />} onClick={onEdit}>

@@ -9,7 +9,7 @@ body {
 }
 
 .app-content {
-  padding: 3 * $spacing-tiny;
+  /*padding: 3 * $spacing-tiny; */
   transition-property: margin-left;
   transition-timing-function: $easing-sharp;
 }

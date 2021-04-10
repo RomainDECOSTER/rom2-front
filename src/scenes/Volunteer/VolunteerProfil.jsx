@@ -63,7 +63,7 @@ function DynamicProfilComponent(props) {
       case 'string':
         return text;
       case 'boolean':
-        return <CheckBox color="secondary" />;
+        return <CheckBox color="primary" />;
       case 'date':
         return moment(text).format('DD-MM-YYYY');
       case 'array':

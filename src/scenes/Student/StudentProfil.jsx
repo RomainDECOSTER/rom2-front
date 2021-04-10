@@ -8,7 +8,7 @@ import { injectIntl } from 'react-intl';
 import { useHistory } from 'react-router';
 import { paths } from 'routes';
 import { StudentActioner } from 'services/student';
-import './StudentProfil.scss';
+import './style/StudentProfil.scss';
 
 function ProfilSection(props) {
   const { items, thisIntl } = props;
@@ -62,7 +62,7 @@ function DynamicProfilComponent(props) {
       case 'string':
         return text;
       case 'boolean':
-        return <CheckBox color="secondary" />;
+        return <CheckBox color="primary" />;
       case 'date':
         return moment(text).format('DD-MM-YYYY');
       case 'array':
@@ -97,7 +97,7 @@ function LabelValue(props) {
 function StudentProfilComponent(props) {
   const [fields, setFields] = useState();
   const [loading, setLoading] = useState(true);
-  const id = props.match.params.id;
+  const { id } = props;
   const intl = props.intl.messages.scenes;
   const history = useHistory();
   useEffect(() => {

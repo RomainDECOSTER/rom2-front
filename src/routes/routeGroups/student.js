@@ -1,6 +1,6 @@
 import { paths } from 'routes';
 import { AuthenticatedRoute } from 'routes/components';
-import { StudentCreate, StudentEdit, StudentList, StudentProfil } from 'scenes';
+import { StudentCreate, StudentEdit, StudentList, StudentProfilHome } from 'scenes';
 
 const studentRoutes = [
   {
@@ -32,7 +32,7 @@ const studentRoutes = [
     props: {
       path: paths.front.student.profil,
       exact: true,
-      component: StudentProfil,
+      component: StudentProfilHome,
     },
   },
 ];

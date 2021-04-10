@@ -2,8 +2,18 @@
 
 .multiple-select-container {
   width: 100%;
+  min-width: 120px;
+}
+
+.multiple-select-container-max-width {
+  max-width: 250px;
 }
 
 .multiple-select-render-value {
   margin-left: $spacing-teeny;
+}
+
+.background-white{
+  background-color: white;
+  padding: 0 10px;
 }

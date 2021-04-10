@@ -6,7 +6,7 @@ const scenes = {
     rememberMeLabel: 'Rester connecté',
     emailLabel: 'Adresse email',
     passwordLabel: 'Mot de passe',
-    welcomeMessage: 'Connectez-vous à Rom2',
+    welcomeMessage: 'Connectez-vous à FRom3.0',
   },
   setPassword: {
     passwordLabel: 'Mot de passe',
@@ -134,6 +134,7 @@ const scenes = {
     },
     family_ressources: {
       title: 'Ressources Familiales',
+      titleVolunteer: 'Situation',
       labels: {
         salary: 'Salarié',
         plain_time: 'Temps Plein',
@@ -158,6 +159,15 @@ const scenes = {
         referent: 'Référent',
         internship: 'Stagiaire',
         parentWork: 'Travail des parents',
+        pre_retirement: 'Pré retraite',
+        retirement: 'Retraité',
+        has_children: 'Avec enfants',
+        work_name: "Description de l'emploi",
+        school: 'Ecole',
+        certification: 'Diplôme obtenue',
+        certification_futur: 'Diplôme envisagé',
+        school_path: "Niveau d'étude",
+        retirement_number: 'N° de carte senior',
       },
     },
     availabilities_information: {
@@ -234,6 +244,7 @@ const scenes = {
         school_comment: "Commentaire sur l'établissement",
         school_path: 'Parcours scolaire',
         subjet: 'Matières',
+        name: 'Formations',
         comment: "Commentaire sur l'apprenant",
       },
     },
@@ -244,24 +255,49 @@ const scenes = {
         workshopsComment: 'Commentaire sur les Ateliers',
       },
     },
-  },
-  studentList: {
-    title: 'Apprenants',
-    columnTitles: {
-      last_name: 'Nom',
-      first_name: 'Prénom',
-      mobile: 'Téléphone',
-      email: 'Email',
+    list: {
+      title: 'Apprenants',
+      columnTitles: {
+        type: 'Type',
+        last_name: 'Nom',
+        first_name: 'Prénom',
+        mobile: 'Téléphone',
+        email: 'Email',
+      },
+    },
+    create: {
+      title: 'Ajouter un apprenant',
+    },
+    edit: {
+      title: 'Modifier un apprenant',
+    },
+    profil: {
+      title: "Profil d'un apprenant",
     },
   },
-  studentCreate: {
-    title: 'Ajouter un apprenant',
-  },
-  studentEdit: {
-    title: 'Modifier un apprenant',
-  },
-  studentProfil: {
-    title: "Profil d'un apprenant",
+  volunteer: {
+    list: {
+      title: 'Bénévoles',
+      columnTitles: {
+        last_name: 'Nom',
+        first_name: 'Prénom',
+        mobile: 'Téléphone',
+        email: 'Email',
+      },
+    },
+    create: {
+      title: 'Ajouter un bénévole',
+    },
+    edit: {
+      title: 'Modifier un bénévole',
+    },
+    profil: {
+      title: "Profil d'un bénévole",
+    },
+    form: {
+      other_intervention: 'Autres intervention',
+      comment: 'Commentaire sur le bénévole',
+    },
   },
 };
 

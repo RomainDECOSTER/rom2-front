@@ -14,12 +14,16 @@ function StudentTable({ studentFound, intlData }) {
   const [skipPageReset] = useState(false);
   const history = useHistory();
 
-  const intl = intlData.messages.scenes.studentList;
+  const intl = intlData.messages.scenes.student.list;
   const commonDefaultTitles = intlData.messages.scenes.Table;
   const columnTitles = intl.columnTitles;
 
   const columns = useMemo(
     () => [
+      {
+        Header: columnTitles.type,
+        accessor: 'type',
+      },
       {
         Header: columnTitles.mobile,
         accessor: 'general_information.mobile',
@@ -53,6 +57,7 @@ function StudentTable({ studentFound, intlData }) {
       },
     ],
     [
+      columnTitles.type,
       columnTitles.phone,
       columnTitles.first_name,
       columnTitles.last_name,

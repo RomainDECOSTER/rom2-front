@@ -59,12 +59,6 @@ function LevelFormComponent(props) {
     { value: 'B1', label: 'B1' },
     { value: 'B2', label: 'B2' },
   ];
-  const type_school = [
-    { value: '', label: '' },
-    { value: 'Primaire', label: 'Primaire' },
-    { value: 'College', label: 'College' },
-    { value: 'Lycee', label: 'Lycee' },
-  ];
 
   const intl = props.intl.messages.scenes.student.level;
 

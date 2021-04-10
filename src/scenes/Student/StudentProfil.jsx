@@ -1,5 +1,7 @@
 import { Box, Button, CircularProgress, Grid, Typography } from '@material-ui/core';
 import { CheckBox, Delete, Edit } from '@material-ui/icons';
+import { AvailabilitiesProfil } from 'components/ComonProfil';
+import { ConfirmDialog } from 'components/ConfirmDialog';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { injectIntl } from 'react-intl';
@@ -25,6 +27,9 @@ function SectionDataPrint(props) {
   const { items, intl } = props;
 
   function testing(type, text, item) {
+    if (Array.isArray(text)) {
+      type = 'array';
+    }
     if (type === 'object') {
       return <SectionDataPrint items={text} intl={intl} />;
     }
@@ -47,6 +52,9 @@ function DynamicProfilComponent(props) {
     if (!text || text === '') {
       return null;
     }
+    if (text && Array.isArray(text)) {
+      type = 'array';
+    }
     if (label && label.includes('Date')) {
       type = 'date';
     }
@@ -57,8 +65,10 @@ function DynamicProfilComponent(props) {
         return <CheckBox color="secondary" />;
       case 'date':
         return moment(text).format('DD-MM-YYYY');
+      case 'array':
+        return text.join(' - ');
       default:
-        return null;
+        return text;
     }
   }
 
@@ -124,7 +134,7 @@ function StudentProfilComponent(props) {
         </Grid>
       ) : (
         <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" className="width80">
-          <h1>{intl.studentProfil.title}</h1>
+          <h1>{intl.student.profil.title.toUpperCase()} </h1>
           <Grid container item spacing={1} xs={12} sm={12}>
             <Grid item xs={12} sm={6}>
               <Box
@@ -145,29 +155,49 @@ function StudentProfilComponent(props) {
                   <Typography className="subtitle" variant="h4">
                     {fields.general_information.email}
                     <br />
+                    {fields.general_information.mobile}
                     <br />
-                    {fields.general_information.address.address_description}
                     <br />
-                    {fields.general_information.address.city}
-                    {'  '}
-                    {fields.general_information.address.zip_code}
+                    {fields.general_information.address ? (
+                      <div>
+                        {fields.general_information.address.address_description}
+                        <br />
+                        {fields.general_information.address.city}
+                        {'  '}
+                        {fields.general_information.address.zip_code}
+                      </div>
+                    ) : null}
                   </Typography>
                   <div className="info-buttons">
                     <Button variant="contained" color="primary" startIcon={<Edit />} onClick={onEdit}>
                       {intl.submitButtons.edit}
                     </Button>{' '}
-                    <Button variant="contained" color="primary" startIcon={<Delete />} onClick={onDelete}>
-                      {intl.submitButtons.delete}
-                    </Button>{' '}
+                    <ConfirmDialog
+                      onConfirm={onDelete}
+                      button={({ onClick }) => (
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          startIcon={<Delete />}
+                          onClick={onClick}
+                          disabled={fields.loading}
+                        >
+                          {intl.submitButtons.delete}
+                        </Button>
+                      )}
+                    />
                   </div>
                 </div>
               </Box>
               <ProfilSection items={fields.registration_information} thisIntl={intl.common.registration_information} />
+              <ProfilSection items={fields.level} thisIntl={intl.student.level} />
+              <ProfilSection items={fields.school} thisIntl={intl.student.school} />
               <ProfilSection items={fields.family_situation} thisIntl={intl.student.family_situation} />
               <ProfilSection items={fields.life_state} thisIntl={intl.student.life_state} />
               <ProfilSection items={fields.social_mediation} thisIntl={intl.student.social_mediation} />
             </Grid>
             <Grid item xs={12} sm={6}>
+              <AvailabilitiesProfil data={fields.availabilities_information} disabled={fields.loading} />
               <ProfilSection items={fields.general_information} thisIntl={intl.common.general_information} />
               <ProfilSection items={fields.family_ressources} thisIntl={intl.common.family_ressources} />
             </Grid>

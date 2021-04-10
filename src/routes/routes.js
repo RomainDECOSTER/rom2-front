@@ -1,7 +1,14 @@
 import { Home } from 'scenes';
 import { AuthenticatedRoute } from './components';
 import { paths } from './paths';
-import { authenticationRoutes, campaignRoutes, studentRoutes, userRoutes, workshopRoutes } from './routeGroups';
+import {
+  authenticationRoutes,
+  campaignRoutes,
+  studentRoutes,
+  userRoutes,
+  volunteerRoutes,
+  workshopRoutes,
+} from './routeGroups';
 
 const otherRoutes = [
   {
@@ -14,6 +21,13 @@ const otherRoutes = [
   },
 ];
 
-const routes = otherRoutes.concat(authenticationRoutes, campaignRoutes, userRoutes, workshopRoutes, studentRoutes);
+const routes = otherRoutes.concat(
+  authenticationRoutes,
+  campaignRoutes,
+  userRoutes,
+  workshopRoutes,
+  studentRoutes,
+  volunteerRoutes,
+);
 
 export { routes };

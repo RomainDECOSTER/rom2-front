@@ -4,4 +4,3 @@ export * from './LifeStateForm';
 export * from './SchoolForm';
 export * from './SocialMediationForm';
 export * from './StudentSubmitButton';
-export * from './WorkshopFormStudent';

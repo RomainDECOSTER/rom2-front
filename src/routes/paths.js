@@ -25,6 +25,12 @@ const paths = {
       edit: '/student/edit/:id',
       profil: '/student/profil/:id',
     },
+    volunteer: {
+      home: '/volunteer',
+      create: '/volunteer/create',
+      edit: '/volunteer/edit/:id',
+      profil: '/volunteer/profil/:id',
+    },
   },
   api: {
     auth: {
@@ -63,6 +69,13 @@ const paths = {
       create: '/student',
       edit: '/student/',
       delete: '/student/',
+    },
+    volunteer: {
+      list: '/volunteers',
+      get: '/volunteer/',
+      create: '/volunteer',
+      edit: '/volunteer/',
+      delete: '/volunteer/',
     },
   },
 };

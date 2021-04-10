@@ -50,6 +50,7 @@ function AddAvailabilitiesComponent({ addAvailabilities, disabled, ...props }) {
           setSelected={setFieldFunction('day')}
           items={weekDay}
           disabled={disabled}
+          FormClassName="multiple-select-container-max-width"
         />
       ),
     },

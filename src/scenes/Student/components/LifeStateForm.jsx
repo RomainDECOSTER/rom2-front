@@ -182,6 +182,7 @@ function LifeStateFormComponent(props) {
             KeyboardButtonProps={{
               'aria-label': 'change date',
             }}
+            inputVariant="outlined"
             fullWidth
           />
         </MuiPickersUtilsProvider>

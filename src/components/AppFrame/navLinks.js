@@ -95,6 +95,22 @@ const getNavLinks = () => {
             },
           ],
         },
+        {
+          label: customNames.volunteer,
+          Icon: School,
+          items: [
+            {
+              label: customNames.list,
+              link: paths.front.volunteer.home,
+              Icon: List,
+            },
+            {
+              label: customNames.create,
+              link: paths.front.volunteer.create,
+              Icon: AddCircle,
+            },
+          ],
+        },
       ],
     },
   ];

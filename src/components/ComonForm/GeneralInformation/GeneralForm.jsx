@@ -30,12 +30,6 @@ function GeneralFormComponent(props) {
     sexe: vod(data.sexe, ''),
   };
 
-  // General
-  const neighbourhoods = [
-    { value: 'Quartier 1', label: 'Quartier 1' },
-    { value: 'Quartier 2', label: 'Quartier 2' },
-    { value: '', label: ' ' },
-  ];
   const genders = [
     { value: 'F', label: 'Femme' },
     { value: 'M', label: 'Homme' },
@@ -110,6 +104,7 @@ function GeneralFormComponent(props) {
               KeyboardButtonProps={{
                 'aria-label': 'change date',
               }}
+              inputVariant="outlined"
               fullWidth
             />
           </MuiPickersUtilsProvider>
@@ -176,6 +171,7 @@ function GeneralFormComponent(props) {
                 KeyboardButtonProps={{
                   'aria-label': 'change date',
                 }}
+                inputVariant="outlined"
                 fullWidth
               />
             </MuiPickersUtilsProvider>

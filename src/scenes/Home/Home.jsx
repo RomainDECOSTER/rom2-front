@@ -1,8 +1,12 @@
 import React from 'react';
 import { injectIntl } from 'react-intl';
-
+import { ShortCut } from './components';
 function HomeComponent(props) {
-  return <p className="home">Coucou</p>;
+  return (
+    <div>
+      <ShortCut />
+    </div>
+  );
 }
 
 const Home = injectIntl(HomeComponent);

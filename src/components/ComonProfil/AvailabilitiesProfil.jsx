@@ -1,23 +1,11 @@
 import { Paper, Typography } from '@material-ui/core';
 import { Table } from 'components/Table';
-import moment from 'moment';
 import React from 'react';
 import { injectIntl } from 'react-intl';
 
 function AvailabilitiesProfilComponent({ data, disabled, ...props }) {
   const intl = props.intl.messages.components.availabilities;
   const labels = intl.labels;
-
-  const weekDay = moment.weekdays(true).map(day => {
-    return {
-      label: day,
-      value: day,
-    };
-  });
-  weekDay.push({
-    label: 'tous les jours',
-    value: 'ALL_DAY',
-  });
 
   const columns = [
     {

@@ -3,7 +3,8 @@ import { Loader } from 'components';
 import React, { useState } from 'react';
 import { injectIntl } from 'react-intl';
 import { StudentForm } from 'scenes';
-import { StudentActioner, StudentUtils } from 'services/student';
+import { ComonUtils } from 'services/comon';
+import { StudentActioner } from 'services/student';
 
 function StudentEditComponent(props) {
   const [, reload] = useState();
@@ -26,7 +27,7 @@ function StudentEditComponent(props) {
   }
 
   function renderEditForm(render) {
-    Promise.all([loadInfos(), StudentUtils.getStudentTemplates()]).then(([values, templates]) => {
+    Promise.all([loadInfos(), ComonUtils.getComonTemplates()]).then(([values, templates]) => {
       render(editForm(values, templates));
     });
   }

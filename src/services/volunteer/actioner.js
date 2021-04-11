@@ -8,7 +8,7 @@ const VolunteerActioner = {
       .then(res => res)
       .catch(err => {
         const messages = lacleStore.getState().I18n.messages.toast.error;
-        toast.error(messages.unableToRetrieveStudentList);
+        toast.error(messages.unableToRetrieveVolunteerList);
         throw err;
       });
   },
@@ -17,7 +17,7 @@ const VolunteerActioner = {
       .then(res => res)
       .catch(err => {
         const messages = lacleStore.getState().I18n.messages.toast.error;
-        toast.error(messages.unableToRetrieveStudentList);
+        toast.error(messages.unableToRetrieveVolunteerInfos);
         throw err;
       });
   },

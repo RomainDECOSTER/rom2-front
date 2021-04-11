@@ -43,10 +43,10 @@ function VolunteerTable({ volunteerFound, intlData }) {
         Cell: ({ value }) => (
           <div>
             <IconButton size="small" component={Link} to={paths.front.volunteer.edit.replace(':id', value)}>
-              <Edit />
+              <Edit color="primary" />
             </IconButton>
             <IconButton size="small" component={Link} to={paths.front.volunteer.profil.replace(':id', value)}>
-              <AccountBox />
+              <AccountBox color="primary" />
             </IconButton>
           </div>
         ),

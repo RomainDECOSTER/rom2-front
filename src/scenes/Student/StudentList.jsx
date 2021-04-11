@@ -47,10 +47,10 @@ function StudentTable({ studentFound, intlData }) {
         Cell: ({ value }) => (
           <div>
             <IconButton size="small" component={Link} to={paths.front.student.edit.replace(':id', value)}>
-              <Edit />
+              <Edit color="primary" />
             </IconButton>
             <IconButton size="small" component={Link} to={paths.front.student.profil.replace(':id', value)}>
-              <AccountBox />
+              <AccountBox color="primary" />
             </IconButton>
           </div>
         ),

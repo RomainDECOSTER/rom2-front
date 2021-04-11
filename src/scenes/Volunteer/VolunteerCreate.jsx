@@ -2,7 +2,7 @@ import { Box } from '@material-ui/core';
 import { Loader } from 'components';
 import React from 'react';
 import { injectIntl } from 'react-intl';
-import { StudentUtils } from 'services/student';
+import { ComonUtils } from 'services/comon';
 import { VolunteerForm } from './VolunteerForm';
 
 function VolunteerCreateComponent({ intl }) {
@@ -11,7 +11,7 @@ function VolunteerCreateComponent({ intl }) {
   }
 
   function renderCreateForm(render) {
-    StudentUtils.getStudentTemplates().then(templates => {
+    ComonUtils.getComonTemplates().then(templates => {
       render(createForm(templates));
     });
   }

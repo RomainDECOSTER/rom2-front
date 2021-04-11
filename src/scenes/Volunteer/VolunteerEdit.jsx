@@ -2,7 +2,7 @@ import { Box } from '@material-ui/core';
 import { Loader } from 'components';
 import React, { useState } from 'react';
 import { injectIntl } from 'react-intl';
-import { StudentUtils } from 'services/student';
+import { ComonUtils } from 'services/comon';
 import { VolunteerActioner } from 'services/volunteer';
 import { VolunteerForm } from './VolunteerForm';
 
@@ -27,7 +27,7 @@ function VolunteerEditComponent(props) {
   }
 
   function renderEditForm(render) {
-    Promise.all([loadInfos(), StudentUtils.getStudentTemplates()]).then(([values, templates]) => {
+    Promise.all([loadInfos(), ComonUtils.getComonTemplates()]).then(([values, templates]) => {
       render(editForm(values, templates));
     });
   }

@@ -5,6 +5,7 @@ import { CheckboxField } from 'components/CheckboxField';
 import { Selector } from 'components/Selector';
 import { TextInput } from 'components/TextInput';
 import { injectIntl } from 'react-intl';
+import { ComonEnums } from 'services/comon';
 import { ArrayUtils, ValueUtils } from 'tools';
 
 const vod = ValueUtils.valueOrDefault;
@@ -49,19 +50,7 @@ function FamilyRessourcesFormComponent(props) {
 
   const intl = props.intl.messages.scenes.common.family_ressources;
 
-  const school_paths = [
-    { value: 'Brevet', label: 'Brevet' },
-    { value: 'Bac', label: 'Bac' },
-    { value: 'Bac+1', label: 'Bac +1' },
-    { value: 'Bac+2', label: 'Bac +2' },
-    { value: 'Bac+3', label: 'Bac +3' },
-    { value: 'Bac+4', label: 'Bac +4' },
-    { value: 'Bac+5', label: 'Bac +5' },
-    { value: 'Bac+6', label: 'Bac +6' },
-    { value: 'Bac+7', label: 'Bac +7' },
-    { value: 'Bac+8', label: 'Bac +8' },
-    { value: '', label: ' ' },
-  ];
+  const school_paths = ComonEnums.getSchoolPathArray();
 
   function setFieldFunction(field) {
     return value => {

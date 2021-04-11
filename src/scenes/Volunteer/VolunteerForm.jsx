@@ -11,6 +11,7 @@ import { Selector } from 'components/Selector';
 import { TextInput } from 'components/TextInput';
 import { useState } from 'react';
 import { injectIntl } from 'react-intl';
+import { VolunteerEnums } from 'services/volunteer';
 import { ArrayToSelector, ValueUtils } from 'tools';
 import { SubjectForm, VolunteerSubmitButton } from './components';
 
@@ -46,14 +47,7 @@ function VolunteerFormComponent(props) {
 
   const intl = props.intl.messages.scenes.volunteer.form;
 
-  const interventions = [
-    { value: 'LACLE', label: 'LACLE' },
-    { value: 'DRE', label: 'DRE' },
-    { value: 'ROUBAIX', label: 'ROUBAIX' },
-    { value: 'LILLE SUD', label: 'LILLE SUD' },
-    { value: 'AUTRE', label: 'AUTRE' },
-    { value: '', label: ' ' },
-  ];
+  const interventions = VolunteerEnums.getOtherInterventionArray();
 
   function setFieldFunction(name) {
     return value => {

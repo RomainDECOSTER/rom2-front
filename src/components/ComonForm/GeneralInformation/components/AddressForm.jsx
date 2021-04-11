@@ -3,6 +3,7 @@ import { CheckboxField } from 'components/CheckboxField';
 import { Selector } from 'components/Selector';
 import { TextInput } from 'components/TextInput';
 import { injectIntl } from 'react-intl';
+import { ComonEnums } from 'services/comon';
 import { ArrayUtils, ValueUtils } from 'tools';
 
 const vod = ValueUtils.valueOrDefault;
@@ -19,11 +20,7 @@ function AddressFormComponent(props) {
   };
 
   // General
-  const neighbourhoods = [
-    { value: 'Quartier 1', label: 'Quartier 1' },
-    { value: 'Quartier 2', label: 'Quartier 2' },
-    { value: '', label: ' ' },
-  ];
+  const neighbourhoods = ComonEnums.getDistrictArray();
 
   function setFieldFunction(field) {
     return value => {

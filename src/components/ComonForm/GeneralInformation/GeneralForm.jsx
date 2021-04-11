@@ -4,6 +4,7 @@ import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/picker
 import { Selector } from 'components/Selector';
 import { TextInput } from 'components/TextInput';
 import { injectIntl } from 'react-intl';
+import { ComonEnums } from 'services/comon';
 import { ArrayUtils, ValueUtils } from 'tools';
 import { AddressForm } from './components';
 
@@ -30,11 +31,7 @@ function GeneralFormComponent(props) {
     sexe: vod(data.sexe, ''),
   };
 
-  const genders = [
-    { value: 'F', label: 'Femme' },
-    { value: 'M', label: 'Homme' },
-    { value: '', label: ' ' },
-  ];
+  const genders = ComonEnums.getGenderArray();
 
   function setFieldFunction(field) {
     return value => {

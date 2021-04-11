@@ -3,39 +3,15 @@ import { Close, Delete } from '@material-ui/icons';
 import { ConfirmDialog } from 'components/ConfirmDialog';
 import { Selector } from 'components/Selector';
 import { Table } from 'components/Table';
-import moment from 'moment';
 import React from 'react';
 import { injectIntl } from 'react-intl';
+import { VolunteerEnums } from 'services/volunteer';
 import { ArrayUtils } from 'tools';
 import { AddSubjects } from './components';
 
-const subjects = [
-  { value: 'francais', label: 'Français' },
-  { value: 'francaislvl2', label: 'Français Langue de Scolarisation' },
-  { value: 'math', label: 'Mathématiques' },
-  { value: 'anglais', label: 'Anglais' },
-  { value: 'svt', label: 'SVT' },
-  { value: 'physique', label: 'Sciences Physiques' },
-  { value: 'philosophie', label: 'Philosophie' },
-  { value: 'ses', label: 'S.E.S' },
-  { value: 'lecture_ecriture_calcul', label: 'Lecture Ecriture Calcul' },
-  { value: 'allemand', label: 'Allemand' },
-  { value: 'espagnol', label: 'Espagnol' },
-  { value: 'histoire', label: 'Histoire Géographie' },
-];
-const type_level = [
-  { value: '', label: '' },
-  { value: 'Primaire', label: 'Primaire' },
-  { value: 'College', label: 'College' },
-  { value: 'Lycee', label: 'Lycee' },
-];
-
-const types = [
-  { value: '', label: '' },
-  { value: 'Enfant', label: 'Enfant' },
-  { value: 'Ado', label: 'Ado' },
-  { value: 'Adulte', label: 'Adulte' },
-];
+const subjects = VolunteerEnums.getSubjectArray();
+const type_level = VolunteerEnums.getLevelArray();
+const types = VolunteerEnums.getTypeArray();
 
 function SubjectFormComponent({ data, setData, disabled, ...props }) {
   const intl = props.intl.messages.components.subjects;
@@ -62,17 +38,6 @@ function SubjectFormComponent({ data, setData, disabled, ...props }) {
     newSubjects = newSubjects.concat(newData);
     setData(newSubjects);
   }
-
-  const weekDay = moment.weekdays(true).map(day => {
-    return {
-      label: day,
-      value: day,
-    };
-  });
-  weekDay.push({
-    label: 'tous les jours',
-    value: 'ALL_DAY',
-  });
 
   const columns = [
     {

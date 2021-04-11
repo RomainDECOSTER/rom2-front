@@ -5,6 +5,7 @@ import { CheckboxField } from 'components/CheckboxField';
 import { Selector } from 'components/Selector';
 import { TextInput } from 'components/TextInput';
 import { injectIntl } from 'react-intl';
+import { ComonEnums } from 'services/comon';
 import { ArrayUtils, ValueUtils } from 'tools';
 
 const vod = ValueUtils.valueOrDefault;
@@ -31,11 +32,7 @@ function RegisterFormComponent(props) {
   const intl = props.intl.messages.scenes.common.registration_information;
 
   // General
-  const how_knows = [
-    { value: 'options1', label: 'options1' },
-    { value: 'options2', label: 'options2' },
-    { value: '', label: ' ' },
-  ];
+  const how_knows = ComonEnums.getKnowLacleArray();
 
   return (
     <Paper className="padding-small full-width marginB20">

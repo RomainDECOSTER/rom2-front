@@ -6,36 +6,13 @@ import moment from 'moment';
 import 'moment/locale/fr';
 import React, { useState } from 'react';
 import { injectIntl } from 'react-intl';
+import { VolunteerEnums } from 'services/volunteer';
 
 moment.locale('fr');
 
-const subjects = [
-  { value: 'francais', label: 'Français' },
-  { value: 'francaislvl2', label: 'Français Langue de Scolarisation' },
-  { value: 'math', label: 'Mathématiques' },
-  { value: 'anglais', label: 'Anglais' },
-  { value: 'svt', label: 'SVT' },
-  { value: 'physique', label: 'Sciences Physiques' },
-  { value: 'philosophie', label: 'Philosophie' },
-  { value: 'ses', label: 'S.E.S' },
-  { value: 'lecture_ecriture_calcul', label: 'Lecture Ecriture Calcul' },
-  { value: 'allemand', label: 'Allemand' },
-  { value: 'espagnol', label: 'Espagnol' },
-  { value: 'histoire', label: 'Histoire Géographie' },
-];
-const type_level = [
-  { value: '', label: '' },
-  { value: 'Primaire', label: 'Primaire' },
-  { value: 'College', label: 'College' },
-  { value: 'Lycee', label: 'Lycee' },
-];
-
-const types = [
-  { value: '', label: '' },
-  { value: 'Enfant', label: 'Enfant' },
-  { value: 'Ado', label: 'Ado' },
-  { value: 'Adulte', label: 'Adulte' },
-];
+const subjects = VolunteerEnums.getSubjectArray();
+const type_level = VolunteerEnums.getLevelArray();
+const types = VolunteerEnums.getTypeArray();
 
 function AddSubjectsComponent({ addSubjects, disabled, ...props }) {
   const emptySubject = {

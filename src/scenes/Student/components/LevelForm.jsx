@@ -2,12 +2,13 @@ import { Box, Grid, Paper, Typography } from '@material-ui/core';
 import { Selector } from 'components/Selector';
 import { TextInput } from 'components/TextInput';
 import { injectIntl } from 'react-intl';
+import { StudentEnums } from 'services/student';
 import { ArrayUtils, ValueUtils } from 'tools';
 
 const vod = ValueUtils.valueOrDefault;
 
 function LevelFormComponent(props) {
-  const { dataLevel, setDataLevel, dataSchool, setDataSchool, disabled } = props;
+  const { dataLevel, setDataLevel, dataSchool, setDataSchool, disabled, type } = props;
   const fields = {
     initial_level: vod(dataLevel.initial_level, ''),
     final_level: vod(dataLevel.final_level, ''),
@@ -22,43 +23,10 @@ function LevelFormComponent(props) {
     comment: vod(dataSchool.comment, ''),
   };
 
-  //Level
-  const levels = [
-    { value: '', label: '' },
-    { value: 'A1.1', label: 'A1.1' },
-    { value: 'A1', label: 'A1' },
-    { value: 'A2', label: 'A2' },
-    { value: 'B1', label: 'B1' },
-    { value: 'B2', label: 'B2' },
-    { value: 'RAN', label: 'RAN' },
-    { value: 'ET1', label: 'ET1' },
-    { value: 'ET2', label: 'ET2' },
-    { value: 'ET3', label: 'ET3' },
-  ];
-  const mifeoptions = [
-    { value: '', label: '' },
-    { value: 'I', label: 'I' },
-    { value: 'II', label: 'II' },
-    { value: 'III', label: 'III' },
-    { value: 'IV', label: 'IV' },
-    { value: 'V', label: 'V' },
-    { value: 'V bis', label: 'V bis' },
-    { value: 'VI', label: 'VI' },
-    { value: 'VI bis', label: 'VI bis' },
-    { value: 'VII', label: 'VII' },
-    { value: 'VII bis', label: 'VII bis' },
-  ];
-  const certifications = [
-    { value: '', label: '' },
-    { value: 'TCF', label: 'TCF' },
-    { value: 'DILF', label: 'DILF' },
-    { value: 'DELF', label: 'DELF' },
-    { value: 'CFG', label: 'CFG' },
-    { value: 'A1', label: 'A1' },
-    { value: 'A2', label: 'A2' },
-    { value: 'B1', label: 'B1' },
-    { value: 'B2', label: 'B2' },
-  ];
+  // Enums
+  const levels = StudentEnums.getLevelArray();
+  const mifeoptions = StudentEnums.getMIFEArray(type);
+  const certifications = StudentEnums.getCertificationsArray(type);
 
   const intl = props.intl.messages.scenes.student.level;
 

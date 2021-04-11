@@ -10,6 +10,7 @@ import {
 import { Selector } from 'components/Selector';
 import { useState } from 'react';
 import { injectIntl } from 'react-intl';
+import { StudentEnums } from 'services/student';
 import { ArrayToSelector, ValueUtils } from 'tools';
 import {
   FamilySituationForm,
@@ -55,13 +56,7 @@ function StudentFormComponent(props) {
     ...initialValues,
   });
 
-  const types = [
-    { value: 'AS', label: 'AS' },
-    { value: 'FLE', label: 'FLE' },
-    { value: 'MSB', label: 'MSB' },
-    { value: 'AA', label: 'AA' },
-    { value: '', label: ' ' },
-  ];
+  const types = StudentEnums.getTypeArray();
 
   const intl = props.intl.messages.scenes.student;
 
@@ -154,6 +149,7 @@ function StudentFormComponent(props) {
                   dataSchool={fields.school}
                   setDataSchool={setFieldFunction('school')}
                   disabled={fields.loading}
+                  type={fields.type}
                 />
               ) : (
                 <SchoolForm data={fields.school} setData={setFieldFunction('school')} disabled={fields.loading} />

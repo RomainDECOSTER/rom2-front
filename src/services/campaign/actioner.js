@@ -22,7 +22,7 @@ const CampaignActioner = {
       .then(res => res)
       .catch(err => {
         const messages = lacleStore.getState().I18n.messages.toast.error;
-        toast.error(messages.unableToRetrieveCampaignList);
+        toast.error(messages.unableToRetrieveCampaignInfos);
         throw err;
       });
   },

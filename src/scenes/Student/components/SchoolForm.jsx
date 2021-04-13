@@ -3,6 +3,7 @@ import { MultipleSelector } from 'components/MultipleSelector';
 import { Selector } from 'components/Selector';
 import { TextInput } from 'components/TextInput';
 import { injectIntl } from 'react-intl';
+import { StudentEnums } from 'services/student';
 import { ArrayUtils, ValueUtils } from 'tools';
 
 const vod = ValueUtils.valueOrDefault;
@@ -32,32 +33,9 @@ function SchoolFormComponent(props) {
   }
 
   //Level
-  const classeRooms = [
-    { value: 'CE1', label: 'CE1' },
-    { value: 'CE2', label: 'CE2' },
-    { value: 'CM1', label: 'CM1' },
-    { value: 'CM2', label: 'CM2' },
-  ];
-  const subjects = [
-    { value: 'francais', label: 'Français' },
-    { value: 'francaislvl2', label: 'Français Langue de Scolarisation' },
-    { value: 'math', label: 'Mathématiques' },
-    { value: 'anglais', label: 'Anglais' },
-    { value: 'svt', label: 'SVT' },
-    { value: 'physique', label: 'Sciences Physiques' },
-    { value: 'philosophie', label: 'Philosophie' },
-    { value: 'ses', label: 'S.E.S' },
-    { value: 'lecture_ecriture_calcul', label: 'Lecture Ecriture Calcul' },
-    { value: 'allemand', label: 'Allemand' },
-    { value: 'espagnol', label: 'Espagnol' },
-    { value: 'histoire', label: 'Histoire Géographie' },
-  ];
-  const type_school = [
-    { value: '', label: '' },
-    { value: 'Primaire', label: 'Primaire' },
-    { value: 'College', label: 'College' },
-    { value: 'Lycee', label: 'Lycee' },
-  ];
+  const classeRooms = StudentEnums.getFirstClassRoomArray();
+  const subjects = StudentEnums.getSubjectArray();
+  const type_school = StudentEnums.getClassLevelArray();
 
   const intl = props.intl.messages.scenes.student.school;
 

@@ -1,11 +1,22 @@
-import React from 'react';
+import { Checkbox, FormControl, InputLabel, ListItemText, MenuItem, Select } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import { FormControl, InputLabel, Select, Checkbox, MenuItem, ListItemText } from '@material-ui/core';
-
+import React from 'react';
 import './MultipleSelector.scss';
 
 function MultipleSelector(props) {
-  const { labelId, label, selected, renderSelected, setSelected, items, error, disabled } = props;
+  const {
+    labelId,
+    label,
+    selected,
+    renderSelected,
+    setSelected,
+    items,
+    error,
+    MenuProps,
+    variant,
+    FormClassName,
+    disabled,
+  } = props;
 
   function handleChange(event) {
     const value = event.target.value[1];
@@ -46,9 +57,9 @@ function MultipleSelector(props) {
   });
 
   return (
-    <FormControl className="multiple-select-container">
+    <FormControl className={`multiple-select-container ${FormClassName}`}>
       {labelId && label && (
-        <InputLabel error={error} id={labelId}>
+        <InputLabel error={error} id={labelId} variant={variant} className="background-white">
           {label}
         </InputLabel>
       )}
@@ -59,6 +70,8 @@ function MultipleSelector(props) {
         onChange={handleChange}
         renderValue={renderValues}
         disabled={disabled}
+        MenuProps={MenuProps}
+        variant={variant}
       >
         {itemsToDisplay.map((item, index) => (
           <MenuItem key={index} value={item.value} disabled={item.disabled}>
@@ -85,6 +98,9 @@ MultipleSelector.propTypes = {
   ),
   error: PropTypes.bool,
   disabled: PropTypes.bool,
+  MenuProps: PropTypes.object,
+  variant: PropTypes.string,
+  FormClassName: PropTypes.string,
 };
 
 MultipleSelector.defaultProps = {
@@ -95,6 +111,9 @@ MultipleSelector.defaultProps = {
   items: [],
   error: false,
   disabled: false,
+  MenuProps: {},
+  variant: 'outlined',
+  FormClassName: '',
 };
 
 export { MultipleSelector };

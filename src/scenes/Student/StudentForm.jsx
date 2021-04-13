@@ -1,11 +1,17 @@
 /* eslint-disable prettier/prettier */
 import { Box, CircularProgress, Container, Grid } from '@material-ui/core';
-import { Availabilities, FamilyRessourcesForm, GeneralForm, RegisterForm } from 'components/ComonForm';
+import {
+  Availabilities,
+  FamilyRessourcesForm,
+  GeneralForm,
+  RegisterForm,
+  WorkshopFormComon,
+} from 'components/ComonForm';
 import { Selector } from 'components/Selector';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { injectIntl } from 'react-intl';
-import { CampaignActioner } from 'services/campaign';
-import { ValueUtils } from 'tools';
+import { StudentEnums } from 'services/student';
+import { ArrayToSelector, ValueUtils } from 'tools';
 import {
   FamilySituationForm,
   LevelForm,
@@ -13,14 +19,15 @@ import {
   SchoolForm,
   SocialMediationForm,
   StudentSubmitButton,
-  WorkshopFormStudent,
 } from './components';
+import './StudentForm.scss';
 
 const vod = ValueUtils.valueOrDefault;
 
 function getInitialValues(values = {}) {
   return {
     type: vod(values.type, ''),
+    draft: vod(values.draft, false),
     general_information: vod(values.general_information, {}),
     registration_information: vod(values.registration_information, {}),
     availabilities_information: vod(values.availabilities_information, []),
@@ -43,36 +50,13 @@ function getInitialValues(values = {}) {
 }
 
 function StudentFormComponent(props) {
-  const { reload, mode, values } = props;
+  const { reload, mode, values, templates } = props;
   const initialValues = getInitialValues(values);
-  const [campaigns, setCampaigns] = useState([{ value: '', label: ' ' }]);
-  const [loading, setLoading] = useState(true);
   const [fields, setFields] = useState({
     ...initialValues,
   });
 
-  const types = [
-    { value: 'AS', label: 'AS' },
-    { value: 'FLE', label: 'FLE' },
-    { value: 'MSB', label: 'MSB' },
-    { value: 'AA', label: 'AA' },
-    { value: '', label: ' ' },
-  ];
-
-  useEffect(() => {
-    const newcampaigns = [...campaigns];
-    if (loading) {
-      CampaignActioner.list().then(docs => {
-        docs.map(doc => {
-          newcampaigns.push({ value: doc._id, label: doc.name });
-          return newcampaigns;
-        });
-        setCampaigns([...newcampaigns]);
-        setLoading(false);
-      });
-    }
-    return () => {};
-  }, [loading, campaigns]);
+  const types = StudentEnums.getTypeArray();
 
   const intl = props.intl.messages.scenes.student;
 
@@ -93,7 +77,7 @@ function StudentFormComponent(props) {
 
   return (
     <Container maxWidth="lg">
-      {loading ? (
+      {fields.loading ? (
         <Grid container spacing={0} direction="column" alignItems="center" justify="center" className="heigh-circular">
           <CircularProgress color="primary" />
         </Grid>
@@ -106,7 +90,9 @@ function StudentFormComponent(props) {
               selected={fields.type}
               setSelected={setFieldWithErrorFunction('type')}
               items={types}
+              error={fields.errors.type}
               disabled={fields.loading}
+              labelClassName={'grey'}
             />
           </Grid>
           <Grid container item xs={12} sm={12}>
@@ -115,6 +101,7 @@ function StudentFormComponent(props) {
                 data={fields.general_information}
                 setData={setFieldFunction('general_information')}
                 disabled={fields.loading}
+                errors={fields.errors}
                 type="student"
               />
               <FamilySituationForm
@@ -137,9 +124,11 @@ function StudentFormComponent(props) {
               <RegisterForm
                 data={fields.registration_information}
                 setData={setFieldFunction('registration_information')}
-                campaign={fields.campaign}
-                setCampaign={setFieldWithErrorFunction('campaign')}
+                root={{ campaign: fields.campaign, draft: fields.draft }}
+                setRoot={setFieldWithErrorFunction}
+                errors={fields.errors}
                 disabled={fields.loading}
+                campaigns={ArrayToSelector.getArray(templates.campaigns) || {}}
               />
               <Availabilities
                 setData={setFieldFunction('availabilities_information')}
@@ -150,6 +139,7 @@ function StudentFormComponent(props) {
                 data={fields.family_ressources}
                 setData={setFieldFunction('family_ressources')}
                 type={fields.type}
+                mode="student"
                 disabled={fields.loading}
               />
               {fields.type !== 'AS' ? (
@@ -159,11 +149,17 @@ function StudentFormComponent(props) {
                   dataSchool={fields.school}
                   setDataSchool={setFieldFunction('school')}
                   disabled={fields.loading}
+                  type={fields.type}
                 />
               ) : (
                 <SchoolForm data={fields.school} setData={setFieldFunction('school')} disabled={fields.loading} />
               )}
-              <WorkshopFormStudent student={fields} setStudent={setFields} />
+              <WorkshopFormComon
+                student={fields}
+                setStudent={setFields}
+                workshops={ArrayToSelector.getArray(templates.workshops)}
+                mode="student"
+              />
             </Grid>
           </Grid>
 

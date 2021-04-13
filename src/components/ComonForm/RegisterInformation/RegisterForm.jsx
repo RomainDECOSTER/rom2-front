@@ -4,17 +4,14 @@ import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/picker
 import { CheckboxField } from 'components/CheckboxField';
 import { Selector } from 'components/Selector';
 import { TextInput } from 'components/TextInput';
-import { useEffect, useState } from 'react';
 import { injectIntl } from 'react-intl';
-import { CampaignActioner } from 'services/campaign';
+import { ComonEnums } from 'services/comon';
 import { ArrayUtils, ValueUtils } from 'tools';
 
 const vod = ValueUtils.valueOrDefault;
 
 function RegisterFormComponent(props) {
-  const [campaigns, setCampaigns] = useState([{ value: '', label: ' ' }]);
-  const { data, setData, campaign, setCampaign, disabled } = props;
-  const [loading, setLoading] = useState(true);
+  const { data, setData, campaigns, disabled, errors, root, setRoot } = props;
   const fields = {
     date: vod(data.date, new Date()),
     number: vod(data.number, 0),
@@ -32,35 +29,10 @@ function RegisterFormComponent(props) {
     };
   }
 
-  function setCampaignFieldFunction(name) {
-    return value => {
-      setCampaign(value);
-    };
-  }
-
   const intl = props.intl.messages.scenes.common.registration_information;
 
-  useEffect(() => {
-    const newcampaigns = [...campaigns];
-    if (loading) {
-      CampaignActioner.list().then(docs => {
-        docs.map(doc => {
-          newcampaigns.push({ value: doc._id, label: doc.name });
-          return newcampaigns;
-        });
-        setCampaigns([...newcampaigns]);
-        setLoading(false);
-      });
-    }
-    return () => {};
-  }, [loading]);
-
   // General
-  const how_knows = [
-    { value: 'options1', label: 'options1' },
-    { value: 'options2', label: 'options2' },
-    { value: '', label: ' ' },
-  ];
+  const how_knows = ComonEnums.getKnowLacleArray();
 
   return (
     <Paper className="padding-small full-width marginB20">
@@ -72,9 +44,10 @@ function RegisterFormComponent(props) {
           <Selector
             labelId="campaign"
             label={intl.labels.campaign}
-            selected={campaign}
-            setSelected={setCampaignFieldFunction('campaign')}
+            selected={root.campaign}
+            setSelected={setRoot('campaign')}
             items={campaigns}
+            error={errors.campaign}
             disabled={disabled}
           />
         </Grid>
@@ -85,6 +58,7 @@ function RegisterFormComponent(props) {
             setField={setFieldFunction('fresh')}
             disabled={disabled}
           />
+          <CheckboxField label="Draft" checked={root.draft} setField={setRoot('draft')} disabled={disabled} />
         </Grid>
         <Grid item xs={12} sm={12}>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -99,6 +73,7 @@ function RegisterFormComponent(props) {
               KeyboardButtonProps={{
                 'aria-label': 'change date',
               }}
+              inputVariant="outlined"
               fullWidth
             />
           </MuiPickersUtilsProvider>
@@ -116,6 +91,7 @@ function RegisterFormComponent(props) {
               KeyboardButtonProps={{
                 'aria-label': 'change date',
               }}
+              inputVariant="outlined"
               fullWidth
             />
           </MuiPickersUtilsProvider>

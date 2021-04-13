@@ -39,14 +39,12 @@ function StudentSubmitButtonComponent({ fields, setFields, mode, initialValues, 
   }
 
   function onCreate() {
-    if (fields.name === '') {
-      return setError('name');
+    if (fields.type === '') {
+      return setError('type');
     }
-
     if (fields.campaign === '') {
       return setError('campaign');
     }
-
     setLoading(true);
     StudentActioner.create(fields)
       .then(() => {

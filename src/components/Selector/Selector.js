@@ -29,7 +29,7 @@ function Selector(props) {
   return (
     <FormControl className={`selector-container ${className}`}>
       {labelId && label && (
-        <InputLabel error={error} id={labelId} className={labelClassName}>
+        <InputLabel error={error} id={labelId} className={`selector-input-label ${labelClassName}`} variant={variant}>
           {label}
         </InputLabel>
       )}
@@ -83,7 +83,7 @@ Selector.defaultProps = {
   items: [],
   error: false,
   disabled: false,
-  variant: 'standard',
+  variant: 'outlined',
   className: '',
   labelClassName: '',
   inputClassName: '',

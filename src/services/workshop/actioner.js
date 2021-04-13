@@ -17,7 +17,7 @@ const WorkshopActioner = {
       .then(res => res)
       .catch(err => {
         const messages = lacleStore.getState().I18n.messages.toast.error;
-        toast.error(messages.unableToRetrieveWorkshopList);
+        toast.error(messages.unableToRetrieveWorkshopInfos);
         throw err;
       });
   },

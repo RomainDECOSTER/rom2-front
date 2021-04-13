@@ -3,15 +3,16 @@ import { Loader } from 'components';
 import React, { useState } from 'react';
 import { injectIntl } from 'react-intl';
 import { StudentForm } from 'scenes';
+import { ComonUtils } from 'services/comon';
 import { StudentActioner } from 'services/student';
 
 function StudentEditComponent(props) {
   const [, reload] = useState();
   const id = props.match.params.id;
-  const intl = props.intl.messages.scenes.studentEdit;
+  const intl = props.intl.messages.scenes.student.edit;
 
-  function editForm(values) {
-    return <StudentForm values={values} reload={() => reload({})} mode={'edit'} />;
+  function editForm(values, templates) {
+    return <StudentForm values={values} templates={templates} reload={() => reload({})} mode={'edit'} />;
   }
 
   function loadInfos() {
@@ -26,8 +27,8 @@ function StudentEditComponent(props) {
   }
 
   function renderEditForm(render) {
-    loadInfos().then(values => {
-      render(editForm(values));
+    Promise.all([loadInfos(), ComonUtils.getComonTemplates()]).then(([values, templates]) => {
+      render(editForm(values, templates));
     });
   }
 

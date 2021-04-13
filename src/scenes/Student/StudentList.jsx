@@ -14,12 +14,16 @@ function StudentTable({ studentFound, intlData }) {
   const [skipPageReset] = useState(false);
   const history = useHistory();
 
-  const intl = intlData.messages.scenes.studentList;
+  const intl = intlData.messages.scenes.student.list;
   const commonDefaultTitles = intlData.messages.scenes.Table;
   const columnTitles = intl.columnTitles;
 
   const columns = useMemo(
     () => [
+      {
+        Header: columnTitles.type,
+        accessor: 'type',
+      },
       {
         Header: columnTitles.mobile,
         accessor: 'general_information.mobile',
@@ -43,16 +47,17 @@ function StudentTable({ studentFound, intlData }) {
         Cell: ({ value }) => (
           <div>
             <IconButton size="small" component={Link} to={paths.front.student.edit.replace(':id', value)}>
-              <Edit />
+              <Edit color="primary" />
             </IconButton>
             <IconButton size="small" component={Link} to={paths.front.student.profil.replace(':id', value)}>
-              <AccountBox />
+              <AccountBox color="primary" />
             </IconButton>
           </div>
         ),
       },
     ],
     [
+      columnTitles.type,
       columnTitles.phone,
       columnTitles.first_name,
       columnTitles.last_name,

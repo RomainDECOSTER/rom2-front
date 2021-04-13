@@ -6,7 +6,7 @@ const components = {
         fr: 'FR',
         us: 'US',
       },
-      campaign: 'Campaign courante',
+      campaign: 'Campagne actuelle',
     },
     navbar: {
       list: 'Liste',
@@ -18,6 +18,7 @@ const components = {
       workshop: 'Ateliers',
       gestion: 'Gestion',
       student: 'Apprenants',
+      volunteer: 'Bénévoles',
     },
   },
   table: {
@@ -40,6 +41,14 @@ const components = {
       day: 'Jour',
       startHour: 'Heure de début',
       endHour: 'Heure de fin',
+    },
+  },
+  subjects: {
+    title: 'Matières proposées',
+    labels: {
+      name: 'Nom',
+      type: 'Type',
+      level: 'Niveau',
     },
   },
 };

@@ -12,7 +12,7 @@
 .header-toolbar {
   min-height: $header-height;
   padding: 0;
-  background: linear-gradient(135deg, $secondary-color, #5989cc);
+  background-color: $secondary-color;
 }
 
 .header-divider {
@@ -50,4 +50,8 @@
 
 .campaign-selector-color {
   color: white;
+}
+
+.blue{
+  background-color: $secondary-color;
 }

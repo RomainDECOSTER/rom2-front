@@ -5,4 +5,5 @@ export * from './Login';
 export * from './SetPassword';
 export * from './Student';
 export * from './User';
+export * from './Volunteer';
 export * from './Workshop';

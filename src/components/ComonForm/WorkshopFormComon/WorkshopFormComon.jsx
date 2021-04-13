@@ -4,13 +4,13 @@ import { TextInput } from 'components/TextInput';
 import { injectIntl } from 'react-intl';
 
 function WorkshopFormComponent(props) {
-  const { student, setStudent, mode, workshops } = props;
+  const { student, setStudent, workshops } = props;
 
   const intl = props.intl.messages.scenes.student.workshop;
 
   function setFieldFunction(name) {
     return value => {
-      setStudent(f => ({ ...f, [name]: value }));
+      setStudent(f => ({ ...f, workshop: { ...f.workshop, [name]: value } }));
     };
   }
 
@@ -24,21 +24,19 @@ function WorkshopFormComponent(props) {
           labelId="workshops"
           label={intl.labels.workshops}
           items={workshops}
-          selected={student.workshops}
+          selected={student.workshop.workshops}
           setSelected={setFieldFunction('workshops')}
           className="full-width"
         />
-        {mode === 'student' ? (
-          <Grid container item xs={12} sm={12}>
-            <TextInput
-              name="workshopsComment"
-              label={intl.labels.workshopsComment}
-              value={student.workshopsComment}
-              setField={setFieldFunction('workshopsComment')}
-              disabled={student.loading}
-            />
-          </Grid>
-        ) : null}
+        <Grid container item xs={12} sm={12}>
+          <TextInput
+            name="workshopsComment"
+            label={intl.labels.workshopsComment}
+            value={student.workshop.workshops_comment}
+            setField={setFieldFunction('workshopsComment')}
+            disabled={student.loading}
+          />
+        </Grid>
       </Grid>
     </Paper>
   );

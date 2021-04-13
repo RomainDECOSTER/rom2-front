@@ -5,7 +5,7 @@ import {
   FamilyRessourcesForm,
   GeneralForm,
   RegisterForm,
-  WorkshopFormComon,
+  WorkshopFormComon
 } from 'components/ComonForm';
 import { Selector } from 'components/Selector';
 import { TextInput } from 'components/TextInput';
@@ -27,7 +27,7 @@ function getInitialValues(values = {}) {
     family_ressources: vod(values.family_ressources, {}),
     life_state: vod(values.life_state, {}),
     campaign: vod(values.campaign, ''),
-    workshopsComment: vod(values.workshopsComment, ''),
+    workshop: vod(values.workshop, {}),
     id: vod(values._id, undefined),
     errors: {
       last_name: false,
@@ -91,7 +91,6 @@ function VolunteerFormComponent(props) {
                 student={fields}
                 setStudent={setFields}
                 workshops={ArrayToSelector.getArray(templates.workshops) || {}}
-                mode="volunteer"
               />
             </Grid>
             <Grid item xs={6} sm={6} className="padding-small">

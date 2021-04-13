@@ -20,7 +20,7 @@ import {
   SocialMediationForm,
   StudentSubmitButton,
 } from './components';
-import './StudentForm.scss';
+import './style/StudentForm.scss';
 
 const vod = ValueUtils.valueOrDefault;
 

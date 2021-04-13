@@ -1,4 +1,5 @@
 import {
+  AccessibilityNew,
   AccountCircle,
   AddCircle,
   CalendarViewDay,
@@ -97,7 +98,7 @@ const getNavLinks = () => {
         },
         {
           label: customNames.volunteer,
-          Icon: School,
+          Icon: AccessibilityNew,
           items: [
             {
               label: customNames.list,

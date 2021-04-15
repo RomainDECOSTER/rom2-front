@@ -1,6 +1,7 @@
 export * from './Campaign';
 export * from './ForgotPassword';
 export * from './Home';
+export * from './Interview';
 export * from './Login';
 export * from './SetPassword';
 export * from './Student';

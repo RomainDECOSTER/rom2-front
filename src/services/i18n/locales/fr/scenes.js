@@ -299,6 +299,49 @@ const scenes = {
       comment: 'Commentaire sur le bénévole',
     },
   },
+  interview: {
+    form: {
+      labels: {
+        title: 'Entretien pour :name',
+        volunteer: 'Bénévole',
+        student: 'Apprenant',
+        interviewed_classmate_id: 'avec',
+        user: 'par',
+        campaign: 'Campagne',
+        school_subject: 'Nom du cours',
+        school_subject_hours: 'horaires du cours',
+        stop_date: "Date d'arrêt",
+        volunteer_stop: 'Arrêt du bénévole',
+        student_stop: "Arrêt de l'apprenants",
+        details: 'Détails',
+      },
+    },
+    create: {
+      title: 'Créer un entretien',
+    },
+    edit: {
+      title: 'Modifier un entretien',
+    },
+    list: {
+      title: 'Entretiens de :id',
+      columnTitles: {
+        interviewed_id: 'Nom',
+        volunteer: 'Bénévole',
+        student: 'Apprenant',
+        interviewed_classmate_id: 'Avec (Nom)',
+        created_at: 'Création',
+        updated_at: 'Mise à jour',
+        user: 'Par',
+        campaign: 'Campagne',
+        school_subject: 'Nom du cours',
+        school_subject_hours: 'Horaires du cours',
+        stop_date: "Date d'arrêt",
+        volunteer_stop: 'Bénévoles',
+        student_stop: 'Apprenants',
+        details: 'Détails',
+      },
+    },
+  },
 };
 
 export { scenes };

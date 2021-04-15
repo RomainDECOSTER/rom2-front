@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { injectIntl } from 'react-intl';
+import { InterviewList } from 'scenes';
 import { StudentProfil } from './StudentProfil';
 import './style/StudentProfilHome.scss';
 
@@ -82,7 +83,7 @@ function StudentProfilHomeComponent(props) {
         <StudentProfil id={id} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Page Two
+        <InterviewList interviewed_id={id} type="student" />
       </TabPanel>
       <TabPanel value={value} index={2}>
         Page Three

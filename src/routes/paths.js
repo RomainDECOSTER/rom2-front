@@ -31,6 +31,10 @@ const paths = {
       edit: '/volunteer/edit/:id',
       profil: '/volunteer/profil/:id',
     },
+    interview: {
+      create: '/interview/create/:it/:type',
+      edit: '/interview/edit/:id',
+    },
   },
   api: {
     auth: {
@@ -76,6 +80,14 @@ const paths = {
       create: '/volunteer',
       edit: '/volunteer/',
       delete: '/volunteer/',
+    },
+    interview: {
+      list: '/interviews',
+      getInterviewedList: '/interview',
+      get: '/interview/',
+      create: '/interview',
+      edit: '/interview/',
+      delete: '/interview/',
     },
   },
 };

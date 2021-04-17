@@ -18,6 +18,7 @@ function StudentEditComponent(props) {
   function loadInfos() {
     return StudentActioner.get(id)
       .then(infos => {
+        console.log(infos);
         const values = { ...infos, id };
         return values;
       })

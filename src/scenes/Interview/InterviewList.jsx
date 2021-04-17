@@ -1,16 +1,18 @@
-import { CircularProgress, Grid, IconButton, Paper } from '@material-ui/core';
+import { Box, IconButton, Paper } from '@material-ui/core';
 import { AddCircle, CheckBox, Edit } from '@material-ui/icons';
-import { EnhancedTable } from 'components';
+import { EnhancedTable, Loader } from 'components';
 import moment from 'moment';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { injectIntl } from 'react-intl';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { paths } from 'routes';
+import { ComonUtils } from 'services/comon';
 import { InterviewActioner } from 'services/interview';
 import { lacleStore } from 'store';
+import './Interview.scss';
 
-function InterviewTable({ interviewed_id, type, interviewFound, intlData }) {
+function InterviewTable({ interviewed_id, type, templates, interviewFound, intlData }) {
   const [data] = useState(useMemo(() => interviewFound, [interviewFound]));
   const [skipPageReset] = useState(false);
   const history = useHistory();
@@ -18,12 +20,27 @@ function InterviewTable({ interviewed_id, type, interviewFound, intlData }) {
   const intl = intlData.messages.scenes.interview.list;
   const commonDefaultTitles = intlData.messages.scenes.Table;
   const columnTitles = intl.columnTitles;
+  const classMate_type = type === 'student' ? 'volunteer' : 'student';
+
+  function getPorfilNames(id, type) {
+    if (type === 'student') {
+      const item = templates.students.find(element => element._id === id);
+      return `${item.general_information.last_name} ${item.general_information.first_name}`;
+    } else {
+      const item = templates.volunteers.find(element => element._id === id);
+      return `${item.general_information.last_name} ${item.general_information.first_name}`;
+    }
+  }
+  function getCampaignName(id) {
+    return templates.campaigns.find(element => element._id === id).name;
+  }
 
   const columns = useMemo(
     () => [
       {
         Header: columnTitles.campaign,
         accessor: 'campaign',
+        Cell: ({ value }) => <div>{getCampaignName(value)}</div>,
       },
       {
         Header: columnTitles.created_at,
@@ -31,13 +48,9 @@ function InterviewTable({ interviewed_id, type, interviewFound, intlData }) {
         Cell: ({ value }) => <div>{moment(value).format('DD-MM-YYYY')}</div>,
       },
       {
-        Header: columnTitles.updated_at,
-        accessor: 'updated_at',
-        Cell: ({ value }) => <div>{moment(value).format('DD-MM-YYYY')}</div>,
-      },
-      {
         Header: columnTitles.interviewed_classmate_id,
         accessor: 'interviewed_classmate_id',
+        Cell: ({ value }) => <div>{getPorfilNames(value, classMate_type)}</div>,
       },
       {
         Header: columnTitles.school_subject,
@@ -51,29 +64,44 @@ function InterviewTable({ interviewed_id, type, interviewFound, intlData }) {
       {
         Header: columnTitles.volunteer_stop,
         accessor: 'volunteer_stop',
-        Cell: ({ value }) => <div>{value ? <CheckBox color="primary" /> : null} </div>,
+        Cell: ({ value }) => <div className="margin-left">{value ? <CheckBox color="primary" /> : null} </div>,
       },
       {
         Header: columnTitles.student_stop,
         accessor: 'student_stop',
-        Cell: ({ value }) => <div>{value ? <CheckBox color="primary" /> : null} </div>,
+        Cell: ({ value }) => <div className="margin-left">{value ? <CheckBox color="primary" /> : null} </div>,
       },
       {
         Header: columnTitles.details,
         accessor: 'details',
+        Cell: ({ value }) => <div>{value.length > 50 ? `${value.slice(0, 50)} ...` : value.slice(0, 50)}</div>,
       },
       {
         Header: commonDefaultTitles.actions,
         accessor: '_id',
         disableSortBy: true,
         Cell: ({ value }) => (
-          <IconButton size="small" component={Link} to={paths.front.interview.edit.replace(':id', value)}>
+          <IconButton
+            size="small"
+            component={Link}
+            to={{ pathname: paths.front.interview.edit.replace(':id', value), state: { templates: templates } }}
+          >
             <Edit />
           </IconButton>
         ),
       },
     ],
-    [columnTitles.campaign, columnTitles.interviewed_id, commonDefaultTitles.actions],
+    [
+      columnTitles.campaign,
+      columnTitles.created_at,
+      columnTitles.interviewed_id,
+      columnTitles.school_subject,
+      columnTitles.stop_date,
+      columnTitles.volunteer_stop,
+      columnTitles.student_stop,
+      columnTitles.details,
+      commonDefaultTitles.actions,
+    ],
   );
 
   const actions = [
@@ -82,7 +110,14 @@ function InterviewTable({ interviewed_id, type, interviewFound, intlData }) {
         <IconButton
           size="small"
           onClick={() =>
-            history.push(paths.front.interview.create.replace(':it', interviewed_id).replace(':type', type))
+            history.push({
+              pathname: paths.front.interview.create,
+              state: {
+                interviewed_id: interviewed_id,
+                type: type,
+                templates: templates,
+              },
+            })
           }
         >
           <AddCircle color="primary" />
@@ -94,7 +129,7 @@ function InterviewTable({ interviewed_id, type, interviewFound, intlData }) {
 
   return (
     <EnhancedTable
-      title={intl.title.replace(':id', interviewed_id)}
+      title={intl.title.replace(':id', getPorfilNames(interviewed_id, type))}
       columns={columns}
       data={data}
       actions={actions}
@@ -104,37 +139,43 @@ function InterviewTable({ interviewed_id, type, interviewFound, intlData }) {
 }
 
 function InterviewListComponent({ interviewed_id, type, campaign, ...props }) {
-  const [interviews, setInterviews] = useState([]);
-  const [loading, setLoading] = useState(true);
-
   const reduxState = lacleStore.getState();
   const id_campaign = reduxState.Campaign.current_campaign;
-  useEffect(() => {
-    if (loading) {
-      InterviewActioner.getInterviewedList(interviewed_id, id_campaign).then(docs => {
-        console.log(docs);
-        setInterviews(docs);
-        setLoading(false);
+
+  function loadList() {
+    return InterviewActioner.getInterviewedList(interviewed_id, id_campaign)
+      .then(docs => {
+        const values = [...docs];
+        return values;
+      })
+      .catch(err => {
+        throw err;
       });
-    }
-    return () => {};
-  }, [loading]);
+  }
+
+  function tableList(values = [], templates) {
+    return (
+      <InterviewTable
+        interviewed_id={interviewed_id}
+        type={type}
+        interviewFound={values}
+        templates={templates}
+        intlData={props.intl}
+      />
+    );
+  }
+
+  function renderCreateForm(render) {
+    Promise.all([loadList(), ComonUtils.getInterviewTemplates(id_campaign)]).then(([values, templates]) => {
+      render(tableList(values, templates));
+    });
+  }
 
   return (
     <Paper>
-      {loading ? (
-        <Grid container spacing={0} direction="column" alignItems="center" justify="center" className="height-circular">
-          <CircularProgress color="primary" />
-        </Grid>
-      ) : (
-        <InterviewTable
-          interviewed_id={interviewed_id}
-          type={type}
-          interviewFound={interviews}
-          intlData={props.intl}
-          reload={() => setLoading(true)}
-        />
-      )}
+      <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" className="full-width">
+        <Loader render={renderCreateForm} />
+      </Box>
     </Paper>
   );
 }

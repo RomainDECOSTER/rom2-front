@@ -6,6 +6,7 @@ import { Selector } from 'components/Selector';
 import { TextInput } from 'components/TextInput';
 import { useState } from 'react';
 import { injectIntl } from 'react-intl';
+import { ComonEnums } from 'services/comon';
 import { ValueUtils } from 'tools';
 import { ArrayToSelector } from 'tools/arrayToSelector';
 import { InterviewSubmitButton } from './components';
@@ -59,6 +60,7 @@ function InterviewFormComponent({ reload, mode, values, templates, type, intervi
   const users = ArrayToSelector.getNamesArray(templates.users);
   const campaigns = ArrayToSelector.getArray(templates.campaigns);
   const intl = props.intl.messages.scenes.interview.form;
+  const subjects = ComonEnums.getSubjectArray();
 
   function setFieldFunction(name) {
     return value => {
@@ -107,11 +109,12 @@ function InterviewFormComponent({ reload, mode, values, templates, type, intervi
           />
         </Grid>
         <Grid item xs={12} sm={12} md={12}>
-          <TextInput
-            name="school_subject"
+          <Selector
+            labelId="school_subject"
             label={intl.labels.school_subject}
-            value={fields.school_subject}
-            setField={setFieldFunction('school_subject')}
+            selected={fields.school_subject}
+            setSelected={setFieldFunction('school_subject')}
+            items={subjects}
             disabled={fields.loading}
           />
         </Grid>

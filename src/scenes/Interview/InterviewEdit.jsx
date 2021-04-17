@@ -1,4 +1,4 @@
-import { Box } from '@material-ui/core';
+import { Box, Paper } from '@material-ui/core';
 import { Loader } from 'components';
 import React, { useState } from 'react';
 import { injectIntl } from 'react-intl';
@@ -10,11 +10,12 @@ import { InterviewForm } from './InterviewForm';
 function InterviewEditComponent(props) {
   const [, reload] = useState();
   const id = props.match.params.id;
+  const templates = props.location.state.templates;
   const intl = props.intl.messages.scenes.interview.edit;
   const reduxState = lacleStore.getState();
   const id_campaign = reduxState.Campaign.current_campaign;
 
-  function editForm(values, templates) {
+  function editForm(values) {
     return <InterviewForm values={values} templates={templates} reload={() => reload({})} mode={'edit'} />;
   }
 
@@ -31,14 +32,22 @@ function InterviewEditComponent(props) {
 
   function renderEditForm(render) {
     Promise.all([loadInfos(), ComonUtils.getInterviewTemplates(id_campaign)]).then(([values, templates]) => {
-      render(editForm(values, templates));
+      render(editForm(values));
     });
   }
 
   return (
-    <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" className="full-width">
-      <h2>{intl.title}</h2>
-      <Loader render={renderEditForm} />
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      className="full-width padding-small"
+    >
+      <Paper className="padding-small">
+        <h2 className="text-centered">{intl.title}</h2>
+        <Loader render={renderEditForm} />
+      </Paper>
     </Box>
   );
 }

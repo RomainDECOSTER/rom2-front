@@ -32,7 +32,7 @@ const paths = {
       profil: '/volunteer/profil/:id',
     },
     interview: {
-      create: '/interview/create/:it/:type',
+      create: '/interview/create',
       edit: '/interview/edit/:id',
     },
   },

@@ -22,6 +22,22 @@ const scenes = {
   Table: {
     actions: 'Actions',
   },
+  home: {
+    buttons: {
+      student: 'Ajouter un apprenant',
+      volunteer: 'Ajouter un bénévole',
+      user: 'Ajouter un utilisateur',
+      workshop: 'Ajouter un atelier',
+      campaign: 'Ajouter une campagne',
+      interview: 'Créer un entretien',
+    },
+    InterviewDialog: {
+      title: 'Créer une interview avec ?',
+      type: 'Type',
+      name: 'Nom Prénom',
+      error: 'Tout les champs doivent être remplis',
+    },
+  },
   campaign: {
     list: {
       title: 'Campagne',

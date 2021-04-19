@@ -3,17 +3,8 @@ import { lacleStore } from 'store';
 import { InterviewApi } from './api';
 
 const InterviewActioner = {
-  list: id => {
-    return InterviewApi.getList(id)
-      .then(res => res)
-      .catch(err => {
-        const messages = lacleStore.getState().I18n.messages.toast.error;
-        toast.error(messages.unableToRetrieveInterviewList);
-        throw err;
-      });
-  },
-  getInterviewedList: (id, campaign) => {
-    return InterviewApi.getInterviewedList(id, campaign)
+  list: (id, campaign) => {
+    return InterviewApi.getList(id, campaign)
       .then(res => res)
       .catch(err => {
         const messages = lacleStore.getState().I18n.messages.toast.error;

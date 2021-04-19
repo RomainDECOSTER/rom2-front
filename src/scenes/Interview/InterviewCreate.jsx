@@ -4,9 +4,7 @@ import { injectIntl } from 'react-intl';
 import { InterviewForm } from './InterviewForm';
 
 function InterviewCreateComponent({ intl, ...props }) {
-  const interviewed_id = props.location.state.interviewed_id;
-  const type = props.location.state.type;
-  const templates = props.location.state.templates;
+  const { interviewedId, type, templates } = props.location.state;
 
   return (
     <Box
@@ -18,7 +16,7 @@ function InterviewCreateComponent({ intl, ...props }) {
     >
       <Paper className="padding-small">
         <h2 className="text-centered">{intl.messages.scenes.interview.create.title}</h2>
-        <InterviewForm interviewed_id={interviewed_id} type={type} templates={templates} mode={'create'} />
+        <InterviewForm interviewedId={interviewedId} type={type} templates={templates} mode={'create'} />
       </Paper>
     </Box>
   );

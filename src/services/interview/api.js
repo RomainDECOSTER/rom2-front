@@ -6,10 +6,7 @@ const END_POINTS = {
 };
 
 const InterviewApi = {
-  getList: id => XHTTP(`${END_POINTS.list}?campaign=${id}`),
-
-  getInterviewedList: (id, campaign) =>
-    XHTTP(`${END_POINTS.getInterviewedList}?interviewed_id=${id}&campaign=${campaign}`),
+  getList: (id, campaign) => XHTTP(`${END_POINTS.list}?interviewed_id=${id}&campaign=${campaign}`),
 
   getSpecific: id => XHTTP(`${END_POINTS.get}${id}`),
 

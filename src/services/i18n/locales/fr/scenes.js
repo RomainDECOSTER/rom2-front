@@ -325,7 +325,7 @@ const scenes = {
         user: 'par',
         campaign: 'Campagne',
         school_subject: 'Nom du cours',
-        school_subject_hours: 'horaires du cours',
+        school_subject_hours: 'Horaires du cours',
         stop_date: "Date d'arrêt",
         volunteer_stop: 'Arrêt du bénévole',
         student_stop: "Arrêt de l'apprenants",

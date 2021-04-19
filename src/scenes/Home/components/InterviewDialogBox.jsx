@@ -48,7 +48,6 @@ function InterviewDialogBoxComponent(props) {
   useEffect(() => {
     if (loading) {
       ComonUtils.getInterviewTemplates(id_campaign).then(templates => {
-        console.log(templates);
         setInterview({ ...interview, templates: templates });
         setLoading(false);
       });
@@ -98,16 +97,10 @@ function InterviewDialogBoxComponent(props) {
               ) : null}
             </DialogContent>
             <DialogActions>
-              <Button
-                className="bosch-sensor-edit-button"
-                variant="contained"
-                onClick={() => setOpen(false)}
-                disabled={!open}
-              >
+              <Button variant="contained" onClick={() => setOpen(false)} disabled={!open}>
                 Annuler
               </Button>
               <Button
-                className="bosch-sensor-edit-button"
                 variant="contained"
                 color="primary"
                 startIcon={<PlayCircleFilled />}

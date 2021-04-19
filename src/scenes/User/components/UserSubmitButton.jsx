@@ -109,7 +109,6 @@ function UserSubmitButtonComponent({ fields, setFields, mode, initialValues, rel
           onConfirm={onDelete}
           button={({ onClick }) => (
             <Button
-              className="bosch-sensor-edit-button"
               variant="contained"
               color="primary"
               startIcon={<Delete />}

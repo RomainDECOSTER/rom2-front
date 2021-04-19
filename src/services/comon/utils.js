@@ -11,13 +11,22 @@ const ComonUtils = {
       workshops: await WorkshopActioner.list(),
     };
   },
-  getInterviewTemplates: async id_campaign => {
+  getInterviewTemplates: async idCampaign => {
     return {
       campaigns: await CampaignActioner.list(),
       users: await UserActioner.getUserList(),
-      students: await StudentActioner.list(id_campaign),
-      volunteers: await VolunteerActioner.list(id_campaign),
+      students: await StudentActioner.list(idCampaign),
+      volunteers: await VolunteerActioner.list(idCampaign),
     };
+  },
+  getPorfilNames(idProfil, type, templates) {
+    if (type === 'student') {
+      const item = templates.students.find(element => element._id === idProfil);
+      return `${item.general_information.last_name} ${item.general_information.first_name}`;
+    } else {
+      const item = templates.volunteers.find(element => element._id === idProfil);
+      return `${item.general_information.last_name} ${item.general_information.first_name}`;
+    }
   },
 };
 

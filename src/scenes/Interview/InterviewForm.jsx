@@ -10,6 +10,7 @@ import { ComonEnums } from 'services/comon';
 import { ValueUtils } from 'tools';
 import { ArrayToSelector } from 'tools/arrayToSelector';
 import { InterviewSubmitButton } from './components';
+import { InterviewAvailabilities } from './components/InterviewAvailabilities';
 
 const vod = ValueUtils.valueOrDefault;
 
@@ -36,8 +37,8 @@ function getInitialValues(values = {}, id, type) {
   };
 }
 
-function InterviewFormComponent({ reload, mode, values, templates, type, interviewed_id, ...props }) {
-  const initialValues = getInitialValues(values, interviewed_id, type);
+function InterviewFormComponent({ reload, mode, values, templates, type, interviewedId, ...props }) {
+  const initialValues = getInitialValues(values, interviewedId, type);
   const [fields, setFields] = useState({
     ...initialValues,
   });
@@ -118,7 +119,13 @@ function InterviewFormComponent({ reload, mode, values, templates, type, intervi
             disabled={fields.loading}
           />
         </Grid>
-        <Grid item xs={12} sm={12} md={12}></Grid>
+        <Grid item xs={12} sm={12} md={12}>
+          <InterviewAvailabilities
+            setData={setFieldFunction('school_subject_hours')}
+            data={fields.school_subject_hours}
+            disabled={fields.loading}
+          />
+        </Grid>
         <Grid item xs={12} sm={12} md={12}>
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
@@ -161,6 +168,7 @@ function InterviewFormComponent({ reload, mode, values, templates, type, intervi
               value={fields.details}
               setField={setFieldFunction('details')}
               disabled={fields.loading}
+              multiline={true}
             />
           </Grid>
         </Grid>

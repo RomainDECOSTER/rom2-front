@@ -7,12 +7,13 @@ import { injectIntl } from 'react-intl';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { paths } from 'routes';
+import { CampaignUtils } from 'services/campaign';
 import { ComonUtils } from 'services/comon';
 import { InterviewActioner } from 'services/interview';
 import { lacleStore } from 'store';
 import './Interview.scss';
 
-function InterviewTable({ interviewed_id, type, templates, interviewFound, intlData }) {
+function InterviewTable({ interviewedId, type, templates, interviewFound, intlData }) {
   const [data] = useState(useMemo(() => interviewFound, [interviewFound]));
   const [skipPageReset] = useState(false);
   const history = useHistory();
@@ -22,25 +23,12 @@ function InterviewTable({ interviewed_id, type, templates, interviewFound, intlD
   const columnTitles = intl.columnTitles;
   const classMate_type = type === 'student' ? 'volunteer' : 'student';
 
-  function getPorfilNames(id, type) {
-    if (type === 'student') {
-      const item = templates.students.find(element => element._id === id);
-      return `${item.general_information.last_name} ${item.general_information.first_name}`;
-    } else {
-      const item = templates.volunteers.find(element => element._id === id);
-      return `${item.general_information.last_name} ${item.general_information.first_name}`;
-    }
-  }
-  function getCampaignName(id) {
-    return templates.campaigns.find(element => element._id === id).name;
-  }
-
   const columns = useMemo(
     () => [
       {
         Header: columnTitles.campaign,
         accessor: 'campaign',
-        Cell: ({ value }) => <div>{getCampaignName(value)}</div>,
+        Cell: ({ value }) => <div>{CampaignUtils.getCampaignName(value, templates)}</div>,
       },
       {
         Header: columnTitles.created_at,
@@ -50,7 +38,7 @@ function InterviewTable({ interviewed_id, type, templates, interviewFound, intlD
       {
         Header: columnTitles.interviewed_classmate_id,
         accessor: 'interviewed_classmate_id',
-        Cell: ({ value }) => <div>{getPorfilNames(value, classMate_type)}</div>,
+        Cell: ({ value }) => <div>{ComonUtils.getPorfilNames(value, classMate_type, templates)}</div>,
       },
       {
         Header: columnTitles.school_subject,
@@ -94,7 +82,6 @@ function InterviewTable({ interviewed_id, type, templates, interviewFound, intlD
     [
       columnTitles.campaign,
       columnTitles.created_at,
-      columnTitles.interviewed_id,
       columnTitles.school_subject,
       columnTitles.stop_date,
       columnTitles.volunteer_stop,
@@ -113,7 +100,7 @@ function InterviewTable({ interviewed_id, type, templates, interviewFound, intlD
             history.push({
               pathname: paths.front.interview.create,
               state: {
-                interviewed_id: interviewed_id,
+                interviewedId: interviewedId,
                 type: type,
                 templates: templates,
               },
@@ -129,7 +116,7 @@ function InterviewTable({ interviewed_id, type, templates, interviewFound, intlD
 
   return (
     <EnhancedTable
-      title={intl.title.replace(':id', getPorfilNames(interviewed_id, type))}
+      title={intl.title.replace(':id', ComonUtils.getPorfilNames(interviewedId, type, templates))}
       columns={columns}
       data={data}
       actions={actions}
@@ -138,12 +125,12 @@ function InterviewTable({ interviewed_id, type, templates, interviewFound, intlD
   );
 }
 
-function InterviewListComponent({ interviewed_id, type, campaign, ...props }) {
+function InterviewListComponent({ interviewedId, type, campaign, ...props }) {
   const reduxState = lacleStore.getState();
-  const id_campaign = reduxState.Campaign.current_campaign;
+  const idCampaign = reduxState.Campaign.current_campaign;
 
   function loadList() {
-    return InterviewActioner.getInterviewedList(interviewed_id, id_campaign)
+    return InterviewActioner.list(interviewedId, idCampaign)
       .then(docs => {
         const values = [...docs];
         return values;
@@ -156,7 +143,7 @@ function InterviewListComponent({ interviewed_id, type, campaign, ...props }) {
   function tableList(values = [], templates) {
     return (
       <InterviewTable
-        interviewed_id={interviewed_id}
+        interviewedId={interviewedId}
         type={type}
         interviewFound={values}
         templates={templates}
@@ -166,7 +153,7 @@ function InterviewListComponent({ interviewed_id, type, campaign, ...props }) {
   }
 
   function renderCreateForm(render) {
-    Promise.all([loadList(), ComonUtils.getInterviewTemplates(id_campaign)]).then(([values, templates]) => {
+    Promise.all([loadList(), ComonUtils.getInterviewTemplates(idCampaign)]).then(([values, templates]) => {
       render(tableList(values, templates));
     });
   }

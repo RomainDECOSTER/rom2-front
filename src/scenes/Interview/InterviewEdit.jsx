@@ -13,7 +13,7 @@ function InterviewEditComponent(props) {
   const templates = props.location.state.templates;
   const intl = props.intl.messages.scenes.interview.edit;
   const reduxState = lacleStore.getState();
-  const id_campaign = reduxState.Campaign.current_campaign;
+  const idCampaign = reduxState.Campaign.current_campaign;
 
   function editForm(values) {
     return <InterviewForm values={values} templates={templates} reload={() => reload({})} mode={'edit'} />;
@@ -23,6 +23,7 @@ function InterviewEditComponent(props) {
     return InterviewActioner.get(id)
       .then(infos => {
         const values = { ...infos, id };
+        console.log(values);
         return values;
       })
       .catch(err => {
@@ -31,7 +32,7 @@ function InterviewEditComponent(props) {
   }
 
   function renderEditForm(render) {
-    Promise.all([loadInfos(), ComonUtils.getInterviewTemplates(id_campaign)]).then(([values, templates]) => {
+    Promise.all([loadInfos(), ComonUtils.getInterviewTemplates(idCampaign)]).then(([values, templates]) => {
       render(editForm(values));
     });
   }

@@ -83,7 +83,6 @@ const paths = {
     },
     interview: {
       list: '/interviews',
-      getInterviewedList: '/interview',
       get: '/interview/',
       create: '/interview',
       edit: '/interview/',

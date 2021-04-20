@@ -21,14 +21,13 @@ function InterviewTable({ interviewedId, type, templates, interviewFound, intlDa
   const intl = intlData.messages.scenes.interview.list;
   const commonDefaultTitles = intlData.messages.scenes.Table;
   const columnTitles = intl.columnTitles;
-  const classMate_type = type === 'student' ? 'volunteer' : 'student';
 
   const columns = useMemo(
     () => [
       {
         Header: columnTitles.campaign,
         accessor: 'campaign',
-        Cell: ({ value }) => <div>{CampaignUtils.getCampaignName(value, templates)}</div>,
+        Cell: ({ value }) => <div>{CampaignUtils.getCampaignName(value, templates.campaigns)}</div>,
       },
       {
         Header: columnTitles.created_at,
@@ -38,7 +37,9 @@ function InterviewTable({ interviewedId, type, templates, interviewFound, intlDa
       {
         Header: columnTitles.interviewed_classmate_id,
         accessor: 'interviewed_classmate_id',
-        Cell: ({ value }) => <div>{ComonUtils.getPorfilNames(value, classMate_type, templates)}</div>,
+        Cell: ({ value }) => (
+          <div>{ComonUtils.getPorfilNames(value, templates.students.concat(templates.volunteers))}</div>
+        ),
       },
       {
         Header: columnTitles.school_subject,
@@ -116,7 +117,10 @@ function InterviewTable({ interviewedId, type, templates, interviewFound, intlDa
 
   return (
     <EnhancedTable
-      title={intl.title.replace(':id', ComonUtils.getPorfilNames(interviewedId, type, templates))}
+      title={intl.title.replace(
+        ':id',
+        ComonUtils.getPorfilNames(interviewedId, templates.students.concat(templates.volunteers)),
+      )}
       columns={columns}
       data={data}
       actions={actions}

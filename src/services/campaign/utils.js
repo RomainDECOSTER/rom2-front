@@ -1,6 +1,6 @@
 const CampaignUtils = {
-  getCampaignName(id, templates) {
-    return templates.campaigns.find(element => element._id === id).name;
+  getCampaignName(id, campaigns) {
+    return campaigns.find(element => element._id === id)?.name || 'Campagne Inconnue';
   },
 };
 

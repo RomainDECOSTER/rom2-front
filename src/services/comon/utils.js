@@ -19,13 +19,12 @@ const ComonUtils = {
       volunteers: await VolunteerActioner.list(idCampaign),
     };
   },
-  getPorfilNames(idProfil, type, templates) {
-    if (type === 'student') {
-      const item = templates.students.find(element => element._id === idProfil);
+  getPorfilNames(idProfil, entities) {
+    const item = entities.find(element => element._id === idProfil);
+    if (item) {
       return `${item.general_information.last_name} ${item.general_information.first_name}`;
     } else {
-      const item = templates.volunteers.find(element => element._id === idProfil);
-      return `${item.general_information.last_name} ${item.general_information.first_name}`;
+      return 'Inconnu';
     }
   },
 };

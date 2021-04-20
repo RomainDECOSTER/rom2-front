@@ -4,10 +4,10 @@ import { toast } from 'components';
 import { ConfirmDialog } from 'components/ConfirmDialog';
 import { injectIntl } from 'react-intl';
 import { useHistory } from 'react-router';
-import { paths } from 'routes';
-import { WorkshopActioner } from 'services/workshop';
+import { InterviewActioner } from 'services/interview';
+import { ObjectUtils } from 'tools';
 
-function WorkshopSubmitButtonComponent({ fields, setFields, mode, initialValues, reload, ...props }) {
+function InterviewSubmitButtonComponent({ fields, setFields, mode, initialValues, reload, ...props }) {
   const intl = props.intl.messages.scenes.submitButtons;
   const toastMessages = props.intl.messages.toast;
   const id = initialValues.id;
@@ -22,21 +22,11 @@ function WorkshopSubmitButtonComponent({ fields, setFields, mode, initialValues,
   }
 
   function onEdit() {
-    const fieldsToSend = {};
-
-    if (fields.name !== initialValues.name) {
-      if (fields.name === '') {
-        return setError('name');
-      }
-      fieldsToSend.name = fields.name;
-    }
-
-    if (Object.entries(fieldsToSend).length === 0) {
+    if (ObjectUtils.compareSimpleObjects(fields, initialValues)) {
       return toast.info(toastMessages.info.noFieldChanged);
     }
     setLoading(true);
-
-    WorkshopActioner.update(id, fieldsToSend)
+    InterviewActioner.update(id, fields)
       .then(() => {
         setLoading(false);
         reload();
@@ -47,15 +37,17 @@ function WorkshopSubmitButtonComponent({ fields, setFields, mode, initialValues,
   }
 
   function onCreate() {
-    if (fields.name === '') {
-      return setError('name');
+    if (fields.interviewed_id === '') {
+      return setError('interviewed_id');
     }
-
+    if (fields.interviewed_type === '') {
+      return setError('interviewed_type');
+    }
     setLoading(true);
-    WorkshopActioner.create(fields)
+    InterviewActioner.create(fields)
       .then(() => {
         setLoading(false);
-        history.push(paths.front.workshop.home);
+        history.goBack();
       })
       .catch(() => {
         setLoading(false);
@@ -64,10 +56,10 @@ function WorkshopSubmitButtonComponent({ fields, setFields, mode, initialValues,
 
   function onDelete() {
     setLoading(true);
-    WorkshopActioner.delete(id)
+    InterviewActioner.delete(id)
       .then(() => {
         setLoading(false);
-        history.push(paths.front.workshop.home);
+        history.goBack();
       })
       .catch(() => {
         setLoading(false);
@@ -105,6 +97,6 @@ function WorkshopSubmitButtonComponent({ fields, setFields, mode, initialValues,
   );
 }
 
-const WorkshopSubmitButton = injectIntl(WorkshopSubmitButtonComponent);
+const InterviewSubmitButton = injectIntl(InterviewSubmitButtonComponent);
 
-export { WorkshopSubmitButton };
+export { InterviewSubmitButton };

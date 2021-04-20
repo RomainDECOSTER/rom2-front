@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { injectIntl } from 'react-intl';
+import { InterviewList } from 'scenes';
 import { StudentProfil } from './StudentProfil';
 import './style/StudentProfilHome.scss';
 
@@ -73,16 +74,16 @@ function StudentProfilHomeComponent(props) {
           indicatorColor="secondary"
           textColor="secondary"
         >
-          <LinkTab label="Profil" href="/drafts" {...a11yProps(0)} />
-          <LinkTab label="Entretien" href="/trash" {...a11yProps(1)} />
-          <LinkTab label="Atelier" href="/spam" {...a11yProps(2)} />
+          <LinkTab label="Profil" href="/profil" {...a11yProps(0)} />
+          <LinkTab label="Entretien" href="/interview" {...a11yProps(1)} />
+          <LinkTab label="Atelier" href="/workshop" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
         <StudentProfil id={id} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Page Two
+        <InterviewList interviewedId={id} type="student" />
       </TabPanel>
       <TabPanel value={value} index={2}>
         Page Three

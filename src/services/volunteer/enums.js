@@ -71,26 +71,6 @@ const VolunteerEnums = {
     ];
     return adultLevel;
   },
-  getSubjectArray: () => {
-    const matiereList = [
-      'MSB',
-      'Alphabétisation',
-      'FLE',
-      'Français',
-      'Français Langue de Scolarisation',
-      'Mathématiques',
-      'Anglais',
-      'SVT',
-      'Sciences Physiques',
-      'Philosophie',
-      'S.E.S',
-      'lecture-écriture-calcul',
-      'Allemand',
-      'Espagnol',
-      'Histoire',
-    ];
-    return ArrayToSelector.getEnums(matiereList);
-  },
   getOtherInterventionArray: () => {
     const otherInterventionList = ['LACLE', 'DRE', 'ROUBAIX', 'LILLE SUD', 'AUTRE', ''];
     return ArrayToSelector.getEnums(otherInterventionList);

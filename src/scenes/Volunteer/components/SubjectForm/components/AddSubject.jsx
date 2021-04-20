@@ -6,11 +6,12 @@ import moment from 'moment';
 import 'moment/locale/fr';
 import React, { useState } from 'react';
 import { injectIntl } from 'react-intl';
+import { ComonEnums } from 'services/comon';
 import { VolunteerEnums } from 'services/volunteer';
 
 moment.locale('fr');
 
-const subjects = VolunteerEnums.getSubjectArray();
+const subjects = ComonEnums.getSubjectArray();
 const type_level = VolunteerEnums.getLevelArray();
 const types = VolunteerEnums.getTypeArray();
 

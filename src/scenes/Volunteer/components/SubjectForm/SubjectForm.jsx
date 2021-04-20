@@ -5,11 +5,12 @@ import { Selector } from 'components/Selector';
 import { Table } from 'components/Table';
 import React from 'react';
 import { injectIntl } from 'react-intl';
+import { ComonEnums } from 'services/comon';
 import { VolunteerEnums } from 'services/volunteer';
 import { ArrayUtils } from 'tools';
 import { AddSubjects } from './components';
 
-const subjects = VolunteerEnums.getSubjectArray();
+const subjects = ComonEnums.getSubjectArray();
 const type_level = VolunteerEnums.getLevelArray();
 const types = VolunteerEnums.getTypeArray();
 

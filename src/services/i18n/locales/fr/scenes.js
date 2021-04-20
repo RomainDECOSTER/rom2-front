@@ -22,6 +22,22 @@ const scenes = {
   Table: {
     actions: 'Actions',
   },
+  home: {
+    buttons: {
+      student: 'Ajouter un apprenant',
+      volunteer: 'Ajouter un bénévole',
+      user: 'Ajouter un utilisateur',
+      workshop: 'Ajouter un atelier',
+      campaign: 'Ajouter une campagne',
+      interview: 'Créer un entretien',
+    },
+    InterviewDialog: {
+      title: 'Créer une interview avec ?',
+      type: 'Type',
+      name: 'Nom Prénom',
+      error: 'Tout les champs doivent être remplis',
+    },
+  },
   campaign: {
     list: {
       title: 'Campagne',
@@ -297,6 +313,49 @@ const scenes = {
     form: {
       other_intervention: 'Autres intervention',
       comment: 'Commentaire sur le bénévole',
+    },
+  },
+  interview: {
+    form: {
+      labels: {
+        title: 'Entretien pour :name',
+        volunteer: 'Bénévole',
+        student: 'Apprenant',
+        interviewed_classmate_id: 'avec',
+        user: 'par',
+        campaign: 'Campagne',
+        school_subject: 'Nom du cours',
+        school_subject_hours: 'Horaires du cours',
+        stop_date: "Date d'arrêt",
+        volunteer_stop: 'Arrêt du bénévole',
+        student_stop: "Arrêt de l'apprenants",
+        details: 'Détails',
+      },
+    },
+    create: {
+      title: 'Créer un entretien',
+    },
+    edit: {
+      title: 'Modifier un entretien',
+    },
+    list: {
+      title: 'Entretiens de :id',
+      columnTitles: {
+        interviewed_id: 'Nom',
+        volunteer: 'Bénévole',
+        student: 'Apprenant',
+        interviewed_classmate_id: 'Avec (Nom)',
+        created_at: 'Création',
+        updated_at: 'Mise à jour',
+        user: 'Par',
+        campaign: 'Campagne',
+        school_subject: 'Nom du cours',
+        school_subject_hours: 'Horaires du cours',
+        stop_date: "Date d'arrêt",
+        volunteer_stop: 'Bénévoles',
+        student_stop: 'Apprenants',
+        details: 'Détails',
+      },
     },
   },
 };

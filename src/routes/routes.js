@@ -4,6 +4,7 @@ import { paths } from './paths';
 import {
   authenticationRoutes,
   campaignRoutes,
+  interviewRoutes,
   studentRoutes,
   userRoutes,
   volunteerRoutes,
@@ -28,6 +29,7 @@ const routes = otherRoutes.concat(
   workshopRoutes,
   studentRoutes,
   volunteerRoutes,
+  interviewRoutes,
 );
 
 export { routes };

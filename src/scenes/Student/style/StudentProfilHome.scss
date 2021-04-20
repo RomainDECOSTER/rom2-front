@@ -3,6 +3,8 @@
 .container {
   flex-grow: 1;
   background-color: #e8e8e8;
+  margin: -3 * $spacing-tiny;
+  min-height: 100vh;
 }
 .tabs-background {
   background-color: #f8f8f8;

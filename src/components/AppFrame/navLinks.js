@@ -2,6 +2,7 @@ import {
   AccessibilityNew,
   AccountCircle,
   AddCircle,
+  CalendarToday,
   CalendarViewDay,
   Home,
   HomeWork,
@@ -55,6 +56,22 @@ const getNavLinks = () => {
               label: customNames.create,
               link: paths.front.workshop.create,
               Icon: AddCircle,
+            },
+            {
+              label: 'Ateliers prévus',
+              Icon: CalendarToday,
+              items: [
+                {
+                  label: customNames.list,
+                  link: paths.front.workshop.positionedWorkshop.home,
+                  Icon: List,
+                },
+                {
+                  label: customNames.create,
+                  link: paths.front.workshop.positionedWorkshop.create,
+                  Icon: AddCircle,
+                },
+              ],
             },
           ],
         },

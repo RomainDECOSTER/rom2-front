@@ -18,6 +18,11 @@ const paths = {
       home: '/workshop',
       create: '/workshop/create',
       edit: '/workshop/edit/:id',
+      positionedWorkshop: {
+        home: '/positioned-workshop',
+        create: '/positioned-workshop/create',
+        edit: '/positioned-workshop/edit/:id',
+      },
     },
     student: {
       home: '/student',
@@ -87,6 +92,12 @@ const paths = {
       create: '/interview',
       edit: '/interview/',
       delete: '/interview/',
+    positionedWorkshop: {
+      list: '/positioned-workshops',
+      get: '/positioned-workshop/',
+      create: '/positioned-workshop',
+      edit: '/positioned-workshop/',
+      delete: '/positioned-workshop/',
     },
   },
 };

@@ -94,7 +94,7 @@ function GeneralFormComponent(props) {
               margin="normal"
               id="birth_date"
               label={intl.labels.birth_date}
-              format="MM/dd/yyyy"
+              format="dd/MM/yyyy"
               name="birth_date"
               value={fields.birth_date}
               onChange={setFieldFunction('birth_date')}
@@ -161,7 +161,7 @@ function GeneralFormComponent(props) {
                 margin="normal"
                 id="arrival_date"
                 label={intl.labels.arrival_date}
-                format="MM/dd/yyyy"
+                format="dd/MM/yyyy"
                 name="arrival_date"
                 value={fields.arrival_date}
                 onChange={setFieldFunction('arrival_date')}

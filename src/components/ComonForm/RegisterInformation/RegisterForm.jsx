@@ -66,7 +66,7 @@ function RegisterFormComponent(props) {
               margin="normal"
               id="date"
               label={intl.labels.date}
-              format="MM/dd/yyyy"
+              format="dd/MM/yyyy"
               name="date"
               value={fields.date}
               onChange={setFieldFunction('date')}
@@ -84,7 +84,7 @@ function RegisterFormComponent(props) {
               margin="normal"
               id="first_date"
               label={intl.labels.first_date}
-              format="MM/dd/yyyy"
+              format="dd/MM/yyyy"
               name="first_date"
               value={fields.first_date}
               onChange={setFieldFunction('first_date')}

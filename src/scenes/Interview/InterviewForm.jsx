@@ -132,7 +132,7 @@ function InterviewFormComponent({ reload, mode, values, templates, type, intervi
               margin="normal"
               id="stop_date"
               label={intl.labels.stop_date}
-              format="MM/dd/yyyy"
+              format="dd/MM/yyyy"
               name="stop_date"
               value={fields.stop_date}
               onChange={setFieldFunction('stop_date')}

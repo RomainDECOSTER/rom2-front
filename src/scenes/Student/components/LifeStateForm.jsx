@@ -175,7 +175,7 @@ function LifeStateFormComponent(props) {
             margin="normal"
             id="employment_asker_date"
             label={intl.labels.employment_asker_date}
-            format="MM/dd/yyyy"
+            format="dd/MM/yyyy"
             name="employment_asker_date"
             value={fields.employment_asker_date}
             onChange={setFieldFunction('employment_asker_date')}

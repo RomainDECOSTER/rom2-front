@@ -22,6 +22,8 @@ const toast = {
     unableToRetrieveInterviewList: 'Impossible de récupérer la liste des interviews.',
     unableToRetrieveInterviewInfos: "Impossible de récupérer les informations de l'interview",
     unableToRetrieveInterviewedList: "Impossible de récupérer la liste des interviews de l'utilisateur.",
+    unableToRetrievePositionedWorkshopList: 'Impossible de récupérer la liste des ateliers positionnés.',
+    unableToRetrievePositionedWorkshopInfos: "Impossible de récupérer les informations de l'atelier positionné",
   },
   success: {
     userSuccessFullyCreated: "L'utilisateur a été créé avec succès.",

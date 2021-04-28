@@ -23,7 +23,6 @@ function InterviewEditComponent(props) {
     return InterviewActioner.get(id)
       .then(infos => {
         const values = { ...infos, id };
-        console.log(values);
         return values;
       })
       .catch(err => {

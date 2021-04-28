@@ -6,9 +6,9 @@ const END_POINTS = {
 };
 
 const PositionedWorkshopApi = {
-  getList: () => XHTTP(END_POINTS.list),
+  getList: campaignId => XHTTP(`${END_POINTS.list}?campaign=${campaignId}`),
 
-  getSpecific: id => XHTTP(END_POINTS.get),
+  getSpecific: id => XHTTP(`${END_POINTS.get}${id}`),
 
   create: fields => XHTTP(END_POINTS.create, { method: 'post', body: fields }),
 

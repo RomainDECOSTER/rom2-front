@@ -256,7 +256,7 @@ function FamilyRessourcesFormComponent(props) {
               margin="normal"
               id="obtention_data"
               label={intl.labels.obtention_data}
-              format="MM/dd/yyyy"
+              format="dd/MM/yyyy"
               name="obtention_data"
               value={fields.obtention_data}
               onChange={setFieldFunction('obtention_data')}

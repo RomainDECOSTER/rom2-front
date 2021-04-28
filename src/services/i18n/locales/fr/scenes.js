@@ -358,6 +358,27 @@ const scenes = {
       },
     },
   },
+  positionedWorkshop: {
+    list: {
+      title: 'Ateliers positionnés',
+      columnTitles: {
+        workshopName: "Nom de l'atelier",
+        date: 'Date',
+        animator: 'Animateur',
+      },
+    },
+    form: {
+      workshop: 'Atelier',
+      positionedDate: 'Date',
+      animator: 'Animateur',
+    },
+    create: {
+      title: "Ajouter un positionnement d'atelier",
+    },
+    edit: {
+      title: "Editer le positionnement d'un atelier",
+    },
+  },
 };
 
 export { scenes };

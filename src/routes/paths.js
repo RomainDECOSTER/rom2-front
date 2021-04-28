@@ -92,6 +92,7 @@ const paths = {
       create: '/interview',
       edit: '/interview/',
       delete: '/interview/',
+    },
     positionedWorkshop: {
       list: '/positioned-workshops',
       get: '/positioned-workshop/',

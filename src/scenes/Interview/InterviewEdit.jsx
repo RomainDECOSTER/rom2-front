@@ -2,9 +2,9 @@ import { Box, Paper } from '@material-ui/core';
 import { Loader } from 'components';
 import React, { useState } from 'react';
 import { injectIntl } from 'react-intl';
+import { connect } from 'react-redux';
 import { ComonUtils } from 'services/comon';
 import { InterviewActioner } from 'services/interview';
-import { lacleStore } from 'store';
 import { InterviewForm } from './InterviewForm';
 
 function InterviewEditComponent(props) {
@@ -12,8 +12,7 @@ function InterviewEditComponent(props) {
   const id = props.match.params.id;
   const templates = props.location.state.templates;
   const intl = props.intl.messages.scenes.interview.edit;
-  const reduxState = lacleStore.getState();
-  const idCampaign = reduxState.Campaign.current_campaign;
+  const idCampaign = props.current_campaign;
 
   function editForm(values) {
     return <InterviewForm values={values} templates={templates} reload={() => reload({})} mode={'edit'} />;
@@ -52,6 +51,10 @@ function InterviewEditComponent(props) {
   );
 }
 
-const InterviewEdit = injectIntl(InterviewEditComponent);
+const mapStateToProps = state => ({
+  current_campaign: state.Campaign.current_campaign,
+});
+
+const InterviewEdit = connect(mapStateToProps)(injectIntl(InterviewEditComponent));
 
 export { InterviewEdit };

@@ -3,11 +3,11 @@ import { AccountBox, AddCircle, Edit } from '@material-ui/icons';
 import { EnhancedTable } from 'components';
 import React, { useEffect, useMemo, useState } from 'react';
 import { injectIntl } from 'react-intl';
+import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { paths } from 'routes';
 import { VolunteerActioner } from 'services/volunteer';
-import { lacleStore } from 'store';
 
 function VolunteerTable({ volunteerFound, intlData }) {
   const [data] = useState(useMemo(() => volunteerFound, [volunteerFound]));
@@ -53,9 +53,9 @@ function VolunteerTable({ volunteerFound, intlData }) {
       },
     ],
     [
-      columnTitles.phone,
-      columnTitles.first_name,
+      columnTitles.mobile,
       columnTitles.last_name,
+      columnTitles.first_name,
       columnTitles.email,
       commonDefaultTitles.actions,
     ],
@@ -81,18 +81,19 @@ function VolunteerListComponent(props) {
   const [volunteers, setVolunteers] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const reduxState = lacleStore.getState();
-  const id_campaign = reduxState.Campaign.current_campaign;
+  useEffect(() => {
+    setLoading(true);
+  }, [props.current_campaign]);
 
   useEffect(() => {
     if (loading) {
-      VolunteerActioner.list(id_campaign).then(docs => {
+      VolunteerActioner.list(props.current_campaign).then(docs => {
         setVolunteers(docs);
         setLoading(false);
       });
     }
     return () => {};
-  }, [loading]);
+  }, [loading, props.current_campaign]);
 
   return (
     <Paper className="padding-small">
@@ -107,6 +108,10 @@ function VolunteerListComponent(props) {
   );
 }
 
-const VolunteerList = injectIntl(VolunteerListComponent);
+const mapStateToProps = state => ({
+  current_campaign: state.Campaign.current_campaign,
+});
+
+const VolunteerList = connect(mapStateToProps)(injectIntl(VolunteerListComponent));
 
 export { VolunteerList };

@@ -5,7 +5,7 @@ import { Selector } from 'components/Selector';
 import moment from 'moment';
 import React, { useState } from 'react';
 import { injectIntl } from 'react-intl';
-import { lacleStore } from 'store';
+import { connect } from 'react-redux';
 import { ValueUtils } from 'tools';
 import { PositionedWorkshopButtons } from './PositionedWorkshopButtons';
 
@@ -23,8 +23,7 @@ function getInitialValues(campaignId, values = {}) {
 
 function PositionedWorkshopFormComponent(props) {
   const { reload, mode, values, templates } = props;
-  const reduxState = lacleStore.getState();
-  const campaignId = reduxState.Campaign.current_campaign;
+  const campaignId = props.current_campaign;
   const initialValues = getInitialValues(campaignId, values);
   const [fields, setFields] = useState({
     ...initialValues,
@@ -104,6 +103,10 @@ function PositionedWorkshopFormComponent(props) {
   );
 }
 
-const PositionedWorkshopForm = injectIntl(PositionedWorkshopFormComponent);
+const mapStateToProps = state => ({
+  current_campaign: state.Campaign.current_campaign,
+});
+
+const PositionedWorkshopForm = connect(mapStateToProps)(injectIntl(PositionedWorkshopFormComponent));
 
 export { PositionedWorkshopForm };

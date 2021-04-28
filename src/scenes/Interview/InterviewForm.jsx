@@ -6,6 +6,7 @@ import { Selector } from 'components/Selector';
 import { TextInput } from 'components/TextInput';
 import { useState } from 'react';
 import { injectIntl } from 'react-intl';
+import { connect } from 'react-redux';
 import { ComonEnums } from 'services/comon';
 import { ValueUtils } from 'tools';
 import { ArrayToSelector } from 'tools/arrayToSelector';
@@ -14,13 +15,13 @@ import { InterviewAvailabilities } from './components/InterviewAvailabilities';
 
 const vod = ValueUtils.valueOrDefault;
 
-function getInitialValues(values = {}, id, type) {
+function getInitialValues(values = {}, id, type, campaign) {
   return {
     id: vod(values.id, ''),
     interviewed_id: vod(values.interviewed_id, id),
     interviewed_type: vod(values.interviewed_type, type),
     user: vod(values.user, ''),
-    campaign: vod(values.campaign, ''),
+    campaign: campaign,
     interviewed_classmate_id: vod(values.interviewed_classmate_id, ''),
     interviewed_classmate_type: vod(values.interviewed_classmate_type, type === 'student' ? 'volunteer' : 'student'),
     school_subject: vod(values.school_subject, ''),
@@ -38,7 +39,7 @@ function getInitialValues(values = {}, id, type) {
 }
 
 function InterviewFormComponent({ reload, mode, values, templates, type, interviewedId, ...props }) {
-  const initialValues = getInitialValues(values, interviewedId, type);
+  const initialValues = getInitialValues(values, interviewedId, type, props.current_campaign);
   const [fields, setFields] = useState({
     ...initialValues,
   });
@@ -106,7 +107,7 @@ function InterviewFormComponent({ reload, mode, values, templates, type, intervi
             selected={fields.campaign}
             setSelected={setFieldFunction('campaign')}
             items={campaigns}
-            disabled={fields.loading}
+            disabled={true}
           />
         </Grid>
         <Grid item xs={12} sm={12} md={12}>
@@ -185,6 +186,10 @@ function InterviewFormComponent({ reload, mode, values, templates, type, intervi
   );
 }
 
-const InterviewForm = injectIntl(InterviewFormComponent);
+const mapStateToProps = state => ({
+  current_campaign: state.Campaign.current_campaign,
+});
+
+const InterviewForm = connect(mapStateToProps)(injectIntl(InterviewFormComponent));
 
 export { InterviewForm };

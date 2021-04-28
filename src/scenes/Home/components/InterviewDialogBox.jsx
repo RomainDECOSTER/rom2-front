@@ -3,10 +3,10 @@ import { AddCircle, Assignment, PlayCircleFilled } from '@material-ui/icons';
 import { Selector } from 'components/Selector';
 import { useEffect, useState } from 'react';
 import { injectIntl } from 'react-intl';
+import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
 import { paths } from 'routes';
 import { ComonUtils } from 'services/comon';
-import { lacleStore } from 'store';
 import { ArrayToSelector } from 'tools/arrayToSelector';
 import './ShortCut.scss';
 
@@ -19,8 +19,6 @@ function InterviewDialogBoxComponent(props) {
   });
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
-  const reduxState = lacleStore.getState();
-  const id_campaign = reduxState.Campaign.current_campaign;
   const intl = props.intl.messages.scenes.home;
   const history = useHistory();
   const types = [
@@ -36,6 +34,10 @@ function InterviewDialogBoxComponent(props) {
 
   function sendToCreate() {
     if (interview.type !== '' && interview.interviewed_id !== '') {
+      console.log({
+        pathname: paths.front.interview.create,
+        state: interview,
+      });
       history.push({
         pathname: paths.front.interview.create,
         state: interview,
@@ -46,14 +48,18 @@ function InterviewDialogBoxComponent(props) {
   }
 
   useEffect(() => {
+    setLoading(true);
+  }, [props.current_campaign]);
+
+  useEffect(() => {
     if (loading) {
-      ComonUtils.getInterviewTemplates(id_campaign).then(templates => {
+      ComonUtils.getInterviewTemplates(props.current_campaign).then(templates => {
         setInterview({ ...interview, templates: templates });
         setLoading(false);
       });
     }
     return () => {};
-  }, [loading]);
+  }, [props.current_campaign, loading, interview]);
 
   return (
     <div>
@@ -104,7 +110,7 @@ function InterviewDialogBoxComponent(props) {
                 variant="contained"
                 color="primary"
                 startIcon={<PlayCircleFilled />}
-                onClick={sendToCreate}
+                onClick={() => sendToCreate()}
                 disabled={!open}
               >
                 Continuer
@@ -117,6 +123,10 @@ function InterviewDialogBoxComponent(props) {
   );
 }
 
-const InterviewDialogBox = injectIntl(InterviewDialogBoxComponent);
+const mapStateToProps = state => ({
+  current_campaign: state.Campaign.current_campaign,
+});
+
+const InterviewDialogBox = connect(mapStateToProps)(injectIntl(InterviewDialogBoxComponent));
 
 export { InterviewDialogBox };

@@ -4,13 +4,13 @@ import { EnhancedTable, Loader } from 'components';
 import moment from 'moment';
 import React, { useMemo, useState } from 'react';
 import { injectIntl } from 'react-intl';
+import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { paths } from 'routes';
 import { CampaignUtils } from 'services/campaign';
 import { ComonUtils } from 'services/comon';
 import { InterviewActioner } from 'services/interview';
-import { lacleStore } from 'store';
 import './Interview.scss';
 
 function InterviewTable({ interviewedId, type, templates, interviewFound, intlData }) {
@@ -83,12 +83,14 @@ function InterviewTable({ interviewedId, type, templates, interviewFound, intlDa
     [
       columnTitles.campaign,
       columnTitles.created_at,
+      columnTitles.interviewed_classmate_id,
       columnTitles.school_subject,
       columnTitles.stop_date,
       columnTitles.volunteer_stop,
       columnTitles.student_stop,
       columnTitles.details,
       commonDefaultTitles.actions,
+      templates,
     ],
   );
 
@@ -101,7 +103,7 @@ function InterviewTable({ interviewedId, type, templates, interviewFound, intlDa
             history.push({
               pathname: paths.front.interview.create,
               state: {
-                interviewedId: interviewedId,
+                interviewed_id: interviewedId,
                 type: type,
                 templates: templates,
               },
@@ -130,8 +132,7 @@ function InterviewTable({ interviewedId, type, templates, interviewFound, intlDa
 }
 
 function InterviewListComponent({ interviewedId, type, campaign, ...props }) {
-  const reduxState = lacleStore.getState();
-  const idCampaign = reduxState.Campaign.current_campaign;
+  const idCampaign = props.current_campaign;
 
   function loadList() {
     return InterviewActioner.list(interviewedId, idCampaign)
@@ -171,6 +172,10 @@ function InterviewListComponent({ interviewedId, type, campaign, ...props }) {
   );
 }
 
-const InterviewList = injectIntl(InterviewListComponent);
+const mapStateToProps = state => ({
+  current_campaign: state.Campaign.current_campaign,
+});
+
+const InterviewList = connect(mapStateToProps)(injectIntl(InterviewListComponent));
 
 export { InterviewList };

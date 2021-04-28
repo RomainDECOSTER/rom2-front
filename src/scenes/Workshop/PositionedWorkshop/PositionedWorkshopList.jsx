@@ -4,11 +4,11 @@ import { EnhancedTable } from 'components';
 import moment from 'moment';
 import React, { useEffect, useMemo, useState } from 'react';
 import { injectIntl } from 'react-intl';
+import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { paths } from 'routes';
 import { PositionedWorkshopApi, PositionedWorkshopUtils } from 'services/positionedWorkshop';
-import { lacleStore } from 'store';
 
 function PositionedWorkshopTable({ positionedWorkshopFound, intlData, templates }) {
   const [skipPageReset] = useState(false);
@@ -86,13 +86,14 @@ function PositionedWorkshopComponent(props) {
   const [templates, setTemplates] = useState({});
   const [loading, setLoading] = useState(true);
 
-  const reduxState = lacleStore.getState();
-  const campaignId = reduxState.Campaign.current_campaign;
+  useEffect(() => {
+    setLoading(true);
+  }, [props.current_campaign]);
 
   useEffect(() => {
     if (loading) {
       Promise.all([
-        PositionedWorkshopApi.getList(campaignId),
+        PositionedWorkshopApi.getList(props.current_campaign),
         PositionedWorkshopUtils.getPositionedWorkshopTemplates(),
       ]).then(([positionedWorkshopsFound, templatesFound]) => {
         setPositionedWorkshops(positionedWorkshopsFound);
@@ -101,7 +102,7 @@ function PositionedWorkshopComponent(props) {
       });
     }
     return () => {};
-  }, [campaignId, loading]);
+  }, [props.current_campaign, loading]);
 
   return (
     <Paper>
@@ -121,6 +122,10 @@ function PositionedWorkshopComponent(props) {
   );
 }
 
-const PositionedWorkshopList = injectIntl(PositionedWorkshopComponent);
+const mapStateToProps = state => ({
+  current_campaign: state.Campaign.current_campaign,
+});
+
+const PositionedWorkshopList = connect(mapStateToProps)(injectIntl(PositionedWorkshopComponent));
 
 export { PositionedWorkshopList };

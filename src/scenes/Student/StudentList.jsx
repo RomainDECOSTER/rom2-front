@@ -3,11 +3,11 @@ import { AccountBox, AddCircle, Edit } from '@material-ui/icons';
 import { EnhancedTable } from 'components';
 import React, { useEffect, useMemo, useState } from 'react';
 import { injectIntl } from 'react-intl';
+import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { paths } from 'routes';
 import { StudentActioner } from 'services/student';
-import { lacleStore } from 'store';
 
 function StudentTable({ studentFound, intlData }) {
   const [data] = useState(useMemo(() => studentFound, [studentFound]));
@@ -58,9 +58,9 @@ function StudentTable({ studentFound, intlData }) {
     ],
     [
       columnTitles.type,
-      columnTitles.phone,
-      columnTitles.first_name,
+      columnTitles.mobile,
       columnTitles.last_name,
+      columnTitles.first_name,
       columnTitles.email,
       commonDefaultTitles.actions,
     ],
@@ -86,18 +86,19 @@ function StudentListComponent(props) {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const reduxState = lacleStore.getState();
-  const id_campaign = reduxState.Campaign.current_campaign;
+  useEffect(() => {
+    setLoading(true);
+  }, [props.current_campaign]);
 
   useEffect(() => {
     if (loading) {
-      StudentActioner.list(id_campaign).then(docs => {
+      StudentActioner.list(props.current_campaign).then(docs => {
         setStudents(docs);
         setLoading(false);
       });
     }
     return () => {};
-  }, [loading]);
+  }, [loading, props.current_campaign]);
 
   return (
     <Paper className="padding-small">
@@ -112,6 +113,10 @@ function StudentListComponent(props) {
   );
 }
 
-const StudentList = injectIntl(StudentListComponent);
+const mapStateToProps = state => ({
+  current_campaign: state.Campaign.current_campaign,
+});
+
+const StudentList = connect(mapStateToProps)(injectIntl(StudentListComponent));
 
 export { StudentList };

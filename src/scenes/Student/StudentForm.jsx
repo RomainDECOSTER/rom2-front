@@ -5,7 +5,7 @@ import {
   FamilyRessourcesForm,
   GeneralForm,
   RegisterForm,
-  WorkshopFormComon
+  WorkshopFormComon,
 } from 'components/ComonForm';
 import { Selector } from 'components/Selector';
 import { useState } from 'react';
@@ -18,7 +18,7 @@ import {
   LifeStateForm,
   SchoolForm,
   SocialMediationForm,
-  StudentSubmitButton
+  StudentSubmitButton,
 } from './components';
 import './style/StudentForm.scss';
 
@@ -40,6 +40,7 @@ function getInitialValues(values = {}) {
     campaign: vod(values.campaign, ''),
     workshop: vod(values.workshop, {}),
     id: vod(values._id, undefined),
+    uuid: vod(values.uuid, undefined),
     errors: {
       last_name: false,
       campaign: false,

@@ -1,5 +1,5 @@
 import { CircularProgress, Grid, IconButton, Paper } from '@material-ui/core';
-import { AccountBox, AddCircle, Edit } from '@material-ui/icons';
+import { AccountBox, AddCircle, Edit, FileCopy } from '@material-ui/icons';
 import { EnhancedTable } from 'components';
 import React, { useEffect, useMemo, useState } from 'react';
 import { injectIntl } from 'react-intl';
@@ -51,6 +51,13 @@ function StudentTable({ studentFound, intlData }) {
             </IconButton>
             <IconButton size="small" component={Link} to={paths.front.student.profil.replace(':id', value)}>
               <AccountBox color="primary" />
+            </IconButton>
+            <IconButton
+              size="small"
+              component={Link}
+              to={{ pathname: paths.front.student.create, state: { duplicate: true, id: value } }}
+            >
+              <FileCopy color="primary" />
             </IconButton>
           </div>
         ),

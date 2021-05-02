@@ -3,16 +3,26 @@ import { Loader } from 'components';
 import React from 'react';
 import { injectIntl } from 'react-intl';
 import { ComonUtils } from 'services/comon';
+import { StudentActioner } from 'services/student';
 import { StudentForm } from './StudentForm';
 
-function StudentCreateComponent({ intl }) {
-  function createForm(templates) {
-    return <StudentForm templates={templates} mode={'create'} />;
+function StudentCreateComponent({ intl, ...props }) {
+  function createForm(templates, values = {}) {
+    return <StudentForm templates={templates} values={values} mode={'create'} />;
   }
 
   function renderCreateForm(render) {
-    ComonUtils.getComonTemplates().then(templates => {
-      render(createForm(templates));
+    const promises = [ComonUtils.getComonTemplates()];
+    if (props.location.state?.duplicate) {
+      promises.push(StudentActioner.get(props.location.state.id));
+    }
+    Promise.all(promises).then(([templates, values]) => {
+      if (values === undefined) {
+        render(createForm(templates));
+      } else {
+        delete values._id;
+        render(createForm(templates, values));
+      }
     });
   }
 

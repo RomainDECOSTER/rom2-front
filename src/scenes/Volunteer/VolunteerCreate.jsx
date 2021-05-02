@@ -3,16 +3,25 @@ import { Loader } from 'components';
 import React from 'react';
 import { injectIntl } from 'react-intl';
 import { ComonUtils } from 'services/comon';
+import { VolunteerActioner } from 'services/volunteer';
 import { VolunteerForm } from './VolunteerForm';
 
-function VolunteerCreateComponent({ intl }) {
-  function createForm(templates) {
-    return <VolunteerForm templates={templates} mode={'create'} />;
+function VolunteerCreateComponent({ intl, ...props }) {
+  function createForm(templates, values = {}) {
+    return <VolunteerForm templates={templates} values={values} mode={'create'} />;
   }
 
   function renderCreateForm(render) {
-    ComonUtils.getComonTemplates().then(templates => {
-      render(createForm(templates));
+    const promises = [ComonUtils.getComonTemplates()];
+    if (props.location.state?.duplicate) {
+      promises.push(VolunteerActioner.get(props.location.state.id));
+    }
+    Promise.all(promises).then(([templates, values]) => {
+      if (values === undefined) {
+        render(createForm(templates));
+      } else {
+        render(createForm(templates, values));
+      }
     });
   }
 

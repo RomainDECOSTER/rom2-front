@@ -5,7 +5,7 @@ import {
   FamilyRessourcesForm,
   GeneralForm,
   RegisterForm,
-  WorkshopFormComon
+  WorkshopFormComon,
 } from 'components/ComonForm';
 import { Selector } from 'components/Selector';
 import { TextInput } from 'components/TextInput';
@@ -29,6 +29,7 @@ function getInitialValues(values = {}) {
     campaign: vod(values.campaign, ''),
     workshop: vod(values.workshop, {}),
     id: vod(values._id, undefined),
+    uuid: vod(values.uuid, undefined),
     errors: {
       last_name: false,
       campaign: false,

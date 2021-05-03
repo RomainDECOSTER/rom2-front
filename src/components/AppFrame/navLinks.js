@@ -1,13 +1,11 @@
 import {
   AccessibilityNew,
   AccountCircle,
-  AddCircle,
   CalendarToday,
   CalendarViewDay,
   Home,
   HomeWork,
   ImportContacts,
-  List,
   School,
   Settings,
 } from '@material-ui/icons';
@@ -34,12 +32,10 @@ const getNavLinks = () => {
             {
               label: customNames.list,
               link: paths.front.user.home,
-              Icon: List,
             },
             {
               label: customNames.create,
               link: paths.front.user.create,
-              Icon: AddCircle,
             },
           ],
         },
@@ -50,12 +46,10 @@ const getNavLinks = () => {
             {
               label: customNames.list,
               link: paths.front.workshop.home,
-              Icon: List,
             },
             {
               label: customNames.create,
               link: paths.front.workshop.create,
-              Icon: AddCircle,
             },
             {
               label: 'Ateliers prévus',
@@ -64,12 +58,10 @@ const getNavLinks = () => {
                 {
                   label: customNames.list,
                   link: paths.front.workshop.positionedWorkshop.home,
-                  Icon: List,
                 },
                 {
                   label: customNames.create,
                   link: paths.front.workshop.positionedWorkshop.create,
-                  Icon: AddCircle,
                 },
               ],
             },
@@ -82,12 +74,10 @@ const getNavLinks = () => {
             {
               label: customNames.list,
               link: paths.front.campaign.home,
-              Icon: List,
             },
             {
               label: customNames.create,
               link: paths.front.campaign.create,
-              Icon: AddCircle,
             },
           ],
         },
@@ -104,12 +94,10 @@ const getNavLinks = () => {
             {
               label: customNames.list,
               link: paths.front.student.home,
-              Icon: List,
             },
             {
               label: customNames.create,
               link: paths.front.student.create,
-              Icon: AddCircle,
             },
           ],
         },
@@ -120,12 +108,10 @@ const getNavLinks = () => {
             {
               label: customNames.list,
               link: paths.front.volunteer.home,
-              Icon: List,
             },
             {
               label: customNames.create,
               link: paths.front.volunteer.create,
-              Icon: AddCircle,
             },
           ],
         },

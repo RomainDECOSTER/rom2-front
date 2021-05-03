@@ -3,7 +3,7 @@ import Box from '@material-ui/core/Box';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import Typography from '@material-ui/core/Typography';
-import { WorkshopManagement } from 'components/ComonProfil/WorkshopManagement';
+import { WorkshopManagment } from 'components/ComonProfil/WorkshopManagement';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { injectIntl } from 'react-intl';
@@ -88,7 +88,7 @@ function StudentProfilHomeComponent(props) {
         <InterviewList interviewedId={id} type="student" />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <WorkshopManagement entityId={id} getActioner={StudentActioner.get} />
+        <WorkshopManagment entityId={id} getActioner={StudentActioner.get} />
       </TabPanel>
     </div>
   );

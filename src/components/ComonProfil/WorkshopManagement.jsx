@@ -8,7 +8,7 @@ import { UserActioner } from 'services';
 import { PositionedWorkshopActioner } from 'services/positionedWorkshop';
 import { WorkshopActioner } from 'services/workshop';
 
-function WorkshopManagementComponent({ entityId, getActioner, current_campaign, ...props }) {
+function WorkshopManagmentComponent({ entityId, getActioner, current_campaign, ...props }) {
   const [entity, setEntity] = useState({});
   const [workshops, setWorkshops] = useState([]);
   const [positionedWorkshop, setPositionedWorkshop] = useState([]);
@@ -86,6 +86,6 @@ const mapStateToProps = state => ({
   current_campaign: state.Campaign.current_campaign,
 });
 
-const WorkshopManagement = connect(mapStateToProps)(injectIntl(WorkshopManagementComponent));
+const WorkshopManagment = connect(mapStateToProps)(injectIntl(WorkshopManagmentComponent));
 
-export { WorkshopManagement };
+export { WorkshopManagment };

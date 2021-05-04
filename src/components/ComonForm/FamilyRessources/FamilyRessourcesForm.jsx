@@ -44,7 +44,7 @@ function FamilyRessourcesFormComponent(props) {
     certification: vod(data.certification, ''),
     certification_futur: vod(data.certification_futur, ''),
     work_name: vod(data.work_name, ''),
-    parentWork: vod(data.parentWork, ''),
+    parent_work: vod(data.parent_work, ''),
     retirement_number: vod(data.retirement_number, ''),
   };
 
@@ -307,10 +307,10 @@ function FamilyRessourcesFormComponent(props) {
       {type === 'AS' ? (
         <Grid item xs={12} sm={12}>
           <TextInput
-            name="parentWork"
-            label={intl.labels.parentWork}
-            value={fields.parentWork}
-            setField={setFieldFunction('parentWork')}
+            name="parent_work"
+            label={intl.labels.parent_work}
+            value={fields.parent_work}
+            setField={setFieldFunction('parent_work')}
             disabled={disabled}
           />
         </Grid>

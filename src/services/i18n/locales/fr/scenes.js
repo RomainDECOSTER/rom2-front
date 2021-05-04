@@ -174,7 +174,7 @@ const scenes = {
         other_details: 'Autres détails',
         referent: 'Référent',
         internship: 'Stagiaire',
-        parentWork: 'Travail des parents',
+        parent_work: 'Travail des parents',
         pre_retirement: 'Pré retraite',
         retirement: 'Retraité',
         has_children: 'Avec enfants',

@@ -1,4 +1,4 @@
-import { CircularProgress, Grid, Paper } from '@material-ui/core';
+import { CircularProgress, Grid, Paper, Typography } from '@material-ui/core';
 import { EnhancedTable } from 'components/EnhancedTable';
 import moment from 'moment';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { UserActioner } from 'services';
 import { PositionedWorkshopActioner } from 'services/positionedWorkshop';
 import { WorkshopActioner } from 'services/workshop';
+import './WorkshopManagment.scss';
 
 function WorkshopManagmentComponent({ entityId, getActioner, current_campaign, ...props }) {
   const [entity, setEntity] = useState({});
@@ -74,9 +75,17 @@ function WorkshopManagmentComponent({ entityId, getActioner, current_campaign, .
           <CircularProgress color="primary" />
         </Grid>
       ) : (
-        <Paper>
-          <EnhancedTable title={'Atelier positionnés'} columns={columns} data={entity.workshop.workshop_managments} />
-        </Paper>
+        <>
+          <Paper className="workshop-available">
+            <div className="workshop-available-content">
+              <Typography variant="h6">Ateliers Disponibles</Typography>
+              {entity.workshop.workshops.map(w => workshops.find(wf => wf._id === w).name).join(' / ')}
+            </div>
+          </Paper>
+          <Paper>
+            <EnhancedTable title={'Atelier positionnés'} columns={columns} data={entity.workshop.workshop_managments} />
+          </Paper>
+        </>
       )}
     </>
   );

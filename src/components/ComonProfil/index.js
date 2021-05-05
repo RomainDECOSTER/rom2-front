@@ -1,2 +1,2 @@
 export * from './AvailabilitiesProfil';
-export * from './WorkshopManagement';
+export * from './WorkshopManagment';

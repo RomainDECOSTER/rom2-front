@@ -3,7 +3,7 @@ import Box from '@material-ui/core/Box';
 import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import Typography from '@material-ui/core/Typography';
-import { WorkshopManagment } from 'components/ComonProfil/WorkshopManagement';
+import { WorkshopManagment } from 'components/ComonProfil';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { injectIntl } from 'react-intl';

@@ -77,6 +77,7 @@ function PositionedWorkshopTable({ positionedWorkshopFound, intlData, templates 
       data={positionedWorkshopFound}
       actions={actions}
       skipPageReset={skipPageReset}
+      useMultipleSelect={false}
     />
   );
 }

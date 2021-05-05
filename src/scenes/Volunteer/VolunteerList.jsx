@@ -80,7 +80,14 @@ function VolunteerTable({ volunteerFound, intlData }) {
   ];
 
   return (
-    <EnhancedTable title={intl.title} columns={columns} data={data} actions={actions} skipPageReset={skipPageReset} />
+    <EnhancedTable
+      title={intl.title}
+      columns={columns}
+      data={data}
+      actions={actions}
+      skipPageReset={skipPageReset}
+      useMultipleSelect={false}
+    />
   );
 }
 

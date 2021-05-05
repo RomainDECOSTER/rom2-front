@@ -127,6 +127,7 @@ function InterviewTable({ interviewedId, type, templates, interviewFound, intlDa
       data={data}
       actions={actions}
       skipPageReset={skipPageReset}
+      useMultipleSelect={false}
     />
   );
 }

@@ -88,7 +88,7 @@ function StudentProfilHomeComponent(props) {
         <InterviewList interviewedId={id} type="student" />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <WorkshopManagment entityId={id} getActioner={StudentActioner.get} />
+        <WorkshopManagment entityId={id} getActioner={StudentActioner.get} updateActioner={StudentActioner.update} />
       </TabPanel>
     </div>
   );

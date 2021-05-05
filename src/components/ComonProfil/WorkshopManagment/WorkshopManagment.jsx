@@ -1,4 +1,5 @@
-import { CircularProgress, Grid, Paper, Typography } from '@material-ui/core';
+import { CircularProgress, Dialog, Grid, IconButton, Paper, Typography } from '@material-ui/core';
+import { AddCircle, Edit, EventAvailable, EventBusy } from '@material-ui/icons';
 import { EnhancedTable } from 'components/EnhancedTable';
 import moment from 'moment';
 import React, { useEffect, useMemo, useState } from 'react';
@@ -8,20 +9,25 @@ import { UserActioner } from 'services';
 import { PositionedWorkshopActioner } from 'services/positionedWorkshop';
 import { WorkshopActioner } from 'services/workshop';
 import './WorkshopManagment.scss';
+import { WorkshopManagmentForm } from './WorkshopManagmentForm';
 
-function WorkshopManagmentComponent({ entityId, getActioner, current_campaign, ...props }) {
+function WorkshopManagmentComponent({ entityId, getActioner, currentCampaign, updateActioner, ...props }) {
   const [entity, setEntity] = useState({});
   const [workshops, setWorkshops] = useState([]);
   const [positionedWorkshop, setPositionedWorkshop] = useState([]);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const [openCreate, setOpenCreate] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [indexToEdit, setIndexToEdit] = useState();
+
   useEffect(() => {
     if (loading) {
       Promise.all([
         getActioner(entityId),
         WorkshopActioner.list(),
-        PositionedWorkshopActioner.list(current_campaign),
+        PositionedWorkshopActioner.list(currentCampaign),
         UserActioner.getUserList(),
       ]).then(([e, w, p, u]) => {
         setEntity(e);
@@ -32,7 +38,7 @@ function WorkshopManagmentComponent({ entityId, getActioner, current_campaign, .
       });
     }
     return () => {};
-  }, [loading, entityId, getActioner, current_campaign]);
+  }, [loading, entityId, getActioner, currentCampaign]);
 
   const columns = useMemo(
     () => [
@@ -64,9 +70,82 @@ function WorkshopManagmentComponent({ entityId, getActioner, current_campaign, .
               ).firstname
             : '',
       },
+      {
+        Header: 'Accepté',
+        accessor: 'accepted',
+        Cell: ({ cell, value }) => (value ? <EventAvailable /> : cell.row.original.rejected ? <EventBusy /> : ''),
+      },
+      {
+        Header: 'Date',
+        accessor: 'date',
+        Cell: ({ value }) => (value !== undefined || value !== '' ? moment(value).format('DD/MM/YYYY') : ''),
+      },
+      {
+        Header: 'Présent',
+        accessor: 'present',
+        Cell: ({ cell, value }) => (value ? <EventAvailable /> : <EventBusy />),
+      },
+      {
+        Header: 'Actions',
+        accessor: '_id',
+        Cell: ({ cell }) => {
+          return (
+            <>
+              <IconButton
+                onClick={() => {
+                  setOpenEdit(true);
+                  setIndexToEdit(cell.row.id);
+                }}
+              >
+                <Edit size="small" />
+              </IconButton>
+              <Dialog open={cell.row.id === indexToEdit && openEdit} onClose={() => setOpenEdit(false)} fullWidth>
+                <WorkshopManagmentForm
+                  entity={entity}
+                  workshops={workshops}
+                  positionedWorkshops={positionedWorkshop}
+                  updateActioner={updateActioner}
+                  indexToEdit={parseInt(indexToEdit, 10)}
+                  onClose={() => {
+                    setOpenEdit(false);
+                    setLoading(true);
+                  }}
+                />
+              </Dialog>
+            </>
+          );
+        },
+      },
     ],
-    [positionedWorkshop, workshops, users],
+    [positionedWorkshop, workshops, users, indexToEdit, openEdit, entity, updateActioner],
   );
+
+  const actions = [
+    {
+      render: () => {
+        return (
+          <>
+            <IconButton onClick={() => setOpenCreate(true)}>
+              <AddCircle size="small" />
+            </IconButton>
+            <Dialog open={openCreate} onClose={() => setOpenCreate(false)} fullWidth>
+              <WorkshopManagmentForm
+                entity={entity}
+                workshops={workshops}
+                positionedWorkshops={positionedWorkshop}
+                updateActioner={updateActioner}
+                onClose={() => {
+                  setOpenCreate(false);
+                  setLoading(true);
+                }}
+              />
+            </Dialog>
+          </>
+        );
+      },
+      isFreeAction: true,
+    },
+  ];
 
   return (
     <>
@@ -83,7 +162,13 @@ function WorkshopManagmentComponent({ entityId, getActioner, current_campaign, .
             </div>
           </Paper>
           <Paper>
-            <EnhancedTable title={'Atelier positionnés'} columns={columns} data={entity.workshop.workshop_managments} />
+            <EnhancedTable
+              title={'Atelier positionnés'}
+              columns={columns}
+              data={entity.workshop.workshop_managments}
+              actions={actions}
+              useMultipleSelect={false}
+            />
           </Paper>
         </>
       )}
@@ -92,7 +177,7 @@ function WorkshopManagmentComponent({ entityId, getActioner, current_campaign, .
 }
 
 const mapStateToProps = state => ({
-  current_campaign: state.Campaign.current_campaign,
+  currentCampaign: state.Campaign.current_campaign,
 });
 
 const WorkshopManagment = connect(mapStateToProps)(injectIntl(WorkshopManagmentComponent));

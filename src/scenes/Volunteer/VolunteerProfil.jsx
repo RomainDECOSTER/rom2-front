@@ -9,7 +9,7 @@ import { useHistory } from 'react-router';
 import { paths } from 'routes';
 import { VolunteerActioner } from 'services/volunteer';
 import { SubjectsProfil } from './components';
-import './VolunteerProfil.scss';
+import './style/VolunteerProfil.scss';
 
 function ProfilSection(props) {
   const { items, thisIntl } = props;
@@ -98,7 +98,7 @@ function LabelValue(props) {
 function VolunteerProfilComponent(props) {
   const [fields, setFields] = useState();
   const [loading, setLoading] = useState(true);
-  const id = props.match.params.id;
+  const { id } = props;
   const intl = props.intl.messages.scenes;
   const history = useHistory();
   useEffect(() => {
@@ -130,7 +130,7 @@ function VolunteerProfilComponent(props) {
   return (
     <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
       {loading ? (
-        <Grid container item spacing={0} direction="column" alignItems="center" justify="center" minHeight="200vh">
+        <Grid container item spacing={0} direction="column" alignItems="center" justify="center">
           <CircularProgress color="primary" />
         </Grid>
       ) : (

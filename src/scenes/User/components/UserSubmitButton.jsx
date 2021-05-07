@@ -110,7 +110,7 @@ function UserSubmitButtonComponent({ fields, setFields, mode, initialValues, rel
           button={({ onClick }) => (
             <Button
               variant="contained"
-              color="primary"
+              color="secondary"
               startIcon={<Delete />}
               onClick={onClick}
               disabled={fields.loading}

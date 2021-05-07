@@ -158,7 +158,7 @@ function WorkshopManagmentComponent({ entityId, getActioner, currentCampaign, up
           <Paper className="workshop-available">
             <div className="workshop-available-content">
               <Typography variant="h6">Ateliers Disponibles</Typography>
-              {entity.workshop.workshops.map(w => workshops.find(wf => wf._id === w).name).join(' / ')}
+              {entity?.workshop?.workshops?.map(w => workshops.find(wf => wf._id === w)?.name).join(' / ') || 'Aucun'}
             </div>
           </Paper>
           <Paper>

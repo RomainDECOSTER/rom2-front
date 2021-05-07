@@ -83,7 +83,7 @@ function InterviewSubmitButtonComponent({ fields, setFields, mode, initialValues
           button={({ onClick }) => (
             <Button
               variant="contained"
-              color="primary"
+              color="secondary"
               startIcon={<Delete />}
               onClick={onClick}
               disabled={fields.loading}

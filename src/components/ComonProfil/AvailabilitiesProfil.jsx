@@ -12,19 +12,19 @@ function AvailabilitiesProfilComponent({ data, disabled, ...props }) {
       id: 'day',
       align: 'center',
       label: labels.day,
-      render: (row, index) => <Typography key={index}>{row.day}</Typography>,
+      render: (row, index) => <Typography key={`${index}-day`}>{row.day}</Typography>,
     },
     {
       id: 'start_hour',
       align: 'center',
       label: labels.startHour,
-      render: (row, index) => <Typography key={index}>{row.start_hour}</Typography>,
+      render: (row, index) => <Typography key={`${index}-start`}>{row.start_hour}</Typography>,
     },
     {
       id: 'end_hour',
       align: 'center',
       label: labels.endHour,
-      render: (row, index) => <Typography key={index}>{row.end_hour}</Typography>,
+      render: (row, index) => <Typography key={`${index}-end`}>{row.end_hour}</Typography>,
     },
   ];
 

@@ -14,7 +14,7 @@ function ProfilSection(props) {
   const { items, thisIntl } = props;
   const intl = thisIntl;
   return (
-    <Typography variant="h4" className="section">
+    <Typography component={'div'} variant="h4" className="section">
       <Typography className="info-title" variant="h4" color="primary">
         {intl.title}
       </Typography>
@@ -31,7 +31,7 @@ function SectionDataPrint(props) {
       type = 'array';
     }
     if (type === 'object') {
-      return <SectionDataPrint items={text} intl={intl} />;
+      return <SectionDataPrint key={item} items={text} intl={intl} />;
     }
     return (
       <DynamicProfilComponent key={item} label={intl.labels[item]} intl={intl} text={text} ptype={type} variant="h6" />
@@ -129,7 +129,7 @@ function StudentProfilComponent(props) {
   return (
     <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
       {loading ? (
-        <Grid container item spacing={0} direction="column" alignItems="center" justify="center" minHeight="200vh">
+        <Grid container item spacing={0} direction="column" alignItems="center" justify="center">
           <CircularProgress color="primary" />
         </Grid>
       ) : (

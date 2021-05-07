@@ -150,7 +150,7 @@ function WorkshopManagmentComponent({ entityId, getActioner, currentCampaign, up
   return (
     <>
       {loading ? (
-        <Grid container item spacing={0} direction="column" alignItems="center" justify="center" minHeight="200vh">
+        <Grid container item spacing={0} direction="column" alignItems="center" justify="center">
           <CircularProgress color="primary" />
         </Grid>
       ) : (

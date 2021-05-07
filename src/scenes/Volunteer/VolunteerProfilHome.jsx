@@ -8,9 +8,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { injectIntl } from 'react-intl';
 import { InterviewList } from 'scenes';
-import { StudentActioner } from 'services/student';
-import { StudentProfil } from './StudentProfil';
-import './style/StudentProfilHome.scss';
+import { VolunteerActioner } from 'services/volunteer';
+import './style/VolunteerProfilHome.scss';
+import { VolunteerProfil } from './VolunteerProfil';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -57,7 +57,7 @@ function LinkTab(props) {
   );
 }
 
-function StudentProfilHomeComponent(props) {
+function VolunteerProfilHomeComponent(props) {
   const [value, setValue] = React.useState(0);
   const id = props.match.params.id;
 
@@ -82,18 +82,22 @@ function StudentProfilHomeComponent(props) {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <StudentProfil id={id} />
+        <VolunteerProfil id={id} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <InterviewList interviewedId={id} type="student" />
+        <InterviewList interviewedId={id} type="volunteer" />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <WorkshopManagment entityId={id} getActioner={StudentActioner.get} updateActioner={StudentActioner.update} />
+        <WorkshopManagment
+          entityId={id}
+          getActioner={VolunteerActioner.get}
+          updateActioner={VolunteerActioner.update}
+        />
       </TabPanel>
     </div>
   );
 }
 
-const StudentProfilHome = injectIntl(StudentProfilHomeComponent);
+const VolunteerProfilHome = injectIntl(VolunteerProfilHomeComponent);
 
-export { StudentProfilHome };
+export { VolunteerProfilHome };

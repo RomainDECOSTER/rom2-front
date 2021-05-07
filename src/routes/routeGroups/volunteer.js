@@ -1,6 +1,6 @@
 import { paths } from 'routes';
 import { AuthenticatedRoute } from 'routes/components';
-import { VolunteerCreate, VolunteerEdit, VolunteerList, VolunteerProfil } from 'scenes';
+import { VolunteerCreate, VolunteerEdit, VolunteerList, VolunteerProfilHome } from 'scenes';
 
 const volunteerRoutes = [
   {
@@ -32,7 +32,7 @@ const volunteerRoutes = [
     props: {
       path: paths.front.volunteer.profil,
       exact: true,
-      component: VolunteerProfil,
+      component: VolunteerProfilHome,
     },
   },
 ];

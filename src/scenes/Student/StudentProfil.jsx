@@ -25,7 +25,7 @@ function ProfilSection(props) {
 
 function SectionDataPrint(props) {
   const { items, intl } = props;
-
+  console.log(items);
   function testing(type, text, item) {
     if (Array.isArray(text)) {
       type = 'array';
@@ -38,10 +38,14 @@ function SectionDataPrint(props) {
     );
   }
 
-  return Object.keys(items).map(item => {
-    const type = typeof items[item];
-    return testing(type, items[item], item);
-  });
+  if (items !== undefined) {
+    return Object.keys(items).map(item => {
+      const type = typeof items[item];
+      return testing(type, items[item], item);
+    });
+  } else {
+    return <></>;
+  }
 }
 
 function DynamicProfilComponent(props) {
